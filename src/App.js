@@ -1,26 +1,37 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider} from 'react-router-dom';
 
 //
-
+import Layout from './pages/Layout'
 import Home from './pages/Home';
-import Navbar from './components/Navbar';
+import ProfileDetails from './components/ProfileDetails';
+import FilterTile from './components/functional/FilterTile';
+
+import Labels from './pages/Labels';
+import Bands from './pages/Bands';
+import About from './pages/About';
+
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout/>} >
+      <Route index element={<Home/>} />
+      <Route path='labels' element={<><FilterTile/><Labels/></>}/>
+        <Route path='labels/:id' element={<ProfileDetails/>} />
+     
+      <Route path='bands' element={<><FilterTile/><Bands/></>}/>
+        <Route path='bands/:id' element={<ProfileDetails/>} />
+      
+      <Route path='about' element={<About/>} />
+    </Route>
+  )
+)
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Navbar/>
-        <div className="pages">
-          <Routes>
-            <Route 
-              path="/" 
-              element={<Home />} 
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+  
+    return (
+      <RouterProvider router={router} />
+    );
+  
 }
 
 export default App;

@@ -1,0 +1,46 @@
+.layout {
+    width: 99%;
+    border: 1px solid white;
+    height: 99vh;
+    text-align: center;
+   
+}
+
+main{
+    border: 1px solid red;
+  }
+
+nav{
+    display: flex;     
+    justify-content: space-around;
+}
+
+/* -------------------- */
+
+.profiles {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+       
+}
+
+.usertile {
+    background-color: aquamarine;
+}
+main{
+    height: 93vh;
+    overflow: auto;
+}
+.user{
+    border: 1px solid red;
+}
+
+
+
+
+/* ---------- */
+footer{
+   position: relative;
+    bottom: 1px;
+    
+}
