@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom"
-import { useState } from "react"
+//import { Link } from "react-router-dom"
+//import { useState } from "react"
 import '../pages/pages.css'
 
-import ProfileDetails from "./ProfileDetails"
+//import ProfileDetails from "./ProfileDetails"
 
 
 const ProfileTile = ({user}) => {

@@ -1,12 +1,20 @@
+import { useNavigate } from "react-router-dom"
+
 
 const SignUpForm = ()=>{
+    let navigate = useNavigate()
+    
 
+const handleSubmit = ()=>{
+    
+  navigate('/account/user')
 
+}
     
     return (
         <form action="" 
                 className="signup"
-                //onSubmit = {handleSubmit}
+                
             >
                 <input type="email" name="email" id="" placeholder="email"/>
                 <input type="password" name="" id="" placeholder="password" /><br />
@@ -16,7 +24,8 @@ const SignUpForm = ()=>{
                 <label for="band">Band</label><br/>
                 <input type="radio" id="fan" name="profile" value="fan"/>
                 <label for="fan">Fan</label><br />
-                <button type="submit">Submit</button>
+                <button  type="submit">Submit</button>
+                <div onClick = {()=> handleSubmit()} >lala</div>
         </form>
         )
 }

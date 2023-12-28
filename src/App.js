@@ -10,20 +10,27 @@ import Labels from './pages/Labels';
 import Bands from './pages/Bands';
 import About from './pages/About';
 import Account from './pages/Account';
+import SignUpForm from './components/forms/SignUpForm';
+import LoginForm from './components/forms/LoginForm';
+import UserDetails from './components/functional/UserDetails';
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout/>} >
       <Route index element={<Home/>} />
-      <Route path='labels' element={<><FilterTile/><Labels/></>}/>
+      <Route path='labels' element={<Labels/>}/>
         <Route path='labels/:id' element={<ProfileDetails/>} />
      
-      <Route path='bands' element={<><FilterTile/><Bands/></>}/>
+      <Route path='bands' element={<Bands/>}/>
         <Route path='bands/:id' element={<ProfileDetails/>} />
       
       <Route path='about' element={<About/>} />
       <Route path='account' element={<Account/>} />
+        <Route path='account/signup' element={<SignUpForm/>}/>
+        <Route path='account/login' element={<LoginForm/>}/>
+        <Route path='account/user' element={<UserDetails/>}/>
+        
     </Route>
   )
 )

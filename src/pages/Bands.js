@@ -34,7 +34,7 @@ export const users = [
     return (
       <div className="bands">
         {users && users.map(user =>
-            <Link key={user._id} to={`/${path +'/'+ user._id}`}>
+            <Link key={user._id} to={`${user._id}`}>
                 <ProfileTile
                 key={user._id}
                 user = {user}
