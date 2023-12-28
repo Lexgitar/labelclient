@@ -15,7 +15,7 @@ const Layout = ()=>{
                         <NavLink to='bands'>Bands</NavLink>                       
                     </div> 
                     <NavLink to='about' className="about">About</NavLink>                                
-                    <div>Sign Up</div>
+                    <NavLink to='account' className="about">Account</NavLink>                                
                 </nav>
             </header>
             <div className="mainWrapper">

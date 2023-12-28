@@ -9,6 +9,7 @@ import FilterTile from './components/functional/FilterTile';
 import Labels from './pages/Labels';
 import Bands from './pages/Bands';
 import About from './pages/About';
+import Account from './pages/Account';
 
 
 const router = createBrowserRouter(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         <Route path='bands/:id' element={<ProfileDetails/>} />
       
       <Route path='about' element={<About/>} />
+      <Route path='account' element={<Account/>} />
     </Route>
   )
 )
