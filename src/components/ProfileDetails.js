@@ -1,11 +1,14 @@
 import {  useParams } from "react-router-dom"
-import { users } from "../pages/Bands"
+import { useSelector } from "react-redux"
+import { selectAllBands } from "../slices/bandsSlice"
 
 
-const ProfileDetails =  () =>{
+
+const ProfileDetails =  () => {
+    let bands = useSelector(selectAllBands)
   
     const {id} = useParams()
-     const user = users.filter(function(user){        
+     const user = bands.filter(function(user){        
          return user._id == id
      })[0]
    

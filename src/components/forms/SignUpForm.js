@@ -13,7 +13,7 @@ const handleSubmit = ()=>{
     
     return (
         <form action="" 
-                className="signup"
+             className="signup"
                 
             >
                 <input type="email" name="email" id="" placeholder="email"/>
@@ -24,8 +24,8 @@ const handleSubmit = ()=>{
                 <label for="band">Band</label><br/>
                 <input type="radio" id="fan" name="profile" value="fan"/>
                 <label for="fan">Fan</label><br />
-                <button  type="submit">Submit</button>
-                <div onClick = {()=> handleSubmit()} >lala</div>
+                <button onClick = {()=> handleSubmit()} type="submit">Submit</button>
+
         </form>
         )
 }

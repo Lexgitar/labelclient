@@ -8,32 +8,20 @@ import ProfileTile from "../components/ProfileTile"
 import FilterTile from "../components/functional/FilterTile"
 import './pages.css'
 
-const path = 'bands'
+import { useSelector } from "react-redux"
+import { selectAllBands } from "../slices/bandsSlice"
 
-export const users = [
-    {_id:1, name: 'alex', location:'laak'},
-    {_id:2, name: 'alex', location:'laak'},
-    {_id:3, name: 'alex', location:'laak'},
-    {_id:4, name: 'alex', location:'laak'},
-    {_id:5, name: 'alex', location:'laak'},
-    {_id:6, name: 'alex', location:'laak'},
-    {_id:7, name: 'alex', location:'laak'},
-    {_id:8, name: 'alex', location:'laak'},
-    {_id:9, name: 'alex', location:'laak'},
-    {_id:10, name: 'alex', location:'laak'},
-    {_id:11, name: 'alex', location:'laak'},
-    {_id:12, name: 'alex', location:'laak'},
-    {_id:13, name: 'alex', location:'laak'},
-    {_id:14, name: 'alex', location:'laak'},
-    {_id:15, name: 'alex', location:'laak'},
-]
+
+
+
  const Bands = () => {
 
+  let bands = useSelector(selectAllBands)
 
  
     return (
       <div className="bands">
-        {users && users.map(user =>
+        {bands && bands.map(user =>
             <Link key={user._id} to={`${user._id}`}>
                 <ProfileTile
                 key={user._id}
