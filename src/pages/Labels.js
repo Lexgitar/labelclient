@@ -27,9 +27,7 @@ import { selectAllLabels } from "../slices/labelsSlice"
                 user = {user}
                 /> 
             </Link>  
-    )}
-        
-          
+       )}
       </div>
     )
   }
