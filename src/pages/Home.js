@@ -4,7 +4,7 @@ import { selectLoggedIn, selectUser } from "../slices/userSlice"
 const Home = () => {
   const logged = useSelector(selectLoggedIn)
   const user = useSelector(selectUser)
-  console.log(user)
+  //console.log(user? user:'no user')
 
   return (
     <div>
