@@ -2,29 +2,30 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
+import axios from 'axios'
+
+import { useDispatch } from 'react-redux'
+import { addUser, toggleLog } from '../../slices/userSlice'
+
 const LoginForm = () => {
     const [email, setEmail] = useState('')
     //const [logged, setLogged] = useState('logged')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     let navigate = useNavigate()
+    const dispatch = useDispatch()
     
-  const user = {
-    email: 'alex@google.com',
-    password: 'lala23'
-  }
+  
     const handleSubmit = async (e) => {
       e.preventDefault()
-
-        if(email === user.email && password === user.password){
-            
-            navigate('/account/user')
-        }else{
-             setError('invalid credentials')
-             setEmail('')
-             setPassword('')
-
-        }
+        let body = {email, password}
+        const response = await axios.post('/api/login', body)
+      if(response.data){
+        console.log(response.data.user)
+        dispatch(addUser(response.data.user))
+        dispatch(toggleLog(true))
+        navigate('/account')
+      }
     
      // navigate('/account/user')
       

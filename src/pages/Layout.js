@@ -1,7 +1,12 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import './pages.css'
+import Logout from '../components/forms/Logout'
+
+import { useSelector } from 'react-redux'
+import { selectLoggedIn } from '../slices/userSlice'
 
 const Layout = ()=>{
+    let logged = useSelector(selectLoggedIn)
 
     return(
         <div className="layout">
@@ -15,7 +20,8 @@ const Layout = ()=>{
                         <NavLink to='bands'>Bands</NavLink>                       
                     </div> 
                     <NavLink to='about' className="about">About</NavLink>                                
-                    <NavLink to='account' className="about">Account</NavLink>                                
+                    <NavLink to='account' className="account">Account</NavLink>
+                   {logged? <Logout/> : <Link to='account/login' className="logbutton">Login</Link>}                     
                 </nav>
             </header>
             <div className="mainWrapper">
