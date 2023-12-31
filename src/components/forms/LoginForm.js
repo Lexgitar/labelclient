@@ -24,7 +24,11 @@ const LoginForm = () => {
         console.log(response.data.user)
         dispatch(addUser(response.data.user))
         dispatch(toggleLog(true))
+        setEmail('')
+        setPassword('')
         navigate('/account')
+      }else{
+        error = response
       }
     
      // navigate('/account/user')
