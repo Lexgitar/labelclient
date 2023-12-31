@@ -6,11 +6,10 @@ import { fetchRoles } from "../slices/userSlice"
 
 const Home = () => {
   let bands = useSelector(selectRoles).bands
+  let labels = useSelector(selectRoles).labels
+  let fans = useSelector(selectRoles).fans
   let dispatch = useDispatch()
-  let role = 'band'
-  useEffect(()=>{
-    dispatch(fetchRoles(role))
-  },[])
+
   const logged = useSelector(selectLoggedIn)
   const user = useSelector(selectUser)
   //console.log(user? user:'no user')
@@ -19,9 +18,24 @@ const Home = () => {
     <div>
       Home
       <div>{`${logged}`}</div>
-      <div>{bands && bands.map((label)=>(
-        <p>{label._id}</p>
-      ))}</div>
+      <div>bands{bands && bands.map((band) => (
+        <p key={band._id} >
+          {band._id}
+        </p>
+      ))}
+      </div>
+      <div>labels{labels && labels.map((label) => (
+        <p key={label._id} >
+          {label._id}
+        </p>
+      ))}
+      </div>
+      <div>fans{fans && fans.map((fan) => (
+        <p key={fan._id} >
+          {fan._id}
+        </p>
+      ))}
+      </div>
     </div>
   )
 }

@@ -27,11 +27,16 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
     }
 )
 
-export const fetchRoles = createAsyncThunk('roles/fetchBands',
-    async (role) => {
-        const response = await axios.get(`api/${role}s`)
-        console.log('fb', response.data)
-        return {response:response.data , role }
+export const fetchRoles = createAsyncThunk('roles/fetchRoles',
+    async () => {
+        const bandsRes = await axios.get(`api/bands`)
+        const labelsRes = await axios.get(`api/labels`)
+        const fansRes = await axios.get(`api/fans`)
+        // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
+        //console.log('fb',bands.data, labels.data, fans.data)
+         console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
+        return [bandsRes.data, labelsRes.data, fansRes.data]
+       
     }
 )
 
@@ -70,8 +75,10 @@ export const userSlice = createSlice({
 
             })
             .addCase(fetchRoles.fulfilled, (state, action)=>{
-                let term = `${action.payload.role}s`
-                state.roles[term] = action.payload.response
+                
+                state.roles.bands = action.payload[0]
+                state.roles.labels = action.payload[1]
+                state.roles.fans = action.payload[2]
             })
     }
 })

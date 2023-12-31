@@ -1,12 +1,21 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
+import { useEffect } from 'react'
 import './pages.css'
 import Logout from '../components/forms/Logout'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectLoggedIn } from '../slices/userSlice'
 
+import { fetchRoles } from '../slices/userSlice'
+
 const Layout = ()=>{
+    let dispatch = useDispatch()
     let logged = useSelector(selectLoggedIn)
+   
+    // useEffect(()=>{
+    //     dispatch(fetchRoles())
+    // }, [])
+    dispatch(fetchRoles())
 
     return(
         <div className="layout">
