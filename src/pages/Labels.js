@@ -1,5 +1,5 @@
 
- // "proxy":"http://localhost:3000",
+
 //import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -9,27 +9,29 @@ import './pages.css'
 
 import { useSelector } from "react-redux"
 import { selectAllLabels } from "../slices/labelsSlice"
+import { selectRoles } from "../slices/userSlice"
 
 
 
 
 
- const Labels = () => {
+const Labels = () => {
 
-  let labels = useSelector(selectAllLabels)
+  let labels = useSelector(selectRoles).labels
 
-    return (
-      <div className="labels">
-        {labels && labels.map(user =>
-            <Link key={user._id} to={`${user._id}`}>
-                <ProfileTile
-                key={user._id}
-                user = {user}
-                /> 
-            </Link>  
-       )}
-      </div>
-    )
-  }
-  
-  export default Labels
+  return (
+    <div className="labels">
+      {labels && labels.map(label =>
+        <Link key={label._id} to={`${label._id}`}>
+
+          <ProfileTile
+            key={label._id}
+            profile={label}
+          />
+        </Link>
+      )}
+    </div>
+  )
+}
+
+export default Labels

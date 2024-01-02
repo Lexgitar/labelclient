@@ -4,19 +4,19 @@ import { createDetails } from "../../slices/userSlice"
 import { useDispatch } from "react-redux"
 
 
-const UserForm = ({user}) => {
+const UserForm = ({ user }) => {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
 
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        let body = {name, location}
+        let body = { name, location }
         let role = user.role
-        console.log('UF' , role)
+        console.log('UF', role)
         //
-        dispatch(createDetails({role, body}))
+        dispatch(createDetails({ role, body }))
         //
         setName('')
         setLocation('')
@@ -24,15 +24,15 @@ const UserForm = ({user}) => {
         navigate('/account')
     }
 
-  return (
-    <form
-        onSubmit={(e)=>handleSubmit(e)}
-    > edit profile <br />
-        <input type="text" onChange={(e)=>setName(e.target.value)} placeholder="name" value={name} /> <br />
-        <input type="text" onChange={(e)=>setLocation(e.target.value)} placeholder="location" value={location} /><br />
-        <button>Submit</button>
-    </form>
-  )
+    return (
+        <form
+            onSubmit={(e) => handleSubmit(e)}
+        > Create profile <br />
+            <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} /> <br />
+            <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} /><br />
+            <button>Submit</button>
+        </form>
+    )
 }
 
 export default UserForm

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectLoggedIn, selectUser, selectRoles } from "../slices/userSlice"
 import { useEffect } from "react"
 
-import { fetchRoles } from "../slices/userSlice"
+
 
 const Home = () => {
   let bands = useSelector(selectRoles).bands
@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div>
       Home
-      <div>{`${logged}`}</div>
+      <div>logged: {`${logged}`}</div>
       <div>bands{bands && bands.map((band) => (
         <p key={band._id} >
           {band._id}

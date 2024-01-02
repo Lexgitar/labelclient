@@ -7,7 +7,6 @@ const initialState = {
     status: '',
     error: '',
     userInfo: '',
-    inited: false,
     roles: {
         bands: [],
         labels: [],
@@ -34,9 +33,9 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
         const fansRes = await axios.get(`api/fans`)
         // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
         //console.log('fb',bands.data, labels.data, fans.data)
-         console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
+        console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
         return [bandsRes.data, labelsRes.data, fansRes.data]
-       
+
     }
 )
 
@@ -46,6 +45,7 @@ export const userSlice = createSlice({
     reducers: {
         addUser: (state, action) => {
             state.user.push(action.payload)
+
         },
         toggleLog: (state, action) => {
             state.loggedIn = action.payload
@@ -54,8 +54,9 @@ export const userSlice = createSlice({
         userDelete: (state) => {
             state.user.pop()
         },
-        initedToggle: (state) => {
-            state.inited = false
+
+        addUserInfo: (state, action) => {
+            state.userInfo = action.payload
         }
     },
     extraReducers(builder) {
@@ -74,8 +75,8 @@ export const userSlice = createSlice({
                 state.inited = true
 
             })
-            .addCase(fetchRoles.fulfilled, (state, action)=>{
-                
+            .addCase(fetchRoles.fulfilled, (state, action) => {
+
                 state.roles.bands = action.payload[0]
                 state.roles.labels = action.payload[1]
                 state.roles.fans = action.payload[2]
@@ -85,7 +86,7 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo } = userSlice.actions
 export const selectUser = (state) => state.user.user[0]
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status

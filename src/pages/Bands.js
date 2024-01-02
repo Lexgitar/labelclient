@@ -1,5 +1,5 @@
 
- // "proxy":"http://localhost:3000",
+// "proxy":"http://localhost:3000",
 //import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -9,32 +9,31 @@ import FilterTile from "../components/functional/FilterTile"
 import './pages.css'
 
 import { useSelector } from "react-redux"
-import { selectAllBands } from "../slices/bandsSlice"
+import { selectRoles } from "../slices/userSlice"
 
 
 
 
- const Bands = () => {
+const Bands = () => {
 
-  let bands = useSelector(selectAllBands)
+  let bands = useSelector(selectRoles).bands
 
- 
-    return (
-      <div className="bands">
-        {bands && bands.map(user =>
-            <Link key={user._id} to={`${user._id}`}>
-                <ProfileTile
-                key={user._id}
-                user = {user}
-               
-                /> 
-            </Link>  
-    )}
-        
-          
-      </div>
-    )
-  }
-  
-  export default Bands
-  
+
+  return (
+    <div className="bands">
+      {bands && bands.map(band =>
+        <Link key={band._id} to={`${band._id}`}>
+          <ProfileTile
+            key={band._id}
+            profile={band}
+
+          />
+        </Link>
+      )}
+
+
+    </div>
+  )
+}
+
+export default Bands

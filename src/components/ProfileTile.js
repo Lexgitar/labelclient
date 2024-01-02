@@ -2,18 +2,18 @@
 //import { useState } from "react"
 import '../pages/pages.css'
 
-import ProfileDetails from "./ProfileDetails"
 
 
-const ProfileTile = ({user}) => {
+
+const ProfileTile = ({profile}) => {
 
 
    return(
 
     <div >
-        <p>{user._id}</p>
-        <p>{user.name}</p>
-        <p>{user.location}</p>
+        <p>{profile._id}</p>
+        <p>{profile.name}</p>
+        <p>{profile.location}</p>
     </div>  
    )
                

@@ -8,16 +8,16 @@ import { selectLoggedIn } from '../slices/userSlice'
 
 import { fetchRoles } from '../slices/userSlice'
 
-const Layout = ()=>{
+const Layout = () => {
     let dispatch = useDispatch()
     let logged = useSelector(selectLoggedIn)
-   
-    // useEffect(()=>{
-    //     dispatch(fetchRoles())
-    // }, [])
-    dispatch(fetchRoles())
 
-    return(
+    useEffect(() => {
+        dispatch(fetchRoles())
+    }, [])
+    //dispatch(fetchRoles())
+
+    return (
         <div className="layout">
             <header className="header">
                 <nav className="nav">
@@ -25,17 +25,17 @@ const Layout = ()=>{
                         HOME
                     </NavLink>
                     <div className="profiles">
-                        <NavLink to='labels'>Labels</NavLink>                       
-                        <NavLink to='bands'>Bands</NavLink>                       
-                    </div> 
-                    <NavLink to='about' className="about">About</NavLink>                                
+                        <NavLink to='labels'>Labels</NavLink>
+                        <NavLink to='bands'>Bands</NavLink>
+                    </div>
+                    <NavLink to='about' className="about">About</NavLink>
                     <NavLink to='account' className="account">Account</NavLink>
-                   {logged? <Logout/> : <Link to='account/login' className="logbutton">Login</Link>}                     
+                    {logged ? <Logout /> : <Link to='account/login' className="logbutton">Login</Link>}
                 </nav>
             </header>
             <div className="mainWrapper">
                 <main className="main">
-                    <Outlet/>
+                    <Outlet />
                 </main>
             </div>
             <footer className='footer'>
