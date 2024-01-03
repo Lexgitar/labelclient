@@ -7,6 +7,7 @@ const initialState = {
     status: '',
     error: '',
     userInfo: '',
+    edit:false,
     roles: {
         bands: [],
         labels: [],
@@ -21,6 +22,16 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
         const response = await axios.post(`api/${role}s`, body)
         const user = response.data
         console.log('uS', role, response.data)
+        return user
+
+    }
+)
+
+export const editDetails = createAsyncThunk('userDetails/editDetails',
+    async ({id, body, role }) => {
+        const response = await axios.put(`api/${role}s/${id}`, body)
+        const user = response.data
+        console.log('uSedit', role, response.data)
         return user
 
     }
@@ -57,6 +68,9 @@ export const userSlice = createSlice({
 
         addUserInfo: (state, action) => {
             state.userInfo = action.payload
+        },
+        toggleEdit:(state,action)=>{
+            state.edit = action.payload
         }
     },
     extraReducers(builder) {
@@ -72,7 +86,14 @@ export const userSlice = createSlice({
                 state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload
-                state.inited = true
+                
+
+            })
+            .addCase(editDetails.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.error = ''
+                state.userInfo = action.payload
+                
 
             })
             .addCase(fetchRoles.fulfilled, (state, action) => {
@@ -86,11 +107,11 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo,toggleEdit } = userSlice.actions
 export const selectUser = (state) => state.user.user[0]
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
 export const selectError = (state) => state.user.error
 export const selectUserInfo = (state) => state.user.userInfo
-export const selectInited = (state) => state.user.inited
+export const selectUserEdit = (state)=> state.user.edit
 export const selectRoles = (state) => state.user.roles

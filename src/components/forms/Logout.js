@@ -2,7 +2,7 @@ import axios from "axios"
 
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { toggleLog, userDelete, addUserInfo } from "../../slices/userSlice"
+import { toggleLog, userDelete, addUserInfo, toggleEdit } from "../../slices/userSlice"
 
 const Logout = () => {
 
@@ -15,6 +15,7 @@ const Logout = () => {
         dispatch(userDelete())
         dispatch(toggleLog(false))
         dispatch(addUserInfo(''))
+        dispatch(toggleEdit(false))
         navigate('/')
     }
 
