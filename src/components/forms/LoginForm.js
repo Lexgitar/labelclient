@@ -22,24 +22,28 @@ const LoginForm = () => {
         let body = { email, password }
         const response = await axios.post('/api/login', body)
         if (response.data) {
+
             const dataId = response.data._id
             const role = response.data.role
+
             console.log(response.data)
             dispatch(addUser(response.data))
-            const foundProfile = (id, role) => {
-                let profileRoles = (role === 'band' ? roles.bands : (role === 'labels' ? roles.labels : roles.fans))
-                const userProfile = profileRoles.filter(function (profile) {
-                    return profile.userId == id
-                })[0]
-                //console.log('Lf - handle', userProfile, profileRoles, roles)
+
+            const foundProfile =  (id, role) => {
+                const profileRoles = (role === 'band' ? roles.bands : (role   === 'label' ? roles.labels : roles.fans))
+                
+                const userProfile =  profileRoles.filter( (profile)=>
+                profile.userId == id)[0]
+                console.log('Lf - handle', userProfile, profileRoles, roles)
                 if (userProfile) {
+                    console.log('userprofiel',userProfile)
                     return dispatch(addUserInfo(userProfile))
                 }
 
 
             }
 
-            foundProfile(dataId, role)
+           foundProfile(dataId, role)
 
 
             dispatch(toggleLog(true))

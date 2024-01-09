@@ -6,11 +6,11 @@ import UserInfo from "../UserInfo"
 import Logout from "../forms/Logout"
 
 
-const UserDetails = () => {
+const UserDetails =  () => {
     const user = useSelector(selectUser)
 
     const logged = useSelector(selectLoggedIn)
-    const userInfo = useSelector(selectUserInfo)
+    const userInfo =  useSelector(selectUserInfo)
     console.log('userdets', userInfo)
     if (userInfo) {
         return (
