@@ -18,7 +18,7 @@ const handleClick=()=>{
             <p>_id: {userInfo._id}</p>
             <p>location: {userInfo.location}</p>
            {edit && <UserForm user={user} userInfo={userInfo} />}
-            <button onClick={handleClick} >Edit</button>
+            {!edit && <button onClick={handleClick} >Edit</button>}
         </div>
     )
 }

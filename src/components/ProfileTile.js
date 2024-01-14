@@ -5,6 +5,8 @@ import '../pages/pages.css'
 
 
 
+
+
 const ProfileTile = ({profile}) => {
 
 
@@ -14,6 +16,7 @@ const ProfileTile = ({profile}) => {
         <p>{profile._id}</p>
         <p>{profile.name}</p>
         <p>{profile.location}</p>
+        
     </div>  
    )
                

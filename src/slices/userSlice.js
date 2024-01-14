@@ -17,10 +17,21 @@ const initialState = {
 
 }
 
+export const attachUser= createAsyncThunk('userDetails/attachUser',
+    async ({hostId, attachId}) => {
+        let link = `/api/labels/${hostId}?attach=${attachId}`
+        const response = await axios.put(link)
+        const array = await response.data
+        console.log('aU', hostId, attachId, link,  array)
+        return array
+
+    }
+)
+
 export const createDetails = createAsyncThunk('userDetails/createDetails',
     async ({ body, role }) => {
         const response = await axios.post(`api/${role}s`, body)
-        const user = response.data
+        const user = await response.data
         console.log('uS', role, response.data)
         return user
 

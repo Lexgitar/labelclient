@@ -12,6 +12,7 @@ const UserForm = ({ user, userInfo }) => {
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
     const [id, setId] = useState('')
+    const tiTle = userInfo ? 'Edit Profile' : 'Create profile'
     useEffect(()=>{
         if(userInfo){
             setName(userInfo.name)
@@ -40,7 +41,7 @@ const UserForm = ({ user, userInfo }) => {
     return (
         <form
             onSubmit={(e) => handleSubmit(e)}
-        > Create profile <br />
+        > {tiTle} <br />
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} /><br />
             <button>Submit</button>
