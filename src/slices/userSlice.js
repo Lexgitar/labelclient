@@ -18,8 +18,8 @@ const initialState = {
 }
 
 export const attachUser= createAsyncThunk('userDetails/attachUser',
-    async ({hostId, attachId}) => {
-        let link = `/api/labels/${hostId}?attach=${attachId}`
+    async ({urlRole, hostId, attachId}) => {
+        let link = `/api/${urlRole}/${hostId}?attach=${attachId}`
         const response = await axios.put(link)
         const array = await response.data
         console.log('aU', hostId, attachId, link,  array)

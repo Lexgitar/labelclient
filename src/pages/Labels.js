@@ -8,7 +8,7 @@ import ProfileTile from "../components/ProfileTile"
 import './pages.css'
 
 import { useSelector } from "react-redux"
-import { selectAllLabels } from "../slices/labelsSlice"
+
 import { selectRoles } from "../slices/userSlice"
 
 
@@ -22,13 +22,9 @@ const Labels = () => {
   return (
     <div className="labels">
       {labels && labels.map(label =>
-        <Link key={label._id} to={`${label._id}`}>
-
-          <ProfileTile
-            key={label._id}
-            profile={label}
-          />
-        </Link>
+        
+          <ProfileTile key={label._id} profile={label}/>
+        
       )}
     </div>
   )

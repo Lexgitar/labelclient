@@ -22,13 +22,9 @@ const Bands = () => {
   return (
     <div className="bands">
       {bands && bands.map(band =>
-        <Link key={band._id} to={`${band._id}`}>
-          <ProfileTile
-            key={band._id}
-            profile={band}
-
-          />
-        </Link>
+        
+          <ProfileTile key={band._id} profile={band} />
+        
       )}
 
 
