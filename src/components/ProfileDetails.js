@@ -27,22 +27,22 @@ const ProfileDetails = () => {
     let urlRole = useLocation().pathname.includes('labels')? 'labels' : 'bands'
 
     let byRolechecking = (`${userRole}s` == urlRole)? false : true
-    console.log(byRolechecking)
+    //console.log(byRolechecking)
 
     const userKind =  usersPool.filter(function (user) {
         return user._id == id
     })[0]
-    console.log('userkind ', userKind)
+    //console.log('userkind ', userKind)
 
     let notInArrayCheck = userKind.attachedId.includes(userInfo._id)? false : true
-    console.log('araycheck ', notInArrayCheck)
+    //console.log('araycheck ', notInArrayCheck)
     
     const handleAttach = () => {
         if(userInfo && userKind){
             const attachId = userInfo._id
             const hostId = userKind._id
         console.log('handle attach', attachId, hostId)
-        dispatch(attachUser({urlRole,hostId, attachId }))
+        dispatch(attachUser({urlRole, hostId, attachId }))
         navigate('/')
         }
         

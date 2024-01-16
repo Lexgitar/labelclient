@@ -33,7 +33,7 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
         const response = await axios.post(`api/${role}s`, body)
         const user = await response.data
         console.log('uS', role, response.data)
-        return user
+        return {user, role}
 
     }
 )
@@ -82,7 +82,8 @@ export const userSlice = createSlice({
         },
         toggleEdit:(state,action)=>{
             state.edit = action.payload
-        }
+        },
+       
     },
     extraReducers(builder) {
         builder
@@ -96,7 +97,9 @@ export const userSlice = createSlice({
             .addCase(createDetails.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.error = ''
-                state.userInfo = action.payload
+                state.userInfo = action.payload.user
+                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role   === 'label' ? state.roles.labels : state.roles.fans))
+               arrayByRole.push(action.payload.user)
                 
 
             })
@@ -118,7 +121,7 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo,toggleEdit } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo,toggleEdit, addRole } = userSlice.actions
 export const selectUser = (state) => state.user.user[0]
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
