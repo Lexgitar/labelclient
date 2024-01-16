@@ -2,12 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    user: [],
+    user: '',
     loggedIn: false,
     status: '',
     error: '',
     userInfo: '',
-    edit:false,
+    edit: false,
     roles: {
         bands: [],
         labels: [],
@@ -17,13 +17,13 @@ const initialState = {
 
 }
 
-export const attachUser= createAsyncThunk('userDetails/attachUser',
-    async ({urlRole, hostId, attachId}) => {
-        let link = `/api/${urlRole}/${hostId}?attach=${attachId}`
+export const attachUser = createAsyncThunk('userDetails/attachUser',
+    async ({ roleFromUrl, hostId, attachId }) => {
+        let link = `/api/${roleFromUrl}/${hostId}?attach=${attachId}`
         const response = await axios.put(link)
         const array = await response.data
-        console.log('aU', hostId, attachId, link,  array)
-        return array
+        console.log('aU', hostId, attachId, link, array)
+        return { roleFromUrl, hostId, array }
 
     }
 )
@@ -33,13 +33,13 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
         const response = await axios.post(`api/${role}s`, body)
         const user = await response.data
         console.log('uS', role, response.data)
-        return {user, role}
+        return { user, role }
 
     }
 )
 
 export const editDetails = createAsyncThunk('userDetails/editDetails',
-    async ({id, body, role }) => {
+    async ({ id, body, role }) => {
         const response = await axios.put(`api/${role}s/${id}`, body)
         const user = response.data
         console.log('uSedit', role, response.data)
@@ -66,7 +66,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         addUser: (state, action) => {
-            state.user.push(action.payload)
+            state.user = action.payload
 
         },
         toggleLog: (state, action) => {
@@ -74,16 +74,16 @@ export const userSlice = createSlice({
             //if state empty logged in = false
         },
         userDelete: (state) => {
-            state.user.pop()
+            state.user = ''
         },
 
         addUserInfo: (state, action) => {
             state.userInfo = action.payload
         },
-        toggleEdit:(state,action)=>{
+        toggleEdit: (state, action) => {
             state.edit = action.payload
         },
-       
+
     },
     extraReducers(builder) {
         builder
@@ -98,17 +98,20 @@ export const userSlice = createSlice({
                 state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload.user
-                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role   === 'label' ? state.roles.labels : state.roles.fans))
-               arrayByRole.push(action.payload.user)
-                
+                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : state.roles.fans))
+                arrayByRole.push(action.payload.user)
+
 
             })
             .addCase(editDetails.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload
-                
-
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+                //edge case when user is null
+                //    console.log('addcase',arrayByRole.findIndex((item)=>item._id === action.payload._id)) 
+                let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload._id)
+                arrayByRole.splice(editedIndex, 1, action.payload)
             })
             .addCase(fetchRoles.fulfilled, (state, action) => {
 
@@ -116,16 +119,22 @@ export const userSlice = createSlice({
                 state.roles.labels = action.payload[1]
                 state.roles.fans = action.payload[2]
             })
+            .addCase(attachUser.fulfilled, (state, action) => {
+                const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
+                console.log('attUsr', arrayByRole)
+                let arrayIndex = arrayByRole.findIndex((item)=> item._id === action.payload.hostId)
+                arrayByRole[arrayIndex].attachedId = action.payload.array
+            })
     }
 })
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo,toggleEdit, addRole } = userSlice.actions
-export const selectUser = (state) => state.user.user[0]
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole } = userSlice.actions
+export const selectUser = (state) => state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
 export const selectError = (state) => state.user.error
 export const selectUserInfo = (state) => state.user.userInfo
-export const selectUserEdit = (state)=> state.user.edit
+export const selectUserEdit = (state) => state.user.edit
 export const selectRoles = (state) => state.user.roles
