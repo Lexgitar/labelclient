@@ -17,6 +17,17 @@ const initialState = {
 
 }
 
+export const detachUser = createAsyncThunk('userDetails/detachUser',
+    async ({ roleFromUrl, hostId, attachId }) => {
+        let link = `/api/${roleFromUrl}/${hostId}?detach=${attachId}`
+        const response = await axios.put(link)
+        const array = await response.data
+        console.log('aU', hostId, attachId, link, array)
+        return { roleFromUrl, hostId, array }
+
+    }
+)
+
 export const attachUser = createAsyncThunk('userDetails/attachUser',
     async ({ roleFromUrl, hostId, attachId }) => {
         let link = `/api/${roleFromUrl}/${hostId}?attach=${attachId}`
@@ -122,7 +133,13 @@ export const userSlice = createSlice({
             .addCase(attachUser.fulfilled, (state, action) => {
                 const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
                 console.log('attUsr', arrayByRole)
-                let arrayIndex = arrayByRole.findIndex((item)=> item._id === action.payload.hostId)
+                let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
+                arrayByRole[arrayIndex].attachedId = action.payload.array
+            })
+            .addCase(detachUser.fulfilled, (state, action) => {
+                const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
+                console.log('dettUsr', arrayByRole)
+                let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
             })
     }
