@@ -1,6 +1,9 @@
-import { useSelector, useDispatch } from "react-redux"
+import {
+  useSelector,
+  //useDispatch 
+} from "react-redux"
 import { selectLoggedIn, selectUser, selectRoles, selectUserEdit } from "../slices/userSlice"
-import { useEffect } from "react"
+//import { useEffect } from "react"
 
 
 
@@ -9,7 +12,7 @@ const Home = () => {
   let bands = useSelector(selectRoles).bands
   let labels = useSelector(selectRoles).labels
   let fans = useSelector(selectRoles).fans
-  let dispatch = useDispatch()
+  //let dispatch = useDispatch()
 
   const logged = useSelector(selectLoggedIn)
   const user = useSelector(selectUser)
@@ -19,6 +22,7 @@ const Home = () => {
     <div>
       Home
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
+      <p>{user && user.email}</p>
       <div>bands{bands && bands.map((band) => (
         <p key={band._id} >
           {band._id}

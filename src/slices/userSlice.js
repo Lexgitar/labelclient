@@ -16,6 +16,16 @@ const initialState = {
 
 
 }
+export const userSignup = createAsyncThunk('userDetails/userSignup',
+    async ({ userBody }) => {
+        const response = await axios.post(`/api/signup`, userBody)
+        const user = response.data
+        console.log('userSignp', user)
+        return user
+
+    }
+)
+
 
 export const detachUser = createAsyncThunk('userDetails/detachUser',
     async ({ roleFromUrl, hostId, attachId }) => {
@@ -72,12 +82,15 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
     }
 )
 
+//ADD REST OF THE CASES FOR FETCHES
+
 export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         addUser: (state, action) => {
             state.user = action.payload
+            state.loggedIn = true
 
         },
         toggleLog: (state, action) => {
@@ -141,6 +154,10 @@ export const userSlice = createSlice({
                 console.log('dettUsr', arrayByRole)
                 let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
+            })
+            .addCase(userSignup.fulfilled, (state, action) => {
+                state.user = action.payload
+                state.loggedIn = state.user ? true : false
             })
     }
 })
