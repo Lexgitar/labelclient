@@ -2,12 +2,14 @@ import {
   useSelector,
   //useDispatch 
 } from "react-redux"
-import { selectLoggedIn, selectUser, selectRoles, selectUserEdit } from "../slices/userSlice"
+import { selectLoggedIn, selectUser, selectRoles, selectUserEdit, selectError } from "../slices/userSlice"
 //import { useEffect } from "react"
 
 
 
 const Home = () => {
+  const error = useSelector(selectError)
+  //console.log('home', error)
   let edit = useSelector(selectUserEdit)
   let bands = useSelector(selectRoles).bands
   let labels = useSelector(selectRoles).labels
@@ -21,6 +23,7 @@ const Home = () => {
   return (
     <div>
       Home
+      {error && <>{error}</>}
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
       <p>{user && user.email}</p>
       <div>bands{bands && bands.map((band) => (

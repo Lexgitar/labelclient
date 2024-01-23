@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+
 import axios from "axios";
 
 const initialState = {
@@ -17,11 +19,16 @@ const initialState = {
 
 }
 export const userSignup = createAsyncThunk('userDetails/userSignup',
-    async ({ userBody }) => {
-        const response = await axios.post(`/api/signup`, userBody)
-        const user = response.data
-        console.log('userSignp', user)
-        return user
+    async ({ userBody }, { rejectWithValue }) => {
+
+        try {
+            const response = await axios.post(`/api/signup`, userBody)
+            return response.data
+
+        } catch (err) {
+
+            return rejectWithValue(err.response.data)
+        }
 
     }
 )
@@ -50,21 +57,31 @@ export const attachUser = createAsyncThunk('userDetails/attachUser',
 )
 
 export const createDetails = createAsyncThunk('userDetails/createDetails',
-    async ({ body, role }) => {
-        const response = await axios.post(`api/${role}s`, body)
-        const user = await response.data
-        console.log('uS', role, response.data)
-        return { user, role }
+    async ({ body, role }, { rejectWithValue }) => {
+
+        try {
+            const response = await axios.post(`api/${role}s`, body)
+            const user = await response.data
+            console.log('uS', role, response.data)
+            return { user, role }
+        } catch (err) {
+            return rejectWithValue(err.response.data)
+        }
+
 
     }
 )
 
 export const editDetails = createAsyncThunk('userDetails/editDetails',
-    async ({ id, body, role }) => {
-        const response = await axios.put(`api/${role}s/${id}`, body)
+    async ({ id, body, role }, { rejectWithValue }) => {
+       try{ const response = await axios.put(`api/${role}s/${id}`, body)
         const user = response.data
         console.log('uSedit', role, response.data)
         return user
+    } catch(err){
+        console.log('eediter', err)
+        return rejectWithValue(err.response.data)
+    }
 
     }
 )
@@ -107,6 +124,9 @@ export const userSlice = createSlice({
         toggleEdit: (state, action) => {
             state.edit = action.payload
         },
+        addError: (state, action) => {
+            state.error = action.payload
+        }
 
     },
     extraReducers(builder) {
@@ -115,8 +135,9 @@ export const userSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(createDetails.rejected, (state, action) => {
+                console.log('rjedct', action)
                 state.status = 'rejected'
-                state.error = action.error.message
+                state.error = action.payload || action.error.message
             })
             .addCase(createDetails.fulfilled, (state, action) => {
                 state.status = 'succeeded'
@@ -126,6 +147,11 @@ export const userSlice = createSlice({
                 arrayByRole.push(action.payload.user)
 
 
+            })
+            .addCase(editDetails.rejected, (state, action) => {
+                console.log('rj edit', action)
+                state.status = 'rejected'
+                state.error = action.payload || action.error.message
             })
             .addCase(editDetails.fulfilled, (state, action) => {
                 state.status = 'succeeded'
@@ -156,15 +182,22 @@ export const userSlice = createSlice({
                 arrayByRole[arrayIndex].attachedId = action.payload.array
             })
             .addCase(userSignup.fulfilled, (state, action) => {
+
                 state.user = action.payload
                 state.loggedIn = state.user ? true : false
+            })
+            .addCase(userSignup.rejected, (state, action) => {
+
+                state.error = action.payload.errors
+                //state.loggedIn = state.user ? true : false
+
             })
     }
 })
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError } = userSlice.actions
 export const selectUser = (state) => state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status

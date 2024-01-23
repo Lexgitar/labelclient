@@ -5,14 +5,15 @@ import { useState } from 'react'
 import axios from 'axios'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addUser, toggleLog, selectRoles, addUserInfo } from '../../slices/userSlice'
+import { addUser, toggleLog, selectRoles, addUserInfo, addError, selectError } from '../../slices/userSlice'
 
 const LoginForm = () => {
     const roles = useSelector(selectRoles)
+    let errror = useSelector(selectError)
     const [email, setEmail] = useState('')
     //const [logged, setLogged] = useState('logged')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState(null)
+
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -20,39 +21,47 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         let body = { email, password }
-        const response = await axios.post('/api/login', body)
-        if (response.data) {
+        try {
+            const response = await axios.post('/api/login', body)
 
-            const dataId = response.data._id
-            const role = response.data.role
+            if (response.data && response.data.status != 400) {
 
-            console.log(response.data)
-            dispatch(addUser(response.data))
+                const dataId = response.data._id
+                const role = response.data.role
 
-            const foundProfile =  (id, role) => {
-                const profileRoles = (role === 'band' ? roles.bands : (role   === 'label' ? roles.labels : roles.fans))
-                
-                const userProfile =  profileRoles.filter( (profile)=>
-                profile.userId == id)[0]
-                console.log('Lf - handle', userProfile, profileRoles, roles)
-                if (userProfile) {
-                    console.log('userprofiel',userProfile)
-                    return dispatch(addUserInfo(userProfile))
+                console.log(response.data)
+                dispatch(addUser(response.data))
+
+                const foundProfile = (id, role) => {
+                    const profileRoles = (role === 'band' ? roles.bands : (role === 'label' ? roles.labels : roles.fans))
+
+                    const userProfile = profileRoles.filter((profile) =>
+                        profile.userId == id)[0]
+                    console.log('Lf - handle', userProfile, profileRoles, roles)
+                    if (userProfile) {
+                        console.log('userprofiel', userProfile)
+                        return dispatch(addUserInfo(userProfile))
+                    }
+
+
                 }
 
+                foundProfile(dataId, role)
 
+
+                dispatch(toggleLog(true))
+                dispatch(addError(''))
+                setEmail('')
+                setPassword('')
+                navigate('/account')
             }
 
-           foundProfile(dataId, role)
+        } catch (error) {
+            dispatch(addError(error.response.data.errors))
 
-
-            dispatch(toggleLog(true))
-            setEmail('')
-            setPassword('')
-            navigate('/account')
-        } else {
-            error = response.data
         }
+
+
 
         // navigate('/account/user')
 
@@ -65,18 +74,18 @@ const LoginForm = () => {
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                required
             /> <br />
             <label>Password:</label>
             <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
-            />
-            <br />
-
+                required
+            /> <br />
             <button >Log in</button>
 
-            {error && <div className="error">{error}</div>}
+            {errror && <div className="error">{errror}</div>}
 
         </form>
     )

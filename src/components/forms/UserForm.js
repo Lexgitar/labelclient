@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { createDetails, editDetails, selectUserEdit, toggleEdit } from "../../slices/userSlice"
+import { createDetails, editDetails, selectUserEdit, toggleEdit, selectError } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 
 
 const UserForm = ({ user, userInfo }) => {
+    let erur = useSelector(selectError)
     let edit = useSelector(selectUserEdit)
     let navigate = useNavigate()
     let fetchType = edit ? editDetails : createDetails
@@ -13,8 +14,8 @@ const UserForm = ({ user, userInfo }) => {
     const [location, setLocation] = useState('')
     const [id, setId] = useState('')
     const tiTle = userInfo ? 'Edit Profile' : 'Create profile'
-    useEffect(()=>{
-        if(userInfo){
+    useEffect(() => {
+        if (userInfo) {
             setName(userInfo.name)
             setLocation(userInfo.location)
             setId(userInfo._id)
@@ -24,7 +25,7 @@ const UserForm = ({ user, userInfo }) => {
         e.preventDefault()
         let body = { name, location }
         let role = user.role
-        let fetchArg = edit? {id,role, body} : {role, body}
+        let fetchArg = edit ? { id, role, body } : { role, body }
         console.log('UF', role)
         //
         dispatch(fetchType(fetchArg))
@@ -42,9 +43,10 @@ const UserForm = ({ user, userInfo }) => {
         <form
             onSubmit={(e) => handleSubmit(e)}
         > {tiTle} <br />
-            <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} /> <br />
-            <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} /><br />
+            <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} required /> <br />
+            <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} required /><br />
             <button>Submit</button>
+            {erur && <p>{erur}</p> }
         </form>
     )
 }

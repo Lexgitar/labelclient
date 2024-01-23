@@ -65,8 +65,8 @@ const SignUpForm = () => {
       className="signup"
       onSubmit={handleSubmit}
     >
-      <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="" placeholder="email" value={email} />
-      <input onChange={(e) => setPassword(e.target.value)} type="password" name="" id="" placeholder="password" value={password} /><br />
+      <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="" placeholder="email" value={email} required />
+      <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" value={password} required/><br />
       <input
         checked={role === 'label'}
         onChange={(e) => roleChange(e)}
