@@ -35,23 +35,35 @@ export const userSignup = createAsyncThunk('userDetails/userSignup',
 
 
 export const detachUser = createAsyncThunk('userDetails/detachUser',
-    async ({ roleFromUrl, hostId, attachId }) => {
-        let link = `/api/${roleFromUrl}/${hostId}?detach=${attachId}`
-        const response = await axios.put(link)
-        const array = await response.data
-        console.log('aU', hostId, attachId, link, array)
-        return { roleFromUrl, hostId, array }
+    async ({ roleFromUrl, hostId, attachId }, { rejectWithValue }) => {
+        try {
+            let link = `/api/${roleFromUrl}/${hostId}?detach=${attachId}`
+            const response = await axios.put(link)
+            const array = await response.data
+            console.log('aU', hostId, attachId, link, array)
+            return { roleFromUrl, hostId, array }
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+
 
     }
 )
 
 export const attachUser = createAsyncThunk('userDetails/attachUser',
-    async ({ roleFromUrl, hostId, attachId }) => {
-        let link = `/api/${roleFromUrl}/${hostId}?attach=${attachId}`
-        const response = await axios.put(link)
-        const array = await response.data
-        console.log('aU', hostId, attachId, link, array)
-        return { roleFromUrl, hostId, array }
+    async ({ roleFromUrl, hostId, attachId }, { rejectWithValue }) => {
+        try {
+            let link = `/api/${roleFromUrl}/${hostId}?attach=${attachId}`
+            const response = await axios.put(link)
+            const array = await response.data
+            console.log('aU', hostId, attachId, link, array)
+            return { roleFromUrl, hostId, array }
+
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+
+
 
     }
 )
@@ -74,31 +86,90 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
 
 export const editDetails = createAsyncThunk('userDetails/editDetails',
     async ({ id, body, role }, { rejectWithValue }) => {
-       try{ const response = await axios.put(`api/${role}s/${id}`, body)
-        const user = response.data
-        console.log('uSedit', role, response.data)
-        return user
-    } catch(err){
-        console.log('eediter', err)
-        return rejectWithValue(err.response.data)
-    }
+        try {
+            const response = await axios.put(`api/${role}s/${id}`, body)
+            const user = response.data
+            console.log('uSedit', role, response.data)
+            return user
+        } catch (err) {
+            console.log('eediter', err)
+            return rejectWithValue(err.response.data)
+        }
 
     }
 )
 
 export const fetchRoles = createAsyncThunk('roles/fetchRoles',
-    async () => {
+    async ( rejectWithValue ) => {
         const bandsRes = await axios.get(`api/bands`)
         const labelsRes = await axios.get(`api/labels`)
         const fansRes = await axios.get(`api/fans`)
-        // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
-        //console.log('fb',bands.data, labels.data, fans.data)
-        console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
-        return [bandsRes.data, labelsRes.data, fansRes.data]
+        try {
+
+             //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
+            //console.log('fb',bands.data, labels.data, fans.data)
+            console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
+            return [bandsRes.data, labelsRes.data, fansRes.data]
+
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+
 
     }
 )
 
+// export const fetchRoles = createAsyncThunk('roles/fetchRoles',
+//     async () => {
+//         const bandsRes = await axios.get(`api/bands`)
+//         const labelsRes = await axios.get(`api/labels`)
+//         const fansRes = await axios.get(`api/fans`)
+//         // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
+//         //console.log('fb',bands.data, labels.data, fans.data)
+//         console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
+//         return [bandsRes.data, labelsRes.data, fansRes.data]
+
+//     }
+// )
+
+
+// export const fetchRoles = createAsyncThunk('roles/fetchRoles',
+//     async ({rejectWithValue}) => {
+//         const bands = await axios.get(`api/bands`)
+//         const labels = await axios.get(`api/labels`)
+//         const fans = await axios.get(`api/fans`)
+//         // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
+//         //console.log('fb',bands.data, labels.data, fans.data)
+//         console.log('fR', bands.data, labels.data, fans.data)
+
+
+
+//         axios.all([bands, labels, fans]).then(
+//             axios.spread((...res) => {
+//                    const bandsRes = res[0]
+//                    const labelsRes = res[1]
+//                    const fansRes = res[2]
+//                 return [bandsRes.data, labelsRes.data, fansRes.data]
+//             })
+//         )
+//             .catch((error) => {
+//                 if (error.response) {
+//                     // the request was made and the server responded with a status code
+//                     console.log('axio',error.response);
+//                     console.log(error.response.status);
+//                     console.log('eediter', error)
+//             return rejectWithValue(error.response.data)
+//                 } else if (error.request) {
+//                     // the request was made but no response was received
+//                     console.log("network error");
+//                     rejectWithValue(error.request)
+//                 } else {
+//                     // something happened when setting up the request
+//                     console.log('wtaf',error);
+//                 }
+//             });
+//     }
+// )
 //ADD REST OF THE CASES FOR FETCHES
 
 export const userSlice = createSlice({
@@ -169,17 +240,33 @@ export const userSlice = createSlice({
                 state.roles.labels = action.payload[1]
                 state.roles.fans = action.payload[2]
             })
+            .addCase(fetchRoles.rejected, (state, action) => {
+                console.log('fetcredux', action, action.payload)
+                state.error = action.payload || action.error.message
+            })
             .addCase(attachUser.fulfilled, (state, action) => {
                 const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
                 console.log('attUsr', arrayByRole)
                 let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
             })
+            .addCase(attachUser.rejected, (state, action) => {
+                console.log('atach', action, action.payload)
+                state.status = 'rejected'
+                state.error = action.payload || action.error.message
+
+            })
             .addCase(detachUser.fulfilled, (state, action) => {
                 const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
                 console.log('dettUsr', arrayByRole)
                 let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
+            })
+            .addCase(detachUser.rejected, (state, action) => {
+                console.log('detach', action, action.payload)
+                state.status = 'rejected'
+                state.error = action.payload || action.error.message
+
             })
             .addCase(userSignup.fulfilled, (state, action) => {
 

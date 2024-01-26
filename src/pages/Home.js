@@ -22,10 +22,10 @@ const Home = () => {
 
   return (
     <div>
-      Home
+      Home 
       {error && <>{error}</>}
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
-      <p>{user && user.email}</p>
+      {user && <p>{user.email}</p> }
       <div>bands{bands && bands.map((band) => (
         <p key={band._id} >
           {band._id}

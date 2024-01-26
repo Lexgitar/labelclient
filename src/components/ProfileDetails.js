@@ -30,11 +30,7 @@ const ProfileDetails = () => {
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
     //console.log(byRolechecking)
 
-    const userProfile = usersPool.filter(function (user) {
-        // eslint-disable-next-line
-        return user._id == id
-
-    })[0]
+    const userProfile = usersPool.filter(function (user) {return user._id == id})[0]
     //console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile.attachedId.includes(userRoleInfo._id) ? false : true
@@ -90,10 +86,12 @@ const ProfileDetails = () => {
                 <p>name: {userProfile.name}</p>
                 <p>location:{userProfile.location}</p>
                 <p>atId{userProfile.attachedId}</p>
-                {attachCheck() &&
+                {
+                attachCheck() &&
                     <button onClick={handleAttach}>Submit</button>
                 }
-                {detachCheck() &&
+                {
+                detachCheck() &&
                     <button onClick={handleDetach}>Detach</button>
                 }
 
