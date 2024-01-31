@@ -2,12 +2,13 @@ import {
   useSelector,
   //useDispatch 
 } from "react-redux"
-import { selectLoggedIn, selectUser, selectRoles, selectUserEdit, selectError } from "../slices/userSlice"
+import { selectLoggedIn, selectUser, selectRoles, selectUserEdit, selectError, selectApiMsg } from "../slices/userSlice"
 //import { useEffect } from "react"
 
 
 
 const Home = () => {
+  let apiMsg = useSelector(selectApiMsg)
   const error = useSelector(selectError)
   //console.log('home', error)
   let edit = useSelector(selectUserEdit)
@@ -23,6 +24,8 @@ const Home = () => {
   return (
     <div>
       Home 
+      <br />
+      {apiMsg && <p> - {apiMsg} - </p> }
       {error && <>{error}</>}
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
       {user && <p>{user.email}</p> }

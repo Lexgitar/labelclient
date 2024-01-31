@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+
+import { selectError, selectUser } from "../../slices/userSlice"
 
 import {
   //useSelector,
@@ -13,6 +16,10 @@ import {
 
 
 const SignUpForm = () => {
+
+  let user = useSelector(selectUser)
+  let erur = useSelector(selectError)
+
   let navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -32,30 +39,17 @@ const SignUpForm = () => {
     // navigate('/account/user')
     let userBody = { email, password, role }
 
-    // const response = await fetch('/api/signup', {
-    //     method: 'POST',
-    //     body: JSON.stringify(user),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })   
-    // const json = await response.json()
-
-    // if(response.ok){
-    //     console.log(json)
-    //     setEmail('')
-    //     setPassword('')
-    //     dispatch(userSignup(userBody))
-
-    //     navigate('/account')
-    // }
-
     console.log('userbody', userBody)
     setEmail('')
     setPassword('')
     dispatch(userSignup({ userBody }))
+    if (!erur){
+       navigate('/account') 
+    } else{
+       navigate('')
+    }
 
-    navigate('/account')
+    // user ? navigate('/account') : navigate('')
 
 
   }
@@ -66,7 +60,7 @@ const SignUpForm = () => {
       onSubmit={handleSubmit}
     >
       <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="" placeholder="email" value={email} required />
-      <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" value={password} required/><br />
+      <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" value={password} required /><br />
       <input
         checked={role === 'label'}
         onChange={(e) => roleChange(e)}
@@ -80,6 +74,7 @@ const SignUpForm = () => {
             <p>{email}</p>
             <p>{password}</p> */}
       <button type="submit">Submit</button>
+      {erur && <p>{erur}</p>}
 
     </form>
   )

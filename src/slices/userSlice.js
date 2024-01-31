@@ -9,6 +9,7 @@ const initialState = {
     status: '',
     error: '',
     userInfo: '',
+    apiMsg:'',
     edit: false,
     roles: {
         bands: [],
@@ -100,13 +101,13 @@ export const editDetails = createAsyncThunk('userDetails/editDetails',
 )
 
 export const fetchRoles = createAsyncThunk('roles/fetchRoles',
-    async ( rejectWithValue ) => {
+    async (rejectWithValue) => {
         const bandsRes = await axios.get(`api/bands`)
         const labelsRes = await axios.get(`api/labels`)
         const fansRes = await axios.get(`api/fans`)
         try {
 
-             //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
+            //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
             //console.log('fb',bands.data, labels.data, fans.data)
             console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
             return [bandsRes.data, labelsRes.data, fansRes.data]
@@ -119,57 +120,31 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
     }
 )
 
-// export const fetchRoles = createAsyncThunk('roles/fetchRoles',
-//     async () => {
-//         const bandsRes = await axios.get(`api/bands`)
-//         const labelsRes = await axios.get(`api/labels`)
-//         const fansRes = await axios.get(`api/fans`)
-//         // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
-//         //console.log('fb',bands.data, labels.data, fans.data)
-//         console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
-//         return [bandsRes.data, labelsRes.data, fansRes.data]
+export const deleteRole = createAsyncThunk('roles/deleteRole',
+    async ({id, role}, {rejectWithValue}) => {
+        try {
+            const json = await axios.delete(`api/${role}s/${id}`)
+            const data = await json.data
+            console.log('delRol', data, role)
+            return {data, id}
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    })
 
-//     }
-// )
+    export const deleteUser = createAsyncThunk('roles/deleteUser',
+    async ( rejectWithValue) => {
+        try {
+            const json = await axios.delete(`api/delete`)
+            const data = await json.data
+            console.log('delRol',json, data, )
+            return data 
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    })
 
 
-// export const fetchRoles = createAsyncThunk('roles/fetchRoles',
-//     async ({rejectWithValue}) => {
-//         const bands = await axios.get(`api/bands`)
-//         const labels = await axios.get(`api/labels`)
-//         const fans = await axios.get(`api/fans`)
-//         // const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
-//         //console.log('fb',bands.data, labels.data, fans.data)
-//         console.log('fR', bands.data, labels.data, fans.data)
-
-
-
-//         axios.all([bands, labels, fans]).then(
-//             axios.spread((...res) => {
-//                    const bandsRes = res[0]
-//                    const labelsRes = res[1]
-//                    const fansRes = res[2]
-//                 return [bandsRes.data, labelsRes.data, fansRes.data]
-//             })
-//         )
-//             .catch((error) => {
-//                 if (error.response) {
-//                     // the request was made and the server responded with a status code
-//                     console.log('axio',error.response);
-//                     console.log(error.response.status);
-//                     console.log('eediter', error)
-//             return rejectWithValue(error.response.data)
-//                 } else if (error.request) {
-//                     // the request was made but no response was received
-//                     console.log("network error");
-//                     rejectWithValue(error.request)
-//                 } else {
-//                     // something happened when setting up the request
-//                     console.log('wtaf',error);
-//                 }
-//             });
-//     }
-// )
 //ADD REST OF THE CASES FOR FETCHES
 
 export const userSlice = createSlice({
@@ -203,15 +178,15 @@ export const userSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(createDetails.pending, (state, action) => {
-                state.status = 'loading'
+                // state.status = 'loading'
             })
             .addCase(createDetails.rejected, (state, action) => {
                 console.log('rjedct', action)
-                state.status = 'rejected'
+                // state.status = 'rejected'
                 state.error = action.payload || action.error.message
             })
             .addCase(createDetails.fulfilled, (state, action) => {
-                state.status = 'succeeded'
+                // state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload.user
                 const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : state.roles.fans))
@@ -239,6 +214,7 @@ export const userSlice = createSlice({
                 state.roles.bands = action.payload[0]
                 state.roles.labels = action.payload[1]
                 state.roles.fans = action.payload[2]
+                state.error = ''
             })
             .addCase(fetchRoles.rejected, (state, action) => {
                 console.log('fetcredux', action, action.payload)
@@ -249,6 +225,7 @@ export const userSlice = createSlice({
                 console.log('attUsr', arrayByRole)
                 let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
+                state.error = ''
             })
             .addCase(attachUser.rejected, (state, action) => {
                 console.log('atach', action, action.payload)
@@ -261,6 +238,7 @@ export const userSlice = createSlice({
                 console.log('dettUsr', arrayByRole)
                 let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
                 arrayByRole[arrayIndex].attachedId = action.payload.array
+                state.error = ''
             })
             .addCase(detachUser.rejected, (state, action) => {
                 console.log('detach', action, action.payload)
@@ -272,6 +250,7 @@ export const userSlice = createSlice({
 
                 state.user = action.payload
                 state.loggedIn = state.user ? true : false
+                state.error = ''
             })
             .addCase(userSignup.rejected, (state, action) => {
 
@@ -279,16 +258,45 @@ export const userSlice = createSlice({
                 //state.loggedIn = state.user ? true : false
 
             })
+            .addCase(deleteRole.fulfilled, (state, action) => {
+                console.log('delrolefulcase', action.payload)
+                
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+                let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
+                arrayByRole.splice(editedIndex, 1)
+                state.error = ''
+
+            })
+            .addCase(deleteRole.rejected, (state, action) => {
+                console.log('delrolercase', action, action.payload)
+                state.error = action.payload.errors
+                
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                console.log('deluserfulcase', action.payload)
+                state.user = ''
+                state.loggedIn = false
+                state.userInfo = ''
+                state.apiMsg  = action.payload
+                state.error = ''
+
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
+                console.log('delusercase', action, action.payload)
+                state.error = action.payload.errors
+                
+            })
     }
 })
 
 export default userSlice.reducer
 
 export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError } = userSlice.actions
-export const selectUser = (state) => state.user.user
+export const selectUser =  (state) =>  state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
 export const selectError = (state) => state.user.error
 export const selectUserInfo = (state) => state.user.userInfo
 export const selectUserEdit = (state) => state.user.edit
 export const selectRoles = (state) => state.user.roles
+export const selectApiMsg = (state) => state.user.apiMsg

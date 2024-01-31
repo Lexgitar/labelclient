@@ -1,7 +1,7 @@
 import axios from "axios"
 
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { toggleLog, userDelete, addUserInfo, toggleEdit } from "../../slices/userSlice"
 
 const Logout = () => {
@@ -20,7 +20,7 @@ const Logout = () => {
     }
 
     return (
-        <div className="logbutton" onClick={handleClick}>Logout</div>
+        <Link className="logbutton" onClick={handleClick}>Logout</Link>
     )
 }
 

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createDetails, editDetails, selectUserEdit, toggleEdit, selectError } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
+import SelectGenre from "../functional/SelectGenre"
+
 
 
 const UserForm = ({ user, userInfo }) => {
     let erur = useSelector(selectError)
-    let edit = useSelector(selectUserEdit)
+    let edited = useSelector(selectUserEdit)
     let navigate = useNavigate()
-    let fetchType = edit ? editDetails : createDetails
+    let fetchType = edited ? editDetails : createDetails
     const dispatch = useDispatch()
     const [name, setName] = useState('')
     const [location, setLocation] = useState('')
@@ -20,19 +22,19 @@ const UserForm = ({ user, userInfo }) => {
             setLocation(userInfo.location)
             setId(userInfo._id)
         }
-    }, [])
+    }, [userInfo])
     const handleSubmit = async (e) => {
         e.preventDefault()
         let body = { name, location }
         let role = user.role
-        let fetchArg = edit ? { id, role, body } : { role, body }
-        console.log('UF', role)
+        let fetchArg = edited ? { id, role, body } : { role, body }
+        //console.log('UF', role)
         //
         dispatch(fetchType(fetchArg))
-        console.log(role, 'and', body)
-        console.log(fetchType)
+        // console.log(role, 'and', body)
+        // console.log(fetchType)
         //
-        dispatch(toggleEdit(false))
+        dispatch(toggleEdit(true))
         setName('')
         setLocation('')
         //
@@ -45,8 +47,10 @@ const UserForm = ({ user, userInfo }) => {
         > {tiTle} <br />
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} required /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} required /><br />
+           <SelectGenre/>
             <button>Submit</button>
             {erur && <p>{erur}</p> }
+           
         </form>
     )
 }
