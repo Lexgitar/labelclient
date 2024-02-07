@@ -4,6 +4,7 @@ import {
 } from "react-redux"
 import { selectLoggedIn, selectUser, selectRoles, selectUserEdit, selectError, selectApiMsg } from "../slices/userSlice"
 //import { useEffect } from "react"
+import Errorent from "../components/functional/Errorent"
 
 
 
@@ -26,7 +27,7 @@ const Home = () => {
       Home 
       <br />
       {apiMsg && <p> - {apiMsg} - </p> }
-      {error && <>{error}</>}
+      <Errorent/>
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
       {user && <p>{user.email}</p> }
       <div>bands{bands && bands.map((band) => (

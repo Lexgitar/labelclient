@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createDetails, editDetails, selectUserEdit, toggleEdit, selectError } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
+import Errorent from "../functional/Errorent"
 
 
 const options = [
@@ -64,7 +65,7 @@ const UserForm = ({ user, userInfo }) => {
             <br />
 
             <button>Submit</button>
-            {erur && <p>{erur}</p>}
+            <Errorent/>
 
         </form>
     )

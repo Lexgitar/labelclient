@@ -8,6 +8,8 @@ import {
 } from '../slices/userSlice'
 import UserDetails from '../components/functional/UserDetails'
 import DeleteAccount from '../components/functional/DeleteAccount'
+import Errorent from '../components/functional/Errorent'
+
 
 
 
@@ -32,7 +34,8 @@ const Account = () => {
         <div>
             <Link to='signup'  >Sign up</Link>
             <Link to='login' >Sign in</Link>
-            {error && <p>{error}</p>}
+            {/* {error && <p>{error}</p>} */}
+            <Errorent/>
         </div>
     )
 }

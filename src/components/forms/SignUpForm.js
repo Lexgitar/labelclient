@@ -17,6 +17,7 @@ import {
   //toggleLog,
   userSignup
 } from "../../slices/userSlice"
+import Errorent from "../functional/Errorent"
 
 
 const SignUpForm = () => {
@@ -86,7 +87,8 @@ const SignUpForm = () => {
             <p>{email}</p>
             <p>{password}</p> */}
       <button type="submit">Submit</button>
-      {erur && <p>{erur}</p>}
+      
+      <Errorent/>
 
     </form>
   )

@@ -11,7 +11,7 @@ import {
     selectLoggedIn
 } from '../slices/userSlice'
 
-
+import Errorent from "./functional/Errorent"
 
 const ProfileDetails = () => {
     const dispatch = useDispatch()
@@ -114,7 +114,7 @@ const ProfileDetails = () => {
                     detachCheck() &&
                     <button onClick={handleDetach}>Detach</button>
                 }
-                {erorr &&<>  <br />{erorr} <br /><OkButton/> </>}
+                <Errorent/>
             </div>
         )
     }
