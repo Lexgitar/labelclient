@@ -2,9 +2,13 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createDetails, editDetails, selectUserEdit, toggleEdit, selectError } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
-import SelectGenre from "../functional/SelectGenre"
 
 
+const options = [
+    { value: 'metal', label: 'Metal' },
+    { value: 'pop', label: 'Pop' },
+    { value: 'rap', label: 'Rap' }
+]
 
 const UserForm = ({ user, userInfo }) => {
     let erur = useSelector(selectError)
@@ -30,15 +34,18 @@ const UserForm = ({ user, userInfo }) => {
         let fetchArg = edited ? { id, role, body } : { role, body }
         //console.log('UF', role)
         //
-        dispatch(fetchType(fetchArg))
-        // console.log(role, 'and', body)
-        // console.log(fetchType)
-        //
-        dispatch(toggleEdit(true))
-        setName('')
-        setLocation('')
-        //
-        navigate('/account')
+        dispatch(fetchType(fetchArg)).then(value => {
+            if (value.payload.errors) {
+                console.log('value paiload erors', value.payload)
+            } else if (value.payload && !value.payload.errors) {
+                console.log('value.payload', value.payload)
+                setName('')
+                setLocation('')
+                navigate('/account')
+            } else {
+                console.log('ELSE')
+            }
+        })
     }
 
     return (
@@ -47,10 +54,18 @@ const UserForm = ({ user, userInfo }) => {
         > {tiTle} <br />
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="name" value={name} required /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="location" value={location} required /><br />
-           <SelectGenre/>
+            <label htmlFor="genre">Genre: </label><br />
+            <select name="" id="genre">
+                {/* <option value="">--Select genre--</option> */}
+                {options.map(item => (
+                    <option key={item.value} value={item.value}>{item.label}</option>
+                ))}
+            </select>
+            <br />
+
             <button>Submit</button>
-            {erur && <p>{erur}</p> }
-           
+            {erur && <p>{erur}</p>}
+
         </form>
     )
 }

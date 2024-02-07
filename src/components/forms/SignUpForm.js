@@ -1,8 +1,12 @@
+import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-import { selectError, selectUser } from "../../slices/userSlice"
+import {
+  selectError,
+  //selectUser 
+} from "../../slices/userSlice"
 
 import {
   //useSelector,
@@ -17,7 +21,7 @@ import {
 
 const SignUpForm = () => {
 
-  let user = useSelector(selectUser)
+  // let user = useSelector(selectUser)
   let erur = useSelector(selectError)
 
   let navigate = useNavigate()
@@ -38,16 +42,24 @@ const SignUpForm = () => {
     e.preventDefault()
     // navigate('/account/user')
     let userBody = { email, password, role }
+    console.log(Object.keys(userBody).length)
 
     console.log('userbody', userBody)
-    setEmail('')
-    setPassword('')
-    dispatch(userSignup({ userBody }))
-    if (!erur){
-       navigate('/account') 
-    } else{
-       navigate('')
-    }
+   
+    dispatch(userSignup({ userBody })).then(value => {
+      if (value.payload.errors) {
+        console.log('value paiload erors', value.payload)
+      } else if (value.payload && !value.payload.errors) {
+        console.log('value.payload', value.payload)
+        setEmail('')
+        setPassword('')
+        navigate('/account')
+      } else {
+        console.log('ELSE')
+      }
+    })
+
+
 
     // user ? navigate('/account') : navigate('')
 

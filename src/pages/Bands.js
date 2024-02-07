@@ -1,11 +1,11 @@
 
 // "proxy":"http://localhost:3000",
 //import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 
 //import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
-import FilterTile from "../components/functional/FilterTile"
+//import FilterTile from "../components/functional/FilterTile"
 import './pages.css'
 
 import { useSelector } from "react-redux"
@@ -22,9 +22,9 @@ const Bands = () => {
   return (
     <div className="bands">
       {bands && bands.map(band =>
-        
-          <ProfileTile key={band._id} profile={band} />
-        
+
+        <ProfileTile key={band._id} profile={band} />
+
       )}
 
 

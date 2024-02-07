@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectUser, selectUserEdit,  toggleEdit } from "../slices/userSlice"
 import UserForm from "./forms/UserForm"
 import DeleteRoleBtn from "./functional/DeleteRoleBtn"
-import DeleteAccount from "./functional/DeleteAccount"
+//import DeleteAccount from "./functional/DeleteAccount"
 
 const UserInfo = ({ userInfo }) => {
     const dispatch = useDispatch()

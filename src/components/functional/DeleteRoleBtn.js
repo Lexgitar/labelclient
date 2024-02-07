@@ -1,14 +1,22 @@
 import React from 'react'
 import { useDispatch, } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {  deleteRole } from '../../slices/userSlice'
+import {  addUserInfo, deleteRole } from '../../slices/userSlice'
 
 const DeleteRoleBtn = ({id, role}) => {
     const dispatch = useDispatch()
     let navigate = useNavigate()
     const handleDelete = () => {
-        dispatch(deleteRole({id, role}))
-        navigate('/')
+        dispatch(deleteRole({id, role})).then(value=>{
+            if(value.payload.data == "User-role-details deleted"){
+                dispatch(addUserInfo(''))
+                navigate('/')
+            }else{
+                dispatch(addUserInfo(''))
+                console.log('delete info invalid')
+            }
+        })
+        
     }
 
     return (

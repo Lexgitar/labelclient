@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser, toggleLog, selectRoles, addUserInfo, addError, selectError } from '../../slices/userSlice'
+import OkButton from '../functional/OkButton'
 
 const LoginForm = () => {
     const roles = useSelector(selectRoles)
@@ -85,7 +86,7 @@ const LoginForm = () => {
             /> <br />
             <button >Log in</button>
 
-            {errror && <div className="error">{errror}</div>}
+            {errror && <div className="error">{errror} <br /><OkButton/> </div>}
 
         </form>
     )

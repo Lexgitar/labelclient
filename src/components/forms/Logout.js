@@ -12,11 +12,18 @@ const Logout = () => {
     const handleClick = async () => {
         const response = await axios.get('/api/logout')
         console.log(response.data)
-        dispatch(userDelete())
-        dispatch(toggleLog(false))
-        dispatch(addUserInfo(''))
-        dispatch(toggleEdit(false))
-        navigate('/')
+        
+        if (response.statusText === 'OK') {
+           
+            dispatch(userDelete())
+            dispatch(toggleLog(false))
+            dispatch(addUserInfo(''))
+            dispatch(toggleEdit(false))
+            navigate('/')
+        }else{
+            console.log('logout error')
+        }
+
     }
 
     return (

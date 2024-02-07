@@ -1,7 +1,7 @@
 
 
 //import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 
 //import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
@@ -22,9 +22,9 @@ const Labels = () => {
   return (
     <div className="labels">
       {labels && labels.map(label =>
-        
-          <ProfileTile key={label._id} profile={label}/>
-        
+
+        <ProfileTile key={label._id} profile={label} />
+
       )}
     </div>
   )
