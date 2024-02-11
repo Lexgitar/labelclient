@@ -2,7 +2,9 @@ import {
   useSelector,
   //useDispatch 
 } from "react-redux"
-import { selectLoggedIn, selectUser, selectRoles, selectUserEdit, selectError, selectApiMsg } from "../slices/userSlice"
+import { selectLoggedIn, selectUser, selectRoles, selectUserEdit,
+   //selectError,
+    selectApiMsg } from "../slices/userSlice"
 //import { useEffect } from "react"
 import Errorent from "../components/functional/Errorent"
 
@@ -10,7 +12,7 @@ import Errorent from "../components/functional/Errorent"
 
 const Home = () => {
   let apiMsg = useSelector(selectApiMsg)
-  const error = useSelector(selectError)
+  //const error = useSelector(selectError)
   //console.log('home', error)
   let edit = useSelector(selectUserEdit)
   let bands = useSelector(selectRoles).bands

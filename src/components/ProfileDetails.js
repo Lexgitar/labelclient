@@ -40,7 +40,7 @@ const ProfileDetails = () => {
     const attachCheck = () => {
         if (loggedIn && byRolechecking &&
             notInArrayCheck &&
-            fanRoleCheck) {
+            fanRoleCheck && userRoleInfo) {
             return true
         } else {
             return false
@@ -50,7 +50,7 @@ const ProfileDetails = () => {
     const detachCheck = () => {
         if (loggedIn && byRolechecking &&
             !notInArrayCheck &&
-            fanRoleCheck) {
+            fanRoleCheck && userRoleInfo) {
             return true
         } else {
             return false

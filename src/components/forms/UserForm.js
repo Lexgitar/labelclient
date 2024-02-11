@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { createDetails, editDetails, selectUserEdit, toggleEdit, selectError } from "../../slices/userSlice"
+import { createDetails, editDetails, selectUserEdit,
+     toggleEdit,
+      //selectError
+     } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
 import Errorent from "../functional/Errorent"
 
@@ -12,7 +15,7 @@ const options = [
 ]
 
 const UserForm = ({ user, userInfo }) => {
-    let erur = useSelector(selectError)
+   // let erur = useSelector(selectError)
     let edited = useSelector(selectUserEdit)
     let navigate = useNavigate()
     let fetchType = edited ? editDetails : createDetails

@@ -1,10 +1,10 @@
-import axios from "axios"
+//import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 import {
-  selectError,
+  //selectError,
   //selectUser 
 } from "../../slices/userSlice"
 
@@ -23,7 +23,7 @@ import Errorent from "../functional/Errorent"
 const SignUpForm = () => {
 
   // let user = useSelector(selectUser)
-  let erur = useSelector(selectError)
+ //let erur = useSelector(selectError)
 
   let navigate = useNavigate()
   const dispatch = useDispatch()

@@ -259,7 +259,7 @@ export const userSlice = createSlice({
 
             })
             .addCase(deleteRole.fulfilled, (state, action) => {
-                console.log('delrolefulcase', action.payload)
+                console.log('delrolefulcase -deluser', action.payload)
                 
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
@@ -274,11 +274,17 @@ export const userSlice = createSlice({
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
                 console.log('deluserfulcase', action.payload)
+                
+                
+               
+                state.apiMsg  = action.payload
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+                let editedIndex = arrayByRole.findIndex((item) => item._id === state.userInfo._id)
+                arrayByRole.splice(editedIndex, 1)
+                state.error = ''
+                state.userInfo = ''
                 state.user = ''
                 state.loggedIn = false
-                state.userInfo = ''
-                state.apiMsg  = action.payload
-                state.error = ''
 
             })
             .addCase(deleteUser.rejected, (state, action) => {

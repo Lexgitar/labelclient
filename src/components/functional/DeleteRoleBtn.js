@@ -8,8 +8,9 @@ const DeleteRoleBtn = ({id, role}) => {
     let navigate = useNavigate()
     const handleDelete = () => {
         dispatch(deleteRole({id, role})).then(value=>{
-            if(value.payload.data == "User-role-details deleted"){
+            if(value.payload.data === "User-role-details deleted"){
                 dispatch(addUserInfo(''))
+                
                 navigate('/')
             }else{
                 dispatch(addUserInfo(''))
