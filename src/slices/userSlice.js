@@ -9,7 +9,7 @@ const initialState = {
     status: '',
     error: '',
     userInfo: '',
-    apiMsg:'',
+    apiMsg: '',
     edit: false,
     roles: {
         bands: [],
@@ -121,24 +121,24 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
 )
 
 export const deleteRole = createAsyncThunk('roles/deleteRole',
-    async ({id, role}, {rejectWithValue}) => {
+    async ({ id, role }, { rejectWithValue }) => {
         try {
             const json = await axios.delete(`api/${role}s/${id}`)
             const data = await json.data
             console.log('delRol', data, role)
-            return {data, id}
+            return { data, id }
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
     })
 
-    export const deleteUser = createAsyncThunk('roles/deleteUser',
-    async ( rejectWithValue) => {
+export const deleteUser = createAsyncThunk('roles/deleteUser',
+    async (rejectWithValue) => {
         try {
             const json = await axios.delete(`api/delete`)
             const data = await json.data
-            console.log('delRol',json, data, )
-            return data 
+            console.log('delRol', json, data,)
+            return data
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
@@ -260,7 +260,20 @@ export const userSlice = createSlice({
             })
             .addCase(deleteRole.fulfilled, (state, action) => {
                 console.log('delrolefulcase -deluser', action.payload)
-                
+
+                const theRole = state.user.role
+                const arrayToMap = theRole === 'band' ? state.roles.labels : state.roles.bands
+                if (theRole === 'band' || theRole === 'label') {
+                    console.log('didd')
+                    arrayToMap.forEach((element) => {
+                        if (element.attachedId.includes(state.userInfo._id)) {
+                            let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
+                            element.attachedId.splice(idIndex, 1)
+                            console.log('did')
+                        }
+                    })
+                }
+
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
                 arrayByRole.splice(editedIndex, 1)
@@ -270,17 +283,30 @@ export const userSlice = createSlice({
             .addCase(deleteRole.rejected, (state, action) => {
                 console.log('delrolercase', action, action.payload)
                 state.error = action.payload.errors
-                
+
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
                 console.log('deluserfulcase', action.payload)
-                
-                
-               
-                state.apiMsg  = action.payload
+                const theRole = state.user.role
+                const arrayToMap = theRole === 'band' ? state.roles.labels : state.roles.bands
+                if (theRole === 'band' || theRole === 'label') {
+                    console.log('didd')
+                    arrayToMap.forEach((element) => {
+                        if (element.attachedId.includes(state.userInfo._id)) {
+                            let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
+                            element.attachedId.splice(idIndex, 1)
+                            console.log('did')
+                        }
+                    })
+                }
+              
+
+                state.apiMsg = action.payload
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
                 let editedIndex = arrayByRole.findIndex((item) => item._id === state.userInfo._id)
                 arrayByRole.splice(editedIndex, 1)
+                //
+
                 state.error = ''
                 state.userInfo = ''
                 state.user = ''
@@ -290,7 +316,7 @@ export const userSlice = createSlice({
             .addCase(deleteUser.rejected, (state, action) => {
                 console.log('delusercase', action, action.payload)
                 state.error = action.payload.errors
-                
+
             })
     }
 })
@@ -298,7 +324,7 @@ export const userSlice = createSlice({
 export default userSlice.reducer
 
 export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError } = userSlice.actions
-export const selectUser =  (state) =>  state.user.user
+export const selectUser = (state) => state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
 export const selectError = (state) => state.user.error

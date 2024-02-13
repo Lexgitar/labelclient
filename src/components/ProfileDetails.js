@@ -1,8 +1,7 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { selectError, selectRoles, selectUser } from "../slices/userSlice"
+import { selectRoles, selectUser } from "../slices/userSlice"
 
-import OkButton from "./functional/OkButton"
 
 import {
     attachUser,
@@ -20,7 +19,7 @@ const ProfileDetails = () => {
     const loggedIn = useSelector(selectLoggedIn)
     const userRole = useSelector(selectUser).role
     const userRoleInfo = useSelector(selectUserInfo)
-    let erorr  = useSelector(selectError)
+    //let erorr  = useSelector(selectError)
     //
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels
@@ -32,7 +31,7 @@ const ProfileDetails = () => {
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
     //console.log(byRolechecking)
 
-    const userProfile = usersPool.filter(function (user) { return user._id == id })[0]
+    const userProfile = usersPool.filter(function (user) { return user._id === id })[0]
     //console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile.attachedId.includes(userRoleInfo._id) ? false : true
