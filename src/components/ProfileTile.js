@@ -26,6 +26,9 @@ const ProfileTile = ({ profile }) => {
                 <p>{profile._id}</p>
                 <p>{profile.name}</p>
                 <p>{profile.location}</p>
+                <p>{profile.genre}</p>
+                <p>{profile.about}</p>
+                <p>{profile.links}</p>
             </Link>
             {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
