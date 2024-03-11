@@ -27,6 +27,7 @@ const Layout = () => {
                     <div className="profiles">
                         <NavLink to='labels'>Labels</NavLink>
                         <NavLink to='bands'>Bands</NavLink>
+                        <NavLink to='artists'>Artists</NavLink>
                     </div>
                     <NavLink to='about' className="about">About</NavLink>
                     <NavLink to='account' className="account">Account</NavLink>

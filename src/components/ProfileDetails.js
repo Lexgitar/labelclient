@@ -15,6 +15,7 @@ import Errorent from "./functional/Errorent"
 const ProfileDetails = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    let pathName = useLocation().pathname
     //  
     const loggedIn = useSelector(selectLoggedIn)
     const userRole = useSelector(selectUser).role
@@ -23,10 +24,11 @@ const ProfileDetails = () => {
     //
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels
+    let artists = useSelector(selectRoles).artists
     //
     const { id } = useParams()
-    let usersPool = useLocation().pathname.includes('labels') ? labels : bands
-    let roleFromUrl = useLocation().pathname.includes('labels') ? 'labels' : 'bands'
+    let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : bands))
+    let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : 'bands'))
     let fanRoleCheck = userRole === 'fan' ? false : true
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
     //console.log(byRolechecking)
@@ -105,7 +107,7 @@ const ProfileDetails = () => {
                 <p>name: {userProfile.name}</p>
                 <p>location:{userProfile.location}</p>
                 <p>atId{userProfile.attachedId}</p>
-                <p>genre - {userProfile.genre}</p>
+                {/* <p>genre - {userProfile.genre}</p> */}
                 <p>about - {userProfile.about}</p>
                 <p>links - {userProfile.links}</p>
                 {
@@ -116,7 +118,7 @@ const ProfileDetails = () => {
                     detachCheck() &&
                     <button onClick={handleDetach}>Detach</button>
                 }
-                <Errorent/>
+                <Errorent />
             </div>
         )
     }

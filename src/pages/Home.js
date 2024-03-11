@@ -18,6 +18,7 @@ const Home = () => {
   let bands = useSelector(selectRoles).bands
   let labels = useSelector(selectRoles).labels
   let fans = useSelector(selectRoles).fans
+  let artists = useSelector(selectRoles).artists
   //let dispatch = useDispatch()
 
   const logged = useSelector(selectLoggedIn)
@@ -47,6 +48,12 @@ const Home = () => {
       <div>fans{fans && fans.map((fan) => (
         <p key={fan._id} >
           {fan._id}
+        </p>
+      ))}
+      </div>
+      <div>artists{artists && artists.map((artist) => (
+        <p key={artist._id} >
+          {artist._id}
         </p>
       ))}
       </div>

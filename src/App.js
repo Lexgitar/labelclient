@@ -8,6 +8,7 @@ import ProfileDetails from './components/ProfileDetails';
 
 import Labels from './pages/Labels';
 import Bands from './pages/Bands';
+import Artists from './pages/Artists';
 import About from './pages/About';
 import Account from './pages/Account';
 import SignUpForm from './components/forms/SignUpForm';
@@ -24,6 +25,9 @@ const router = createBrowserRouter(
 
       <Route path='bands' element={<Bands />} />
       <Route path='bands/:id' element={<ProfileDetails />} />
+
+      <Route path='artists' element={<Artists />} />
+      <Route path='artists/:id' element={<ProfileDetails />} />
 
       <Route path='about' element={<About />} />
       <Route path='account' element={<Account />} />

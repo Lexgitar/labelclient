@@ -14,7 +14,8 @@ const initialState = {
     roles: {
         bands: [],
         labels: [],
-        fans: []
+        fans: [],
+        artists: []
     }
 
 
@@ -105,12 +106,13 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
         const bandsRes = await axios.get(`api/bands`)
         const labelsRes = await axios.get(`api/labels`)
         const fansRes = await axios.get(`api/fans`)
+        const artistsRes = await axios.get(`api/artists`)
         try {
 
             //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
             //console.log('fb',bands.data, labels.data, fans.data)
-            console.log('fR', bandsRes.data, labelsRes.data, fansRes.data)
-            return [bandsRes.data, labelsRes.data, fansRes.data]
+            console.log('fR', bandsRes.data, labelsRes.data, fansRes.data, artistsRes.data)
+            return [bandsRes.data, labelsRes.data, fansRes.data, artistsRes.data]
 
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -214,6 +216,7 @@ export const userSlice = createSlice({
                 state.roles.bands = action.payload[0]
                 state.roles.labels = action.payload[1]
                 state.roles.fans = action.payload[2]
+                state.roles.artists = action.payload[3]
                 state.error = ''
             })
             .addCase(fetchRoles.rejected, (state, action) => {
@@ -275,6 +278,7 @@ export const userSlice = createSlice({
                 }
 
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
                 arrayByRole.splice(editedIndex, 1)
                 state.error = ''
@@ -299,7 +303,7 @@ export const userSlice = createSlice({
                         }
                     })
                 }
-              
+
 
                 state.apiMsg = action.payload
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))

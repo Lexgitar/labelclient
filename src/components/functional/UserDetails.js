@@ -30,7 +30,7 @@ const UserDetails = () => {
 
                 <div>{`${logged}`}</div>
 
-                <UserForm user={user} />
+                <UserForm user={user}  />
                 {erur && console.log('udets',erur)}
 
             </div>

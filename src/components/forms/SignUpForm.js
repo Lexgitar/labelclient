@@ -1,7 +1,7 @@
 //import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 
 import {
   //selectError,
@@ -81,6 +81,8 @@ const SignUpForm = () => {
       <label htmlFor="label">Label</label><br />
       <input checked={role === 'band'} onChange={(e) => roleChange(e)} type="radio" id="band" name="role" value="band" />
       <label htmlFor="band">Band</label><br />
+      <input checked={role === 'artist'} onChange={(e) => roleChange(e)} type="radio" id="artist" name="role" value="artist" />
+      <label htmlFor="artist">Artist</label><br />
       <input checked={role === 'fan'} onChange={(e) => roleChange(e)} type="radio" id="fan" name="role" value="fan" />
       <label htmlFor="fan">Fan</label><br />
       {/* <p>{role}</p>
