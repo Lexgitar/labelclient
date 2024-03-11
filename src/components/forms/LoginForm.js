@@ -35,7 +35,7 @@ const LoginForm = () => {
                 dispatch(addUser(response.data))
 
                 const foundProfile = (id, role) => {
-                    const profileRoles = (role === 'band' ? roles.bands : (role === 'label' ? roles.labels : roles.artists))
+                    const profileRoles = (role === 'band' ? roles.bands : (role === 'label' ? roles.labels : (role === 'artist'? roles.artists : roles.fans)))
 
                     const userProfile = profileRoles.filter((profile) =>
                         profile.userId == id)[0]
