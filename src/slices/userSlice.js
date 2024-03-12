@@ -191,7 +191,7 @@ export const userSlice = createSlice({
                 // state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload.user
-                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : state.roles.fans))
+                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : (action.payload.role === 'artist' ? state.roles.artists : state.roles.fans)))
                 arrayByRole.push(action.payload.user)
 
 
@@ -205,7 +205,7 @@ export const userSlice = createSlice({
                 state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload
-                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : (action.payload.role === 'artist' ? state.roles.artists : state.roles.fans)))
                 //edge case when user is null
                 //    console.log('addcase',arrayByRole.findIndex((item)=>item._id === action.payload._id)) 
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload._id)
@@ -224,10 +224,13 @@ export const userSlice = createSlice({
                 state.error = action.payload || action.error.message
             })
             .addCase(attachUser.fulfilled, (state, action) => {
-                const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
-                console.log('attUsr', arrayByRole)
-                let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
-                arrayByRole[arrayIndex].attachedId = action.payload.array
+                //const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
+                // which array to look into 
+                let roleOfArray = state.roles[action.payload.roleFromUrl]
+                console.log('role of array', roleOfArray)
+                //console.log('attUsr', arrayByRole)
+                let arrayIndex = roleOfArray.findIndex((item) => item._id === action.payload.hostId)
+                roleOfArray[arrayIndex].attachedId = action.payload.array
                 state.error = ''
             })
             .addCase(attachUser.rejected, (state, action) => {
@@ -237,10 +240,11 @@ export const userSlice = createSlice({
 
             })
             .addCase(detachUser.fulfilled, (state, action) => {
-                const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
-                console.log('dettUsr', arrayByRole)
-                let arrayIndex = arrayByRole.findIndex((item) => item._id === action.payload.hostId)
-                arrayByRole[arrayIndex].attachedId = action.payload.array
+                //const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
+                let roleOfArray = state.roles[action.payload.roleFromUrl]
+                // console.log('dettUsr', arrayByRole)
+                let arrayIndex = roleOfArray.findIndex((item) => item._id === action.payload.hostId)
+                roleOfArray[arrayIndex].attachedId = action.payload.array
                 state.error = ''
             })
             .addCase(detachUser.rejected, (state, action) => {
@@ -265,19 +269,24 @@ export const userSlice = createSlice({
                 console.log('delrolefulcase -deluser', action.payload)
 
                 const theRole = state.user.role
-                const arrayToMap = theRole === 'band' ? state.roles.labels : state.roles.bands
-                if (theRole === 'band' || theRole === 'label') {
+                //arrays to map over
+                const arrayToMap = (theRole === 'band' ? [state.roles.labels, state.roles.artists] : (theRole === 'label' ? [state.roles.bands, state.roles.artists] : [state.roles.bands, state.roles.labels]))
+                if (theRole === 'band' || theRole === 'label' || theRole === 'artist') {
                     console.log('didd')
-                    arrayToMap.forEach((element) => {
-                        if (element.attachedId.includes(state.userInfo._id)) {
-                            let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
-                            element.attachedId.splice(idIndex, 1)
-                            console.log('did')
-                        }
+                    arrayToMap.forEach(rolArray => {
+                        rolArray.forEach((element) => {
+                            if (element.attachedId.includes(state.userInfo._id)) {
+                                let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
+                                element.attachedId.splice(idIndex, 1)
+                                console.log('did')
+                            }
+                        })
                     })
+
+
                 }
 
-                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : (state.user.role === 'artist' ? state.roles.artists : state.roles.fans)))
 
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
                 arrayByRole.splice(editedIndex, 1)
@@ -292,22 +301,28 @@ export const userSlice = createSlice({
             .addCase(deleteUser.fulfilled, (state, action) => {
                 console.log('deluserfulcase', action.payload)
                 const theRole = state.user.role
-                const arrayToMap = theRole === 'band' ? state.roles.labels : state.roles.bands
-                if (theRole === 'band' || theRole === 'label') {
-                    console.log('didd')
-                    arrayToMap.forEach((element) => {
-                        if (element.attachedId.includes(state.userInfo._id)) {
-                            let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
-                            element.attachedId.splice(idIndex, 1)
-                            console.log('did')
-                        }
+                //arrays to map over
+                const arrayToMap = (theRole === 'band' ? [state.roles.labels, state.roles.artists] : (theRole === 'label' ? [state.roles.bands, state.roles.artists] : [state.roles.bands, state.roles.labels]))
+                if (theRole === 'band' || theRole === 'label' || theRole === 'artist') {
+                    console.log('didd-deluser')
+                    arrayToMap.forEach(rolArray => {
+                        rolArray.forEach((element) => {
+                            if (element.attachedId.includes(state.userInfo._id)) {
+                                let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
+                                element.attachedId.splice(idIndex, 1)
+                                console.log('did')
+                            }
+                        })
                     })
+
                 }
 
 
                 state.apiMsg = action.payload
-                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : state.roles.fans))
-                let editedIndex = arrayByRole.findIndex((item) => item._id === state.userInfo._id)
+
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : (state.user.role === 'artist' ? state.roles.artists : state.roles.fans)))
+
+                let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
                 arrayByRole.splice(editedIndex, 1)
                 //
 

@@ -3,15 +3,15 @@
     border: 1px solid white;
     height: 99vh;
     text-align: center;
-   
+
 }
 
-main{
+main {
     border: 1px solid red;
-  }
+}
 
-nav{
-    display: flex;     
+nav {
+    display: flex;
     justify-content: space-around;
 }
 
@@ -21,17 +21,19 @@ nav{
     width: 30%;
     display: flex;
     justify-content: space-around;
-       
+
 }
 
 .usertile {
     background-color: aquamarine;
 }
-main{
+
+main {
     height: 93vh;
     overflow: auto;
 }
-.user{
+
+.user {
     border: 1px solid red;
 }
 
@@ -39,8 +41,8 @@ main{
 
 
 /* ---------- */
-footer{
-   position: relative;
+footer {
+    position: relative;
     bottom: 1px;
-    
+
 }

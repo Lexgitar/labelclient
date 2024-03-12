@@ -77,7 +77,7 @@ const UserForm = ({ user, userInfo }) => {
             <textarea type="text" onChange={(e) => setAbout(e.target.value)} placeholder="About" value={about} required /><br />
             <input type="text" onChange={(e) => setLinks(e.target.value)} placeholder="Link" value={links} required /><br />
 
-            {user.role !== 'fan' &&
+            {(user.role !== 'fan' && user.role !== 'artist') &&
                 <>
                     <label htmlFor="genre">Genre: </label><br />
                     <select name="" id="genre"
