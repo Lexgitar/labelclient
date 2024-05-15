@@ -16,23 +16,26 @@ const ProfileTile = ({ profile }) => {
 
     //let usersPool = useLocation().pathname.includes('labels') ? labels : bands
     let path = useLocation().pathname.includes('labels') ? 'bands' : 'labels'
+    let pathNew = profile.role
 
 
     console.log('PTile', profile)
+    console.log('patnew', pathNew)
     return (
 
         <div >
             <Link key={profile.id} to={`${profile._id}`}>
-                <p>{profile._id}</p>
-                <p>{profile.name}</p>
-                <p>{profile.location}</p>
-                <p>{profile.genre}</p>
-                <p>{profile.about}</p>
-                <p>{profile.links}</p>
+                <p>id: {profile._id}</p>
+                <p>name: {profile.name}</p>
+                <p>location: {profile.location}</p>
+                <p>genre: {profile.genre}</p>
+                <p>abot: {profile.about}</p>
+                <p>links: {profile.links}</p>
+                <p>role: {profile.role}</p>
             </Link>
             {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
-                <Link to={`/${path}/${id}`} key={id}>id:{id}</Link>
+                <Link to={`/${pathNew}s/${id}`} key={id}>id:{id}</Link>
 
 
             ))}

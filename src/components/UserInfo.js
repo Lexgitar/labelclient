@@ -17,7 +17,7 @@ const UserInfo = ({ userInfo }) => {
     console.log('Uinfo', userInfo, user)
     return (
         <div>
-            <p>name: {userInfo.name}</p>
+            <p>user info name: {userInfo.name}</p>
             <p>_id: {userInfo._id}</p>
             <p>location: {userInfo.location}</p>
             {edit && <UserForm user={user} userInfo={userInfo} />}

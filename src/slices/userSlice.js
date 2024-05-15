@@ -205,11 +205,14 @@ export const userSlice = createSlice({
                 state.status = 'succeeded'
                 state.error = ''
                 state.userInfo = action.payload
-                const arrayByRole = (action.payload.role === 'band' ? state.roles.bands : (action.payload.role === 'label' ? state.roles.labels : (action.payload.role === 'artist' ? state.roles.artists : state.roles.fans)))
-                //edge case when user is null
+                const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : (state.user.role === 'artist' ? state.roles.artists : state.roles.fans)))
+                //add edge case when user is null
                 //    console.log('addcase',arrayByRole.findIndex((item)=>item._id === action.payload._id)) 
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload._id)
                 arrayByRole.splice(editedIndex, 1, action.payload)
+                console.log('paiload.role', action.payload)
+                console.log('sttae rols', state.roles.fans)
+                console.log('sttae rol', state.user.role)
             })
             .addCase(fetchRoles.fulfilled, (state, action) => {
 

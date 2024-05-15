@@ -2,9 +2,11 @@ import {
   useSelector,
   //useDispatch 
 } from "react-redux"
-import { selectLoggedIn, selectUser, selectRoles, selectUserEdit,
-   //selectError,
-    selectApiMsg } from "../slices/userSlice"
+import {
+  selectLoggedIn, selectUser, selectRoles, selectUserEdit,
+  //selectError,
+  selectApiMsg
+} from "../slices/userSlice"
 //import { useEffect } from "react"
 import Errorent from "../components/functional/Errorent"
 
@@ -24,15 +26,16 @@ const Home = () => {
   const logged = useSelector(selectLoggedIn)
   const user = useSelector(selectUser)
   //console.log(user? user:'no user')
+  console.log('fans', fans)
 
   return (
     <div>
-      Home 
+      Home
       <br />
-      {apiMsg && <p> - {apiMsg} - </p> }
-      <Errorent/>
+      {apiMsg && <p> - {apiMsg} - </p>}
+      <Errorent />
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
-      {user && <p>{user.email}</p> }
+      {user && <p>{user.email}</p>}
       <div>bands{bands && bands.map((band) => (
         <p key={band._id} >
           {band._id}

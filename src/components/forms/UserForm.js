@@ -4,6 +4,7 @@ import {
     createDetails,
      editDetails,
       selectUserEdit,
+      toggleEdit
     
     //selectError
 } from "../../slices/userSlice"
@@ -57,11 +58,12 @@ const UserForm = ({ user, userInfo }) => {
                 console.log('value paiload erors', value.payload)
             } else if (value.payload && !value.payload.errors) {
                 console.log('value.payload', value.payload)
-                setName('')
-                setLocation('')
-                setGenre('')
-                setAbout('')
-                setLinks('')
+                // setName('')
+                // setLocation('')
+                // setGenre('')
+                // setAbout('')
+                // setLinks('')
+                dispatch(toggleEdit(false))
                 navigate('/account')
             } else {
                 console.log('ELSE')

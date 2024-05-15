@@ -106,7 +106,7 @@ const ProfileDetails = () => {
                 <p>_id:{userProfile._id}</p>
                 <p>name: {userProfile.name}</p>
                 <p>location:{userProfile.location}</p>
-                <p>atId{userProfile.attachedId}</p>
+                <p>atId's: {userProfile.attachedId}</p>
                 {/* <p>genre - {userProfile.genre}</p> */}
                 <p>about - {userProfile.about}</p>
                 <p>links - {userProfile.links}</p>
