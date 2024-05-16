@@ -1,8 +1,8 @@
-import { Link, useLocation,  } from "react-router-dom"
+import { Link, useLocation, } from "react-router-dom"
 //import { useState } from "react"
 import '../pages/pages.css'
-// import { selectRoles } from '../slices/userSlice'
-// import { useSelector } from 'react-redux'
+import { selectRoles } from '../slices/userSlice'
+import { useSelector } from 'react-redux'
 
 
 
@@ -11,16 +11,33 @@ import '../pages/pages.css'
 
 const ProfileTile = ({ profile }) => {
 
-    // let bands = useSelector(selectRoles).bands
-    // let labels = useSelector(selectRoles).labels
+    let bands = useSelector(selectRoles).bands
+    let labels = useSelector(selectRoles).labels
+    let artists = useSelector(selectRoles).artists
 
     //let usersPool = useLocation().pathname.includes('labels') ? labels : bands
-    let path = useLocation().pathname.includes('labels') ? 'bands' : 'labels'
-    let pathNew = profile.role
+    let location = useLocation().pathname
+    let alocation = location.includes('bands')? 'bands' : (location.includes('labels')? 'labels' : 'artists')
+    const roleFinder = (id) => {
+        let rolePools = alocation === 'labels' ? [bands, artists] : alocation === 'bands' ? [labels, artists] : [bands, labels];
+        let path = ''
+        rolePools.forEach(roleArray => {
+            roleArray.forEach((roleObject) => {
+                console.log('inside rolefinder', roleObject, 'and id', id)
+                console.log('pools', rolePools)
+                if (roleObject._id == id) {
+                    path = `/${roleObject.role}s/${id}`
+                }
+            })
+        })
+        console.log('pathh',path)
+        return path
+
+    }
 
 
     console.log('PTile', profile)
-    console.log('patnew', pathNew)
+    // console.log('patnew', pathNew)
     return (
 
         <div >
@@ -35,7 +52,8 @@ const ProfileTile = ({ profile }) => {
             </Link>
             {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
-                <Link to={`/${pathNew}s/${id}`} key={id}>id:{id}</Link>
+
+                <Link to={roleFinder(id)} key={id}>id:{id}</Link>
 
 
             ))}
