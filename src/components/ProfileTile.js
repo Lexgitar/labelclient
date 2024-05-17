@@ -21,17 +21,20 @@ const ProfileTile = ({ profile }) => {
     const roleFinder = (id) => {
         let rolePools = alocation === 'labels' ? [bands, artists] : alocation === 'bands' ? [labels, artists] : [bands, labels];
         let path = ''
-        rolePools.forEach(roleArray => {
-            roleArray.forEach((roleObject) => {
+        let name = ''
+        rolePools.map(roleArray => {
+            roleArray.map((roleObject) => {
                 console.log('inside rolefinder', roleObject, 'and id', id)
                 console.log('pools', rolePools)
-                if (roleObject._id == id) {
+                if (roleObject._id === id) {
                     path = `/${roleObject.role}s/${id}`
+                    name = roleObject.name
+
                 }
             })
         })
-        console.log('pathh',path)
-        return path
+        
+        return <Link to={path} key={id}>id:{name}</Link>
 
     }
 
@@ -53,7 +56,8 @@ const ProfileTile = ({ profile }) => {
             {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
 
-                <Link to={roleFinder(id)} key={id}>id:{id}</Link>
+                // <Link to={roleFinder(id)} key={id}>id:{id}</Link>
+                roleFinder(id)
 
 
             ))}

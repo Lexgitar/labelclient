@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
     createDetails,
-     editDetails,
-      selectUserEdit,
-      toggleEdit
-    
+    editDetails,
+    selectUserEdit,
+    toggleEdit
+
     //selectError
 } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -36,6 +36,7 @@ const UserForm = ({ user, userInfo }) => {
     const tiTle = userInfo ? 'Edit Profile' : 'Create profile'
 
     useEffect(() => {
+
         if (userInfo) {
             setName(userInfo.name)
             setLocation(userInfo.location)
@@ -43,6 +44,7 @@ const UserForm = ({ user, userInfo }) => {
             setGenre(userInfo.genre)
             setAbout(userInfo.about)
             setLinks(userInfo.links)
+
         }
     }, [userInfo])
 
@@ -72,7 +74,7 @@ const UserForm = ({ user, userInfo }) => {
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)} >
+        <form onSubmit={(e) => handleSubmit(e)} id='userform'>
             {tiTle} <br />
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Name" value={name} required /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="Location" value={location} required /><br />
@@ -83,8 +85,12 @@ const UserForm = ({ user, userInfo }) => {
                 <>
                     <label htmlFor="genre">Genre: </label><br />
                     <select name="" id="genre"
+                        
                         onChange={(e) => setGenre(e.target.value)}
+                        required
+                        form='userform'
                     >
+                        <option value="">--select--</option>
                         {/* <option value="">--Select genre--</option> */}
                         {options.map(item => (
                             <option key={item.value} value={item.value}>{item.label}</option>
@@ -96,7 +102,7 @@ const UserForm = ({ user, userInfo }) => {
 
             <button>Submit</button>
             <Errorent />
-            {genre && <p>{genre}</p>}
+            {genre && <p>genrecheck:{genre}</p>}
         </form>
     )
 }
