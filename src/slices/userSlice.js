@@ -325,7 +325,7 @@ export const userSlice = createSlice({
 
                 const arrayByRole = (state.user.role === 'band' ? state.roles.bands : (state.user.role === 'label' ? state.roles.labels : (state.user.role === 'artist' ? state.roles.artists : state.roles.fans)))
 
-                let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload.id)
+                let editedIndex = arrayByRole.findIndex((item) => item._id === state.userInfo._id)
                 arrayByRole.splice(editedIndex, 1)
                 //
 
