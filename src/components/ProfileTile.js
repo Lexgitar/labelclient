@@ -22,8 +22,8 @@ const ProfileTile = ({ profile }) => {
         let rolePools = alocation === 'labels' ? [bands, artists] : alocation === 'bands' ? [labels, artists] : [bands, labels];
         let path = ''
         let name = ''
-        rolePools.map(roleArray => {
-            roleArray.map((roleObject) => {
+        rolePools.forEach(roleArray => {
+            roleArray.forEach((roleObject) => {
                 console.log('inside rolefinder', roleObject, 'and id', id)
                 console.log('pools', rolePools)
                 if (roleObject._id === id) {
