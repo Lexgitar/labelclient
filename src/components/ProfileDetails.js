@@ -11,6 +11,7 @@ import {
 } from '../slices/userSlice'
 
 import Errorent from "./functional/Errorent"
+import FindRole from "./functional/FindRole"
 
 const ProfileDetails = () => {
     const dispatch = useDispatch()
@@ -106,10 +107,15 @@ const ProfileDetails = () => {
                 <p>_id:{userProfile._id}</p>
                 <p>name: {userProfile.name}</p>
                 <p>location:{userProfile.location}</p>
-                <p>atId's: {userProfile.attachedId}</p>
+                
                 {userProfile.genre && <p>genre - {userProfile.genre}</p>}
+                
                 <p>about - {userProfile.about}</p>
                 <p>links - {userProfile.links}</p>
+                {/* <p>atId's: {userProfile.attachedId}</p> */}
+                {userProfile.attachedId.map(id=>{
+                    return <FindRole id = {id}/>
+                })}
                 {
                     attachCheck() &&
                     <button onClick={handleAttach}>Submit</button>
