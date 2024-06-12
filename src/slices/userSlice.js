@@ -11,6 +11,7 @@ const initialState = {
     userInfo: '',
     apiMsg: '',
     edit: false,
+    searchTerm:'',
     roles: {
         bands: [],
         labels: [],
@@ -174,6 +175,21 @@ export const userSlice = createSlice({
         },
         addError: (state, action) => {
             state.error = action.payload
+        },
+        searchInRole: (state, action) => {
+            let lalo = action.payload.alocation
+            let roleSearched = state.roles[lalo]
+            //let roleSearched = action.payload.alocation === 'bands' ? state.roles.bands : (action.payload.alocation === 'labels' ? state.roles.labels : (action.payload.alocation === 'artists' ? state.roles.artists : state.roles.fans))
+             //state.roles.lalo = [{ _id: "6647463f9dd99d4b6a5d8850", userId: "664746319dd99d4b6a5d884c", name: "band5", location: "band5", genre: "metal", about: "band5", links: "band5", role: "band", attachedId: [], createdAt: "2024-05-17T11:57:51.198Z" }]
+             console.log('alocaton', action.payload.alocation)
+             console.log('rolesearched',  state.roles[lalo])
+             console.log('rolesearched',  roleSearched)
+             // state.roles.roleSearched = state.roles.roleSearched.filter((item)=>
+            // item.name.toLowerCase().includes(action.payload[1]))
+            // state.searchTerm = action.payload[1]
+            // console.log('search console',action.payload[0])
+            // console.log('searchterm',action.payload[1])
+            // console.log('search console2',action.payload[1])
         }
 
     },
@@ -345,7 +361,7 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError, searchInRole } = userSlice.actions
 export const selectUser = (state) => state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status

@@ -5,6 +5,7 @@
 
 //import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
+import SearchBar from "../components/functional/SearchBar"
 //import FilterTile from "../components/functional/FilterTile"
 import './pages.css'
 
@@ -21,6 +22,7 @@ const Bands = () => {
 
   return (
     <div className="bands">
+      <SearchBar/>
       {bands && bands.map(band =>
 
         <ProfileTile key={band._id} profile={band} />

@@ -5,6 +5,7 @@
 
 //import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
+import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
 
 import { useSelector } from "react-redux"
@@ -21,6 +22,7 @@ const Labels = () => {
 
   return (
     <div className="labels">
+      <SearchBar/>
       {labels && labels.map(label =>
 
         <ProfileTile key={label._id} profile={label} />
