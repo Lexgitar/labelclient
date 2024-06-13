@@ -24,8 +24,8 @@ const ProfileTile = ({ profile }) => {
         let name = ''
         rolePools.forEach(roleArray => {
             roleArray.forEach((roleObject) => {
-                console.log('inside rolefinder', roleObject, 'and id', id)
-                console.log('pools', rolePools)
+                //console.log('inside rolefinder', roleObject, 'and id', id)
+                //console.log('pools', rolePools)
                 if (roleObject._id === id) {
                     path = `/${roleObject.role}s/${id}`
                     name = roleObject.name
@@ -39,7 +39,7 @@ const ProfileTile = ({ profile }) => {
     }
 
 
-    console.log('PTile', profile)
+    //console.log('PTile', profile)
     // console.log('patnew', pathNew)
     return (
 
@@ -48,7 +48,7 @@ const ProfileTile = ({ profile }) => {
                 <p>id: {profile._id}</p>
                 <p>name: {profile.name}</p>
                 <p>location: {profile.location}</p>
-                <p>genre: {profile.genre}</p>
+                {profile.genre && <p>genre: {profile.genre}</p>}
                 <p>abot: {profile.about}</p>
                 <p>links: {profile.links}</p>
                 <p>role: {profile.role}</p>

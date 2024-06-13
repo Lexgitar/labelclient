@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import {useDispatch } from 'react-redux'
 import { searchInRole } from '../../slices/userSlice'
 
 
@@ -16,20 +16,28 @@ const SearchBar = () => {
     const [stateTerm, setStateTerm] = useState('')
     const [placeholder , setPlaceholder] = useState(`Search ${alocation}`)
 
+    useEffect(()=>{
+        setPlaceholder(`Search ${alocation}`)
+        //setStateTerm('')
+        dispatch(searchInRole([alocation, stateTerm]))
+      }, [alocation, stateTerm])
+
     const handleOnChange = (e)=>{
         e.preventDefault();
         setStateTerm(e.target.value)
-        
-        
-        
+       
         
         }
 
         const handleSubmit =(e)=>{
             e.preventDefault();
-            if(stateTerm !=''){
-                dispatch(searchInRole({alocation, stateTerm}))
-            }
+            
+                dispatch(searchInRole([alocation, stateTerm]))
+                setStateTerm('')
+                setPlaceholder(`Search ${alocation}`)
+            
+            
+            
           }
 
   return (
