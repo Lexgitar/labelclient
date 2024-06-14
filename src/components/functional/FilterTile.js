@@ -47,9 +47,8 @@ const FilterTile = () => {
       <WhatshotIcon onClick={handleHot} />
       <FiberNewIcon onClick={handleNew} />
       <SortByAlphaIcon onClick={handleAlpha} /> 
-      {}
       <br />
-      {pot !== 'artists' && <button onClick={handleGenre} >{byGenre}</button>}
+      {pot !== 'artists' &&  <button onClick={handleGenre} >{byGenre}</button>}
       <br />
       {pot !== 'artists' && <FilterByGenre/>}
 
