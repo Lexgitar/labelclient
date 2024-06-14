@@ -10,7 +10,7 @@ import './pages.css'
 import FilterTile from "../components/functional/FilterTile"
 
 import { useSelector } from "react-redux"
-import { selectRoles, selectTerm , selectSearchRole,selectSearchKeys, selectFilteredLabels} from "../slices/userSlice"
+import { selectTerm , selectSearchRole,selectSearchKeys, selectFilteredLabels} from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
 
 

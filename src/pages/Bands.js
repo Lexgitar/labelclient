@@ -10,7 +10,7 @@ import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
 import FilterTile from "../components/functional/FilterTile"
 import { useSelector } from "react-redux"
-import { selectRoles, selectTerm , selectSearchRole, selectSearchKeys, selectFilterGenre, selectFilteredBands} from "../slices/userSlice"
+import {  selectTerm , selectSearchRole, selectSearchKeys, selectFilteredBands} from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
 
 

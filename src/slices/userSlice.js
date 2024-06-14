@@ -193,10 +193,10 @@ export const userSlice = createSlice({
 
         },
         filterByGenre: (state, action) => {
-            let pot = state.searchPot
-            state.toggleAtoZ = !state.toggleAtoZ
+            
+            
             state.filterGenre = action.payload
-            console.log('fBG lsice', action.payload)
+            
         },
         filterByNew: (state,) => {
             let pot = state.searchPot
@@ -406,18 +406,21 @@ export const selectUserInfo = (state) => state.user.userInfo
 export const selectUserEdit = (state) => state.user.edit
 export const selectRoles = (state) => state.user.roles
 export const selectFilterGenre = (state) => state.user.filterGenre
+// 
 export const selectFilteredBands = createSelector(
     [selectRoles, selectFilterGenre],
      (roles, filterGenre) => 
         filterGenre ? roles.bands.filter(item => item.genre === filterGenre) : roles.bands
            
 )
+//
 export const selectFilteredLabels = createSelector(
     [selectRoles, selectFilterGenre],
      (roles, filterGenre) => 
         filterGenre ? roles.labels.filter(item => item.genre === filterGenre) : roles.labels
            
 )
+//
 export const selectTerm = (state) => state.user.searchTerm
 export const selectSearchRole = (state) => state.user.searchPot
 export const selectSearchKeys = (state) => state.user.searchKeys
