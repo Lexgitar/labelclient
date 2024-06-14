@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit";
 
 
 import axios from "axios";
@@ -15,6 +15,8 @@ const initialState = {
     searchKeys: ['name', 'location', 'about'],
     searchTerm: '',
     searchPot: '',
+    togglePot: '',
+    filterGenre: '',
     roles: {
         bands: [],
         labels: [],
@@ -183,20 +185,36 @@ export const userSlice = createSlice({
             state.searchTerm = action.payload[1]
             state.searchPot = action.payload[0]
         },
-        filterByNew: (state) => {
+        sortByGenre: (state, action) => {
+            let pot = state.searchPot
             state.toggleAtoZ = !state.toggleAtoZ
-            state.roles.bands = state.roles.bands.slice().sort((a, b) => state.toggleAtoZ ? a.createdAt < b.createdAt : a.createdAt > b.createdAt)
+            state.roles[pot] = state.roles[pot].slice().sort((a, b) =>
+                state.toggleAtoZ ? a.genre < b.genre : a.genre > b.genre)
+
+        },
+        filterByGenre: (state, action) => {
+            let pot = state.searchPot
+            state.toggleAtoZ = !state.toggleAtoZ
+            state.filterGenre = action.payload
+            console.log('fBG lsice', action.payload)
+        },
+        filterByNew: (state,) => {
+            let pot = state.searchPot
+            state.toggleAtoZ = !state.toggleAtoZ
+            state.roles[pot] = state.roles[pot].slice().sort((a, b) => state.toggleAtoZ ? a.createdAt < b.createdAt : a.createdAt > b.createdAt)
             console.log(state.roles.bands[0])
         },
-        filterByHot: (state) => {
+        filterByHot: (state,) => {
+            let pot = state.searchPot
             state.toggleAtoZ = !state.toggleAtoZ
-            state.roles.bands = state.roles.bands.slice().sort((a, b) =>
+            state.roles[pot] = state.roles[pot].slice().sort((a, b) =>
                 state.toggleAtoZ ? a.attachedId < b.attachedId : a.attachedId > b.attachedId)
 
         },
         filterAtoZ: (state,) => {
+            let pot = state.searchPot
             state.toggleAtoZ = !state.toggleAtoZ
-            state.roles.bands = state.roles.bands.slice().sort((a, b) => {
+            state.roles[pot] = state.roles[pot].slice().sort((a, b) => {
 
                 if (!state.toggleAtoZ) {
                     if (b.name > a.name) return 1;
@@ -379,7 +397,7 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError, searchInRole, filterByNew, filterByHot, filterAtoZ } = userSlice.actions
+export const { addUser, toggleLog, userDelete, initedToggle, addUserInfo, toggleEdit, addRole, addError, searchInRole, filterByNew, filterByHot, filterAtoZ, sortByGenre, filterByGenre } = userSlice.actions
 export const selectUser = (state) => state.user.user
 export const selectLoggedIn = (state) => state.user.loggedIn
 export const selectStatus = (state) => state.user.status
@@ -387,8 +405,22 @@ export const selectError = (state) => state.user.error
 export const selectUserInfo = (state) => state.user.userInfo
 export const selectUserEdit = (state) => state.user.edit
 export const selectRoles = (state) => state.user.roles
+export const selectFilterGenre = (state) => state.user.filterGenre
+export const selectFilteredBands = createSelector(
+    [selectRoles, selectFilterGenre],
+     (roles, filterGenre) => 
+        filterGenre ? roles.bands.filter(item => item.genre === filterGenre) : roles.bands
+           
+)
+export const selectFilteredLabels = createSelector(
+    [selectRoles, selectFilterGenre],
+     (roles, filterGenre) => 
+        filterGenre ? roles.labels.filter(item => item.genre === filterGenre) : roles.labels
+           
+)
 export const selectTerm = (state) => state.user.searchTerm
 export const selectSearchRole = (state) => state.user.searchPot
 export const selectSearchKeys = (state) => state.user.searchKeys
+
 
 export const selectApiMsg = (state) => state.user.apiMsg

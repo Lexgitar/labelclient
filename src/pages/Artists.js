@@ -1,7 +1,7 @@
 import ProfileTile from "../components/ProfileTile"
 import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
-
+import FilterTile from "../components/functional/FilterTile"
 import { useSelector } from "react-redux"
 import { selectRoles, selectTerm, selectSearchRole, selectSearchKeys } from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
@@ -21,7 +21,7 @@ const Artists = () => {
   }
   return (
     <div className="artists">
-      <SearchBar />
+      <SearchBar /> <FilterTile/>
       {(artists && artists.map(artist =>
 
         <ProfileTile key={artist._id} profile={artist} />

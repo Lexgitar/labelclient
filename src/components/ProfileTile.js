@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 
 
 
-const ProfileTile = ({ profile }) => {
+const ProfileTile =  ({ profile }) => {
 
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels

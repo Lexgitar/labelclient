@@ -10,7 +10,7 @@ import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
 import FilterTile from "../components/functional/FilterTile"
 import { useSelector } from "react-redux"
-import { selectRoles, selectTerm , selectSearchRole, selectSearchKeys} from "../slices/userSlice"
+import { selectRoles, selectTerm , selectSearchRole, selectSearchKeys, selectFilterGenre, selectFilteredBands} from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
 
 
@@ -18,10 +18,12 @@ import { useLocation } from "react-router-dom"
 
 
 const Bands = () => {
+
   let keys = useSelector(selectSearchKeys)
   let location = useLocation().pathname
-  let bands = useSelector(selectRoles).bands
-  let term = useSelector(selectTerm)
+  let bands = useSelector(selectFilteredBands)
+
+  let term =  useSelector(selectTerm)
   let searchPot = useSelector(selectSearchRole)
   if(term.length && location.includes(searchPot)){
     bands = bands.filter((item)=>

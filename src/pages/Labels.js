@@ -10,7 +10,7 @@ import './pages.css'
 import FilterTile from "../components/functional/FilterTile"
 
 import { useSelector } from "react-redux"
-import { selectRoles, selectTerm , selectSearchRole,selectSearchKeys} from "../slices/userSlice"
+import { selectRoles, selectTerm , selectSearchRole,selectSearchKeys, selectFilteredLabels} from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
 
 
@@ -20,7 +20,7 @@ import { useLocation } from "react-router-dom"
 const Labels = () => {
   let keys = useSelector(selectSearchKeys)
   let location = useLocation().pathname
-  let labels = useSelector(selectRoles).labels
+  let labels = useSelector(selectFilteredLabels)
   let term = useSelector(selectTerm)
   let searchPot = useSelector(selectSearchRole)
   if(term.length && location.includes(searchPot)){
