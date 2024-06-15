@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { filterByGenre } from '../../slices/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { filterByGenre, selectGenreOptions } from '../../slices/userSlice'
 
-const options = [
-    { value: 'metal', label: 'Metal' },
-    { value: 'pop', label: 'Pop' },
-    { value: 'rap', label: 'Rap' }
-]
+
 
 const FilterByGenre = () => {
+
+    const options = useSelector(selectGenreOptions)
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
 
     const handleShow = () => {
-        show ? setShow(false) : setShow(true)
+        show ? setShow(false) : setShow(true);
+
+        dispatch(filterByGenre(''))
+
+
+
     }
 
     return (
         <div>
+
             <button onClick={handleShow}  >Filter by Genre</button>
             {show && <>
                 <label htmlFor="genre"> </label><br />

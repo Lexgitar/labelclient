@@ -11,6 +11,11 @@ const initialState = {
     userInfo: '',
     apiMsg: '',
     edit: false,
+    genreOptions: [
+        { value: 'metal', label: 'Metal' },
+        { value: 'pop', label: 'Pop' },
+        { value: 'rap', label: 'Rap' }
+    ],
     toggleAtoZ: false,
     searchKeys: ['name', 'location', 'about'],
     searchTerm: '',
@@ -404,6 +409,7 @@ export const selectStatus = (state) => state.user.status
 export const selectError = (state) => state.user.error
 export const selectUserInfo = (state) => state.user.userInfo
 export const selectUserEdit = (state) => state.user.edit
+export const selectGenreOptions = (state) => state.user.genreOptions
 export const selectRoles = (state) => state.user.roles
 export const selectFilterGenre = (state) => state.user.filterGenre
 // 

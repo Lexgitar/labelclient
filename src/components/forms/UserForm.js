@@ -4,7 +4,8 @@ import {
     createDetails,
     editDetails,
     selectUserEdit,
-    toggleEdit
+    toggleEdit,
+    selectGenreOptions,
 
     //selectError
 } from "../../slices/userSlice"
@@ -12,13 +13,12 @@ import { useDispatch, useSelector } from "react-redux"
 import Errorent from "../functional/Errorent"
 
 
-const options = [
-    { value: 'metal', label: 'Metal' },
-    { value: 'pop', label: 'Pop' },
-    { value: 'rap', label: 'Rap' }
-]
+
+
 
 const UserForm = ({ user, userInfo }) => {
+
+    const options = useSelector(selectGenreOptions)
 
     let edited = useSelector(selectUserEdit)
     let navigate = useNavigate()
