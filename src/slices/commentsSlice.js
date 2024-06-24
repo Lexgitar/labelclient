@@ -56,9 +56,11 @@ export const commentsSlice = createSlice({
 export default commentsSlice.reducer
 
 export const selectPcomms = (state) => state.comments.pcomms
-export const selectPcommById = (state, id) =>
-    createSelector(
-        selectPcomms,
-        pcomms => pcomms.filter((pcom) => pcom.profileId === id)
-        
-    ) 
+// export const selectPcommById = (state, id) =>
+//     createSelector(
+//         selectPcomms,
+//         pcomms => pcomms.filter((pcom) => pcom.profileId === id)
+
+//     ) 
+export const selectbyId = (state, id) =>
+    state.comments.pcomms.filter((pcom) => pcom.profileId === id)

@@ -1,5 +1,9 @@
 import { useSelector, useDispatch } from "react-redux"
-import { selectPcomms, selectPcommById, fetchComment } from "../slices/commentsSlice"
+import { selectPcomms,
+     selectPcommById,
+      fetchComment,
+        selectbyId
+    } from "../slices/commentsSlice"
 import { useEffect } from "react"
 
 
@@ -11,8 +15,9 @@ const Pcomments = () => {
     }, [])
 
     const profileComm = useSelector(selectPcomms)
-    const pcom = useSelector(state => selectPcommById(state, id))
-    console.log('kk', profileComm, pcom)
+    //const pcom = useSelector(state => selectPcommById(state, id))
+    const com= useSelector(state=>selectbyId(state,id))
+    console.log('kk', profileComm, com)
     return (
         <div>
             {/* {profileComm && profileComm.comments} */}
