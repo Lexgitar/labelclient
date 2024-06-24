@@ -1,23 +1,24 @@
 import { useSelector, useDispatch } from "react-redux"
-import { selectPcommById, fetchComment } from "../slices/commentsSlice"
+import { selectPcomms, selectPcommById, fetchComment } from "../slices/commentsSlice"
 import { useEffect } from "react"
 
 
 const Pcomments = () => {
     let id = '66770bcf65ac34fbc3354ae1'
     const dispatch = useDispatch()
-    useEffect(()=>{
-dispatch(fetchComment({id}))
-    },[])
+    useEffect(() => {
+        dispatch(fetchComment({ id }))
+    }, [])
 
-    //const profileComm = useSelector(state =>selectPcommById(state, id))
+    const profileComm = useSelector(selectPcomms)
+    const pcom = useSelector(state => selectPcommById(state, id))
+    console.log('kk', profileComm, pcom)
+    return (
+        <div>
+            {/* {profileComm && profileComm.comments} */}
 
-  return (
-    <div>
-        {/* {profileComm && profileComm.comments} */}
-
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Pcomments

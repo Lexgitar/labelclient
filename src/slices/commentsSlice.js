@@ -1,8 +1,9 @@
-import { createSlice,
-     createAsyncThunk,
-     createSelector,
-      //createSelector 
-    } from "@reduxjs/toolkit";
+import {
+    createSlice,
+    createAsyncThunk,
+    createSelector,
+    //createSelector 
+} from "@reduxjs/toolkit";
 
 import axios from "axios";
 
@@ -39,15 +40,15 @@ export const commentsSlice = createSlice({
         builder
             //fetch one profileComment
             .addCase(fetchComment.fulfilled, (state, action) => {
-                     state.pcomms.push(action.payload)
-                     
-                    console.log('fcompush', action.payload)
-                    state.error = ''
+                state.pcomms.push(action.payload)
+
+                console.log('fcompush', action.payload)
+                state.error = ''
             })
             .addCase(fetchComment.rejected, (state, action) => {
-                
+
                 state.error = action.payload || action.error.message
-        })
+            })
     }
 })
 
@@ -55,8 +56,9 @@ export const commentsSlice = createSlice({
 export default commentsSlice.reducer
 
 export const selectPcomms = (state) => state.comments.pcomms
-export const selectPcommById = (state, id) => 
+export const selectPcommById = (state, id) =>
     createSelector(
         selectPcomms,
-        state => state.pcomms.filter(pcom=>pcom.profileId === id)
-) 
+        pcomms => pcomms.filter((pcom) => pcom.profileId === id)
+        
+    ) 
