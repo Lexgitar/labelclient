@@ -8,22 +8,26 @@ import {
 import axios from "axios";
 
 const initialState = {
-    pcomms: [],
+    pcomms: [
+        // { _id: "66799c52f1da1673e0e36f4f", profileId: "66770bcf65ac34fbc3354ae1", comments: { _id: "66799c52f1da1673e0e36f4e", body: "comm on lb  ", authorId: "66770d7984e58dfe2986033f" }, createdAt: "2024-06-24T16:18:26.578Z", updatedAt: "2024-06-24T16:18:26.578Z", __v: 0 }
+    ],
     error: '',
 }
 
 
-export const fetchComment = createAsyncThunk('comments/fetchComments',
+export const fetchComment = createAsyncThunk('comment/fetchComment',
     async ({ id }, { rejectWithValue }) => {
         try {
-            //const response = await axios.get(`api/comment/${id}`)
-            const response = await axios.get(`api/comment/${id}`)
+            
+            const response = await axios.get(`/api/comment/${id}`)
             const pComm = response.data
             console.log('ftechcom', response.data)
             return pComm
         } catch (err) {
-            console.log('fetchccome r-or', err)
+            // console.log('fetchccome r-or', err)
+            // console.log('fcomdata er', err.response.data)
             return rejectWithValue(err.response.data)
+            
         }
 
     }
@@ -48,6 +52,7 @@ export const commentsSlice = createSlice({
             .addCase(fetchComment.rejected, (state, action) => {
 
                 state.error = action.payload || action.error.message
+                console.log('errr',action.payload,action.error.message)
             })
     }
 })
@@ -56,11 +61,14 @@ export const commentsSlice = createSlice({
 export default commentsSlice.reducer
 
 export const selectPcomms = (state) => state.comments.pcomms
-// export const selectPcommById = (state, id) =>
-//     createSelector(
-//         selectPcomms,
-//         pcomms => pcomms.filter((pcom) => pcom.profileId === id)
+export const selectItemId = (state, id) => id
 
-//     ) 
-export const selectbyId = (state, id) =>
-    state.comments.pcomms.filter((pcom) => pcom.profileId === id)
+export const selectbyId = 
+    createSelector(
+            [selectPcomms, selectItemId],
+         (pcomms, id) => pcomms.filter((pcom) => pcom.profileId === id)
+
+    ) 
+
+// export const selectbyId = (state, id) =>
+//     state.comments.pcomms.filter((pcom) => pcom.profileId === id)

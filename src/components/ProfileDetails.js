@@ -12,6 +12,7 @@ import {
 
 import Errorent from "./functional/Errorent"
 import FindRole from "./functional/FindRole"
+import Pcomments from "../pages/Pcomments"
 
 const ProfileDetails = () => {
     const dispatch = useDispatch()
@@ -103,7 +104,7 @@ const ProfileDetails = () => {
 
     if (userProfile) {
         return (
-            <div>
+            <div> profiledetails
                 <p>_id:{userProfile._id}</p>
                 <p>name: {userProfile.name}</p>
                 <p>location:{userProfile.location}</p>
@@ -125,6 +126,7 @@ const ProfileDetails = () => {
                     <button onClick={handleDetach}>Detach</button>
                 }
                 <Errorent />
+                <Pcomments id = {userProfile._id}/>
             </div>
         )
     }

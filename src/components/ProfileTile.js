@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 
 
 
+
 const ProfileTile =  ({ profile }) => {
 
     let bands = useSelector(selectRoles).bands
@@ -61,6 +62,8 @@ const ProfileTile =  ({ profile }) => {
 
 
             ))}
+
+           
 
         </div>
     )

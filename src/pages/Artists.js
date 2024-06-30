@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { selectRoles, selectTerm, selectSearchRole, selectSearchKeys } from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
 
-import Pcomments from "./Pcomments"
+
 
 const Artists = () => {
   let keys = useSelector(selectSearchKeys)
@@ -23,7 +23,7 @@ const Artists = () => {
   return (
     <div className="artists">
       <SearchBar /> <FilterTile/>
-      <Pcomments/>
+      
       {(artists && artists.map(artist =>
 
         <ProfileTile key={artist._id} profile={artist} />
