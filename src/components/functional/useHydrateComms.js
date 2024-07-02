@@ -17,6 +17,7 @@ let dispatchType = 'PUT'
 const useHydrateComms = (id) => {
 
     const [comments, setComments] = useState(null)
+   
 
     const dispatch = useDispatch()
 
@@ -31,9 +32,15 @@ const useHydrateComms = (id) => {
             console.log('disptching')
             dispatch(fetchComment({ id }))
         } else if (profileComment && profileComment.comments) {
-           
+           //all can comment
             console.log('pcom.coms', profileComment.comments)
             setComments(profileComment.comments)
+           
+        } else if(profileComment && !profileComment.comments){
+            //all can comment 
+           setComments('no comments yet')
+        }else{
+            //only POST dispatch 
         }
 
     }, [profileComment])

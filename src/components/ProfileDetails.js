@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+
 import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectRoles, selectUser } from "../slices/userSlice"
@@ -15,6 +19,13 @@ import FindRole from "./functional/FindRole"
 import Pcomments from "../pages/Pcomments"
 
 const ProfileDetails = () => {
+    const [bubble, setBubble] = useState(false)
+    const handleBubble = () => {
+      
+        !bubble ? setBubble(true) : setBubble(false)
+ 
+    }
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     let pathName = useLocation().pathname
@@ -111,6 +122,7 @@ const ProfileDetails = () => {
     return (
         <div>
             {(userProfile !== undefined &&
+            
 
                 <div> profiledetails
                     <p>_id:{userProfile._id}</p>
@@ -133,8 +145,9 @@ const ProfileDetails = () => {
                         detachCheck() &&
                         <button onClick={handleDetach}>Detach</button>
                     }
+                    <ChatBubbleOutlineIcon onClick={handleBubble} />
                     <Errorent />
-                    <Pcomments id={id} />
+                    {bubble && <Pcomments id={id} bubble={bubble} />}
                 </div>)
                 || 'Loading'
             }

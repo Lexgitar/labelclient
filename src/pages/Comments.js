@@ -6,7 +6,7 @@ const Comments = ({comms}) => {
     <div>
         {(comms && comms.map((comment) =>
             <p key={comment._id}>{comment.body}</p>
-        ))  || '>> no results <<' }
+        ))  || '>> no comments <<' }
     </div>
   )
 }

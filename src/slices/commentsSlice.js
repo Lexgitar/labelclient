@@ -13,6 +13,8 @@ const initialState = {
 
     ],
     error: '',
+    canComment:'false',
+    dispatchType:'',
 }
 
 
