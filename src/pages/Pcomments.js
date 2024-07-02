@@ -1,39 +1,36 @@
-import { useSelector, useDispatch } from "react-redux"
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import {
-    
-    fetchComment,
-    selectbyId
-} from "../slices/commentsSlice"
+import { useSelector, useDispatch } from 'react-redux';
+import { selectbyId } from '../slices/commentsSlice';
 
-import { useEffect, useState } from "react"
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import Comments from "./Comments";
+
+
+import {  useState } from "react"
+import useHydrateComms from "../components/functional/useHydrateComms";
 
 
 const Pcomments = ({ id }) => {
-
-    //use hook
-
-    let profileComment = useSelector(state => selectbyId(state, id))
-    const [bubble, setBubble] = useState(false)
-    
-
-    let ids = '66770bcf65ac34fbc3354ae1'
     const dispatch = useDispatch()
+    const [bubble, setBubble] = useState(false)
+    const {comments} = useHydrateComms(id)
+    //use hook
+    //const [comms, setComms] = useState('')
+    
+    //let profileComment = useSelector(state => selectbyId(state, id))
+   
+    let komms = comments
+    console.log('pcom',komms)
+    const comms = comments
+
+
+
 
     const handleBubble = () => {
-
-        console.log('kk', profileComment)
+      
         !bubble ? setBubble(true) : setBubble(false)
-
+ 
     }
 
-
-
-    useEffect(() => {
-        dispatch(fetchComment({ id }))
-    }, [])
-
-    
 
 
 
@@ -45,6 +42,8 @@ const Pcomments = ({ id }) => {
             <div>
                 {bubble && 'comment ' + id}
             </div>
+            {/* {bubble && <Comments comments={comms}/>} */}
+            {bubble && <Comments comms={comms}/>}
         </div>
     )
 }

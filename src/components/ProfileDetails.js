@@ -29,20 +29,25 @@ const ProfileDetails = () => {
     let artists = useSelector(selectRoles).artists
     //
     const { id } = useParams()
+    console.log('useparams', id)
+
     let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : bands))
     let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : 'bands'))
     let fanRoleCheck = userRole === 'fan' ? false : true
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
     //console.log(byRolechecking)
-
-    const userProfile = usersPool.filter(function (user) { return user._id === id })[0]
-    //console.log('userkind ', userProfile)
+    //const profileUserAsync = async (id) => await usersPool.filter(function (user) { return user._id === id })[0]
+    const profileUserAsync =  usersPool.filter(async function (user) { return await user._id === id })[0]
+    //const userProfile =  usersPool.filter(function (user) { return user._id === id })[0]
+    const userProfile = profileUserAsync
+    console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile.attachedId.includes(userRoleInfo._id) ? false : true
     //console.log('araycheck ', notInArrayCheck)
+
     const attachCheck = () => {
-        if (loggedIn && byRolechecking &&
-            notInArrayCheck &&
+        if ( loggedIn && byRolechecking &&
+             notInArrayCheck &&
             fanRoleCheck && userRoleInfo) {
             return true
         } else {
@@ -51,7 +56,7 @@ const ProfileDetails = () => {
     }
     //
     const detachCheck = () => {
-        if (loggedIn && byRolechecking &&
+        if ( loggedIn && byRolechecking &&
             !notInArrayCheck &&
             fanRoleCheck && userRoleInfo) {
             return true
@@ -60,8 +65,8 @@ const ProfileDetails = () => {
         }
     }
     //
-    const handleAttach = () => {
-        if (userRoleInfo && userProfile) {
+    const handleAttach =  () => {
+        if (userRoleInfo &&  userProfile) {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
@@ -81,8 +86,8 @@ const ProfileDetails = () => {
 
     }
 
-    const handleDetach = () => {
-        if (userRoleInfo && userProfile) {
+    const handleDetach =  () => {
+        if (userRoleInfo &&  userProfile) {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
@@ -102,34 +107,42 @@ const ProfileDetails = () => {
 
     }
 
-    if (userProfile) {
-        return (
-            <div> profiledetails
-                <p>_id:{userProfile._id}</p>
-                <p>name: {userProfile.name}</p>
-                <p>location:{userProfile.location}</p>
-                
-                {userProfile.genre && <p>genre - {userProfile.genre}</p>}
-                
-                <p>about - {userProfile.about}</p>
-                <p>links - {userProfile.links}</p>
-                {/* <p>atId's: {userProfile.attachedId}</p> */}
-                {userProfile.attachedId.map(id=>{
-                    return <FindRole id = {id}/>
-                })}
-                {
-                    attachCheck() &&
-                    <button onClick={handleAttach}>Submit</button>
-                }
-                {
-                    detachCheck() &&
-                    <button onClick={handleDetach}>Detach</button>
-                }
-                <Errorent />
-                <Pcomments id = {userProfile._id}/>
-            </div>
-        )
-    }
+
+    return (
+        <div>
+            {(userProfile !== undefined &&
+
+                <div> profiledetails
+                    <p>_id:{userProfile._id}</p>
+                    <p>name: {userProfile.name}</p>
+                    <p>location:{userProfile.location}</p>
+
+                    {userProfile.genre && <p>genre - {userProfile.genre}</p>}
+
+                    <p>about - {userProfile.about}</p>
+                    <p>links - {userProfile.links}</p>
+
+                    {userProfile.attachedId.map(id => {
+                        return <FindRole id={id} />
+                    })}
+                    {
+                        attachCheck() &&
+                        <button onClick={handleAttach}>Submit</button>
+                    }
+                    {
+                        detachCheck() &&
+                        <button onClick={handleDetach}>Detach</button>
+                    }
+                    <Errorent />
+                    <Pcomments id={id} />
+                </div>)
+                || 'Loading'
+            }
+        </div>
+
+
+    )
+
 }
 
 export default ProfileDetails

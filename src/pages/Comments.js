@@ -1,8 +1,13 @@
-import React from 'react'
 
-const Comments = () => {
+
+const Comments = ({comms}) => {
+    console.log('f coms cmp ' , comms)
   return (
-    <div>Comments</div>
+    <div>
+        {(comms && comms.map((comment) =>
+            <p key={comment._id}>{comment.body}</p>
+        ))  || '>> no results <<' }
+    </div>
   )
 }
 
