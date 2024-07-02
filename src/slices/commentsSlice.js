@@ -13,15 +13,15 @@ const initialState = {
 
     ],
     error: '',
-    canComment:'false',
-    dispatchType:'',
+    canCommentPost: 'false',
+    dispatchType: '',
 }
 
 
 export const fetchComment = createAsyncThunk('comment/fetchComment',
     async ({ id }, { rejectWithValue }) => {
         try {
-            
+
             const response = await axios.get(`/api/comment/${id}`)
             const pComm = response.data
             console.log('ftechcom', response.data)
@@ -30,9 +30,35 @@ export const fetchComment = createAsyncThunk('comment/fetchComment',
             // console.log('fetchccome r-or', err)
             // console.log('fcomdata er', err.response.data)
             return rejectWithValue(err.response.data)
-            
+
         }
 
+    }
+)
+
+export const fetchPostComment = createAsyncThunk('comment/fetchPostComment',
+    async ({ id, body }, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(`/api/comment?id=${id}`, body)
+            const pComm = response.data
+            console.log('fetchPostCom', response.data)
+            return pComm
+        } catch (err) {
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
+export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
+    async ({ id, body }, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(`/api/comment/${id}`, body)
+            const pComm = response.data
+            console.log('fetchPostCom', response.data)
+            return pComm
+        } catch (err) {
+            return rejectWithValue(err.response.data)
+        }
     }
 )
 
@@ -55,7 +81,30 @@ export const commentsSlice = createSlice({
             .addCase(fetchComment.rejected, (state, action) => {
 
                 state.error = action.payload || action.error.message
-                console.log('errr', action.payload,action.error.message)
+                console.log('errr', action.payload, action.error.message)
+            })
+            .addCase(fetchPostComment.fulfilled, (state, action) => {
+                state.pcomms.push(action.payload)
+
+                console.log('fcompush - fpc', action.payload)
+                state.error = ''
+            })
+            .addCase(fetchPostComment.rejected, (state, action) => {
+
+                state.error = action.payload || action.error.message
+                console.log('errr fpc', action.payload, action.error.message)
+            })
+            .addCase(fetchPutComment.fulfilled, (state, action) => {
+                //EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!! REPLACE PC in state
+                state.pcomms.push(action.payload)
+
+                console.log('fcompush - fputc', action.payload)
+                state.error = ''
+            })
+            .addCase(fetchPutComment.rejected, (state, action) => {
+
+                state.error = action.payload || action.error.message
+                console.log('errr fputc', action.payload, action.error.message)
             })
     }
 })
@@ -66,12 +115,12 @@ export default commentsSlice.reducer
 export const selectPcomms = (state) => state.comments.pcomms
 export const selectItemId = (state, id) => id
 
-export const selectbyId = 
+export const selectbyId =
     createSelector(
-            [selectPcomms, selectItemId],
-         (pcomms, id) => pcomms.filter((pcom) => pcom.profileId === id)
+        [selectPcomms, selectItemId],
+        (pcomms, id) => pcomms.filter((pcom) => pcom.profileId === id)
 
-    ) 
+    )
 
 // export const selectbyId = (state, id) =>
 //     state.comments.pcomms.filter((pcom) => pcom.profileId === id)

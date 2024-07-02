@@ -17,7 +17,9 @@ let dispatchType = 'PUT'
 const useHydrateComms = (id) => {
 
     const [comments, setComments] = useState(null)
-   
+    const [onlyPost, setOnlyPost] = useState(false)
+   // user logged can't initialize own ProfileComments
+
 
     const dispatch = useDispatch()
 
@@ -40,12 +42,13 @@ const useHydrateComms = (id) => {
             //all can comment 
            setComments('no comments yet')
         }else{
-            //only POST dispatch 
+            //if still no pCs - > only POST dispatch 
+            setOnlyPost(true)
         }
 
     }, [profileComment])
 
-    return { comments }
+    return { comments, onlyPost }
 }
 
 export default useHydrateComms
