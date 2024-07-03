@@ -44,7 +44,7 @@ const Pcomments = ({ id, bubble }) => {
             </div>
             {/* {bubble && <Comments comments={comms}/>} */}
             {(bubble && canComment)  && <CommentForm id={id} onlyPost={onlyPost} />}
-            {bubble && <Comments comms={comms} />}
+            {bubble && <Comments profile = {id} comms={comms} />}
         </div>
     )
 }

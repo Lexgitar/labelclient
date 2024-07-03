@@ -1,11 +1,18 @@
+import DeleteComment from "../components/functional/DeleteComment"
 
-
-const Comments = ({comms}) => {
+const Comments = ({profile, comms}) => {
     console.log('f coms cmp ' , comms)
   return (
     <div>
         {(comms && comms.map((comment) =>
-            <p key={comment._id}>{comment.body}</p>
+            <div key={comment._id}>
+              <p >
+                {comment.body} 
+              </p>
+              <DeleteComment
+                  id = {profile}
+                  authorId = {comment.authorId} />
+            </div>
         ))  || '>> no comments <<' }
     </div>
   )

@@ -65,6 +65,21 @@ export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
     }
 )
 
+export const fetchDeleteComment = createAsyncThunk('comment/fetchDeleteComment',
+    async ({ id, authorId}, { rejectWithValue }) => {
+        try {
+            console.log('fetchPutCom id and authorid',  id, authorId)
+            const response = await axios.put(`/api/comment/${id}?delete=${authorId}`)
+            const pComm = response.data
+            //console.log('fetchPutCom BODY', body)
+            console.log('fetchPutDeleteCom', response.data)
+            return pComm
+        } catch (err) {
+            return rejectWithValue(err.response.data)
+        }
+    }
+)
+
 export const commentsSlice = createSlice({
     name: 'comments',
     initialState,
@@ -111,6 +126,20 @@ export const commentsSlice = createSlice({
                 state.error = action.payload || action.error.message
                 console.log('errr fputc', action.payload, action.error.message)
             })
+            .addCase(fetchDeleteComment.fulfilled, (state, action) => {
+                
+                let pIndex = state.pcomms.findIndex((item)=> item._id === action.payload._id )
+                state.pcomms.splice(pIndex, 1, action.payload)
+
+                console.log('fcompush - fdelete', action.payload)
+                state.error = ''
+            })
+            .addCase(fetchDeleteComment.rejected, (state, action) => {
+
+                state.error = action.payload || action.error.message
+                console.log('errr fputc', action.payload, action.error.message)
+            })
+    
     }
 })
 

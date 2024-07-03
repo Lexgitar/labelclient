@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchPostComment, fetchPutComment } from "../../slices/commentsSlice"
 import { selectLoggedIn } from "../../slices/userSlice"
 
+
+
 const CommentForm = ({id, onlyPost}) => {
     let loggedIn = useSelector(selectLoggedIn)
     const dispatch = useDispatch()
@@ -15,6 +17,7 @@ const CommentForm = ({id, onlyPost}) => {
         console.log('hsb BEFORE', id, body)
         dispatch(fetchType({id, body}))
         console.log('hsb', id, body)
+        setBody('')
     }
 
     
