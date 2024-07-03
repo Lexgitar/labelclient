@@ -31,7 +31,7 @@ const LoginForm = () => {
                 const dataId = response.data._id
                 const role = response.data.role
 
-                console.log(response.data)
+                console.log('from login data',response.data)
                 dispatch(addUser(response.data))
 
                 const foundProfile = (id, role) => {

@@ -48,9 +48,9 @@ const ProfileDetails = () => {
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
     //console.log(byRolechecking)
     //const profileUserAsync = async (id) => await usersPool.filter(function (user) { return user._id === id })[0]
-    const profileUserAsync =  usersPool.filter(async function (user) { return await user._id === id })[0]
+    //const profileUserAsync =  usersPool.filter(async function (user) { return await user._id === id })[0]
     //const userProfile =  usersPool.filter(function (user) { return user._id === id })[0]
-    const userProfile = profileUserAsync
+    const userProfile = usersPool.filter( function (user) { return  user._id === id })[0]
     console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile.attachedId.includes(userRoleInfo._id) ? false : true
@@ -145,8 +145,9 @@ const ProfileDetails = () => {
                         detachCheck() &&
                         <button onClick={handleDetach}>Detach</button>
                     }
-                    <ChatBubbleOutlineIcon onClick={handleBubble} />
                     <Errorent />
+                    <ChatBubbleOutlineIcon onClick={handleBubble} />
+                    
                     {bubble && <Pcomments id={id} bubble={bubble} />}
                 </div>)
                 || 'Loading'
