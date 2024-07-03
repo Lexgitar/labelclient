@@ -39,11 +39,12 @@ export const fetchComment = createAsyncThunk('comment/fetchComment',
 export const fetchPostComment = createAsyncThunk('comment/fetchPostComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/comment?id=${id}`, body)
+            const response = await axios.post(`/api/comment?id=${id}`, {body})
             const pComm = response.data
             console.log('fetchPostCom', response.data)
             return pComm
         } catch (err) {
+            console.log('err post', err)
             return rejectWithValue(err.response.data)
         }
     }
@@ -52,9 +53,11 @@ export const fetchPostComment = createAsyncThunk('comment/fetchPostComment',
 export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`/api/comment/${id}`, body)
+            console.log('fetchPutCom BODY and id', body, id)
+            const response = await axios.put(`/api/comment/${id}`, {body})
             const pComm = response.data
-            console.log('fetchPostCom', response.data)
+            //console.log('fetchPutCom BODY', body)
+            console.log('fetchPutCom', response.data)
             return pComm
         } catch (err) {
             return rejectWithValue(err.response.data)
@@ -96,7 +99,9 @@ export const commentsSlice = createSlice({
             })
             .addCase(fetchPutComment.fulfilled, (state, action) => {
                 //EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!! REPLACE PC in state
-                state.pcomms.push(action.payload)
+                    //done edit
+                let pIndex = state.pcomms.findIndex((item)=> item._id === action.payload._id )
+                state.pcomms.splice(pIndex, 1, action.payload)
 
                 console.log('fcompush - fputc', action.payload)
                 state.error = ''

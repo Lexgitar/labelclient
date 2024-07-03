@@ -6,24 +6,26 @@ import { selectLoggedIn } from "../../slices/userSlice"
 const CommentForm = ({id, onlyPost}) => {
     let loggedIn = useSelector(selectLoggedIn)
     const dispatch = useDispatch()
-    const [comment, setComment] = useState('')
+    const [body, setBody] = useState('')
 
     let fetchType = onlyPost? fetchPostComment : fetchPutComment
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(fetchPostComment({id, body:comment}))
+        console.log('hsb BEFORE', id, body)
+        dispatch(fetchType({id, body}))
+        console.log('hsb', id, body)
     }
 
     
     if(loggedIn){
         return (
-            <form onSubmit={(e) => handleSubmit(e)} action="" id='commentform'>
+            <form onSubmit={(e) => handleSubmit(e)}  id='commentform'>
                 <textarea 
-                onChange={(e) => setComment(e.target.value)} 
+                onChange={(e) => setBody(e.target.value)} 
                 type="text" 
                 placeholder="add comment..." 
-                value={comment}
+                value={body}
                 />
                 <button>Add</button>
             </form>
