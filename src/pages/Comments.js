@@ -11,7 +11,9 @@ const Comments = ({profile, comms}) => {
               </p>
               <DeleteComment
                   id = {profile}
-                  authorId = {comment.authorId} />
+                  authorId = {comment.authorId} 
+                  commentId = {comment._id}
+                  />
             </div>
         ))  || '>> no comments <<' }
     </div>

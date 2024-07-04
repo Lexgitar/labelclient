@@ -6,13 +6,6 @@ import {
 } from '../../slices/commentsSlice'
 
 
-//POST or PUT
-let dispatchType = 'PUT'
-
-
-
-//
-
 
 const useHydrateComms = (id) => {
 

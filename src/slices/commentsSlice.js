@@ -66,10 +66,10 @@ export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
 )
 
 export const fetchDeleteComment = createAsyncThunk('comment/fetchDeleteComment',
-    async ({ id, authorId}, { rejectWithValue }) => {
+    async ({ id, authorId, commentId}, { rejectWithValue }) => {
         try {
             console.log('fetchPutCom id and authorid',  id, authorId)
-            const response = await axios.put(`/api/comment/${id}?delete=${authorId}`)
+            const response = await axios.put(`/api/comment/${id}?delete=${commentId}&authorId=${authorId}`)
             const pComm = response.data
             //console.log('fetchPutCom BODY', body)
             console.log('fetchPutDeleteCom', response.data)

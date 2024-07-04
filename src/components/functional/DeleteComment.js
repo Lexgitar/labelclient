@@ -1,17 +1,21 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch, useSelector } from 'react-redux';
+
+import { useDispatch,
+     //useSelector
+     }   from 'react-redux';
 import { fetchDeleteComment } from '../../slices/commentsSlice';
 
-const DeleteComment = ({ id, authorId }) => {
+const DeleteComment = ({ id, authorId, commentId }) => {
     const dispatch = useDispatch()
 
     const handleDelete = () => {
-        dispatch(fetchDeleteComment({ id, authorId }))
+        dispatch(fetchDeleteComment({ id, authorId, commentId }))
     }
     return (
-        <div>
-            <DeleteIcon onClick={handleDelete} />
-        </div>
+        
+            <button onClick={handleDelete}  >
+                Delete
+            </button> 
+        
     )
 }
 
