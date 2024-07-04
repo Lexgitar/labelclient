@@ -1,21 +1,20 @@
-import DeleteComment from "../components/functional/DeleteComment"
 
-const Comments = ({profile, comms}) => {
-    console.log('f coms cmp ' , comms)
+import OneComment from "./OneComment"
+const Comments = ({ profile, comms }) => {
+
+  console.log('f coms cmp ', comms)
   return (
     <div>
-        {(comms && comms.map((comment) =>
-            <div key={comment._id}>
-              <p >
-                {comment.body} 
-              </p>
-              <DeleteComment
-                  id = {profile}
-                  authorId = {comment.authorId} 
-                  commentId = {comment._id}
-                  />
-            </div>
-        ))  || '>> no comments <<' }
+      {(comms && comms.map((comment) =>
+        <div key={comment._id}>
+          <OneComment
+            id={profile}
+            comment={comment}
+
+          />
+
+        </div>
+      )) || '>> no comments <<'}
     </div>
   )
 }

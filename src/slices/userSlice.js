@@ -198,10 +198,10 @@ export const userSlice = createSlice({
 
         },
         filterByGenre: (state, action) => {
-            
-            
+
+
             state.filterGenre = action.payload
-            
+
         },
         filterByNew: (state,) => {
             let pot = state.searchPot
@@ -415,17 +415,33 @@ export const selectFilterGenre = (state) => state.user.filterGenre
 // 
 export const selectFilteredBands = createSelector(
     [selectRoles, selectFilterGenre],
-     (roles, filterGenre) => 
+    (roles, filterGenre) =>
         filterGenre ? roles.bands.filter(item => item.genre === filterGenre) : roles.bands
-           
+
 )
 //
 export const selectFilteredLabels = createSelector(
     [selectRoles, selectFilterGenre],
-     (roles, filterGenre) => 
+    (roles, filterGenre) =>
         filterGenre ? roles.labels.filter(item => item.genre === filterGenre) : roles.labels
-           
+
 )
+//
+export const selectUserNameById = (state, id) => id
+export const selectNameById =
+    createSelector(
+        
+        [selectRoles,selectUserNameById ],
+        (roles, id) =>
+            
+            Object.values(roles)
+            // Object.values(roles).filter((keyItem) => keyItem.filter((band) => band._id === id)
+                //keyItem.filter((item)=> Object.values(item).filter((band)=> band._id === id)) 
+
+
+                //((arrayItem) => arrayItem._id === id))
+            //)
+    )
 //
 export const selectTerm = (state) => state.user.searchTerm
 export const selectSearchRole = (state) => state.user.searchPot

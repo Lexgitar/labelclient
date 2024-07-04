@@ -7,6 +7,7 @@ const FindRole = ({id}) => {
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels
     let artists = useSelector(selectRoles).artists
+    
 
     //let usersPool = useLocation().pathname.includes('labels') ? labels : bands
     let location = useLocation().pathname

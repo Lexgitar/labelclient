@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 import { useParams, useLocation, useNavigate } from "react-router-dom"
@@ -38,23 +38,21 @@ const ProfileDetails = () => {
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels
     let artists = useSelector(selectRoles).artists
-    //
+    let fans = useSelector(selectRoles).fans
+   
     const { id } = useParams()
     console.log('useparams', id)
 
-    let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : bands))
-    let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : 'bands'))
+    let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : (pathName.includes('fans') ? fans : bands)))
+    let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : (pathName.includes('fans') ? 'fans':'bands')))
     let fanRoleCheck = userRole === 'fan' ? false : true
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
-    //console.log(byRolechecking)
-    //const profileUserAsync = async (id) => await usersPool.filter(function (user) { return user._id === id })[0]
-    //const profileUserAsync =  usersPool.filter(async function (user) { return await user._id === id })[0]
-    //const userProfile =  usersPool.filter(function (user) { return user._id === id })[0]
+    
     const userProfile = usersPool.filter( function (user) { return  user._id === id })[0]
     console.log('userkind ', userProfile)
 
-    let notInArrayCheck = userProfile.attachedId.includes(userRoleInfo._id) ? false : true
-    //console.log('araycheck ', notInArrayCheck)
+    let notInArrayCheck = userProfile.attachedId? (userProfile.attachedId.includes(userRoleInfo._id) ? false : true) : false
+  
 
     const attachCheck = () => {
         if ( loggedIn && byRolechecking &&
@@ -134,7 +132,7 @@ const ProfileDetails = () => {
                     <p>about - {userProfile.about}</p>
                     <p>links - {userProfile.links}</p>
 
-                    {userProfile.attachedId.map(id => {
+                    {(userProfile.attachedId !==undefined )&& userProfile.attachedId.map(id => {
                         return <FindRole id={id} />
                     })}
                     {
@@ -149,6 +147,7 @@ const ProfileDetails = () => {
                     <ChatBubbleOutlineIcon onClick={handleBubble} />
                     
                     {bubble && <Pcomments id={id} bubble={bubble} />}
+                    <Link to={'/fans/6686e1e9a634e8ec8b01701f'}>fan</Link>
                 </div>)
                 || 'Loading'
             }
