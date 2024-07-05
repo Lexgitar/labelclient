@@ -430,18 +430,27 @@ export const selectFilteredLabels = createSelector(
 export const selectUserNameById = (state, id) => id
 export const selectNameById =
     createSelector(
-        
-        [selectRoles,selectUserNameById ],
-        (roles, id) =>
+
+        [selectRoles, selectUserNameById],
+        (roles, id) => {
+
+            function isEquals(band) {
+                if (band._id === id) {
+                    return band
+                }
+
+            }
+            const [a, b, c, d] = Object.values(roles)
+            const conced = a.concat(b, c, d)
+            console.log(conced)
+            const confil = conced.find(isEquals)
+            if(confil){
+                const {name} = confil
+            return name
+            }
             
-            Object.values(roles)
-            // Object.values(roles).filter((keyItem) => keyItem.filter((band) => band._id === id)
-                //keyItem.filter((item)=> Object.values(item).filter((band)=> band._id === id)) 
 
-
-                //((arrayItem) => arrayItem._id === id))
-            //)
-    )
+        })
 //
 export const selectTerm = (state) => state.user.searchTerm
 export const selectSearchRole = (state) => state.user.searchPot
