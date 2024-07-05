@@ -11,23 +11,35 @@ import Comments from "./Comments";
 
 
 import useHydrateComms from "../components/functional/useHydrateComms";
+import { useEffect, 
+    useState ,
+} from 'react';
 
 
 const Pcomments = ({ id, bubble }) => {
     //const dispatch = useDispatch()
+    const { comments, onlyPost } = useHydrateComms(id)
     const user = useSelector(selectUser)
     console.log('user - from pcoms',user.itemId)
+    //  const [comms, setComms] = useState('')
+    //  const [justPost, setJustPost] = useState(false)
 
-    const { comments, onlyPost } = useHydrateComms(id)
-    //use hook
- 
+    //const { comments, onlyPost } = useHydrateComms(id)
+   
+    // useEffect(()=>{
+    //     //const { comments, onlyPost } = useHydrateComms(id)
+    //     setComms(comments)
+    //     setJustPost(onlyPost)
+    // },[id])
+
+    //let canComment = ((justPost && (id === user.itemId)) ? false : true)
     let canComment = ((onlyPost && (id === user.itemId)) ? false : true)
     console.log('cancom: ',canComment)
     console.log('only postt: ', onlyPost)
     //let canComment = true
-    let komms = comments
-    console.log('pcom', komms)
-    const comms = comments
+     let comms = comments
+    
+    
 
 
 
@@ -39,7 +51,7 @@ const Pcomments = ({ id, bubble }) => {
 
     return (
         <div>
-
+                pcoms
 
 
             <div>

@@ -438,17 +438,23 @@ export const selectNameById =
                 if (band._id === id) {
                     return band
                 }
-
             }
             const [a, b, c, d] = Object.values(roles)
             const conced = a.concat(b, c, d)
             console.log(conced)
             const confil = conced.find(isEquals)
-            if(confil){
-                const {name} = confil
-            return name
+            if (confil.name && confil.role ) {
+                console.log('confil', confil)
+                const { name, role} = confil
+                console.log('name si role', name, role)
+                return {name, role}
+            } else if( confil.name){
+                console.log('confil2', confil)
+                const { name, role} = confil
+                console.log('name si role2', name, role)
+                return {name, role}
             }
-            
+
 
         })
 //

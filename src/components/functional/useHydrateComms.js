@@ -37,7 +37,7 @@ const useHydrateComms = (id) => {
            setComments('no comments yet')
            setOnlyPost(false)
         }
-    }, [profileComment])
+    }, [id,profileComment])
 
     return { comments, onlyPost }
 }

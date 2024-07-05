@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
@@ -25,6 +25,7 @@ const ProfileDetails = () => {
         !bubble ? setBubble(true) : setBubble(false)
  
     }
+    
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -43,6 +44,10 @@ const ProfileDetails = () => {
     const { id } = useParams()
     console.log('useparams', id)
 
+    useEffect(()=>{
+        setBubble(false)
+    },[id])
+
     let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : (pathName.includes('fans') ? fans : bands)))
     let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : (pathName.includes('fans') ? 'fans':'bands')))
     let fanRoleCheck = userRole === 'fan' ? false : true
@@ -51,7 +56,7 @@ const ProfileDetails = () => {
     const userProfile = usersPool.filter( function (user) { return  user._id === id })[0]
     console.log('userkind ', userProfile)
 
-    let notInArrayCheck = userProfile.attachedId? (userProfile.attachedId.includes(userRoleInfo._id) ? false : true) : false
+    let notInArrayCheck = userProfile && userProfile.attachedId ? (userProfile.attachedId.includes(userRoleInfo._id) ? false : true) : false
   
 
     const attachCheck = () => {
@@ -147,9 +152,9 @@ const ProfileDetails = () => {
                     <ChatBubbleOutlineIcon onClick={handleBubble} />
                     
                     {bubble && <Pcomments id={id} bubble={bubble} />}
-                    <Link to={'/fans/6686e1e9a634e8ec8b01701f'}>fan</Link>
+                    <Link to={'/fans/6688425f41ec988d66f28766'}>fan</Link>
                 </div>)
-                || 'Loading'
+               
             }
         </div>
 

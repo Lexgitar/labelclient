@@ -4,21 +4,23 @@ import { selectNameById } from "../../slices/userSlice"
 
 const useGetComAuthor = (id) => {
     const [author, setAuthor] = useState('Unknown')
-    const [mane, setMane] = useState('')
+    const [linkRole, setLinkRole] = useState('home')
 
-    const nameA = useSelector(state => selectNameById(state, id))
-    
+
+    const  {name, role } = useSelector(state => selectNameById(state, id))
+
     useEffect(() => {
+        if(name && role){
+            setAuthor(name)
+            setLinkRole(role)
+        }
         
         
-        setMane(nameA)
     }, [])
 
-    console.log('name', nameA, 
-        
-        id,
-    )
-    return { author, mane }
+    console.log('namez',  author,linkRole, id,)
+
+    return { author, linkRole  }
 }
 
 export default useGetComAuthor
