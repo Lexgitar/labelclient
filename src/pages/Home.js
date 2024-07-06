@@ -8,7 +8,7 @@ import {
   selectApiMsg
 } from "../slices/userSlice"
 //import { useEffect } from "react"
-import Errorent from "../components/functional/Errorent"
+//import Errorent from "../components/functional/Errorent"
 
 
 
