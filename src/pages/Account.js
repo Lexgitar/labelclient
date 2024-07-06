@@ -8,7 +8,7 @@ import {
 } from '../slices/userSlice'
 import UserDetails from '../components/functional/UserDetails'
 import DeleteAccount from '../components/functional/DeleteAccount'
-import Errorent from '../components/functional/Errorent'
+//import Errorent from '../components/functional/Errorent'
 
 
 

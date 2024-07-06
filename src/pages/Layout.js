@@ -4,7 +4,9 @@ import './pages.css'
 import Logout from '../components/forms/Logout'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { selectError, selectLoggedIn } from '../slices/userSlice'
+import {
+     //selectError, 
+     selectLoggedIn } from '../slices/userSlice'
 
 import { fetchRoles } from '../slices/userSlice'
 import Errorent from '../components/functional/Errorent'
@@ -16,7 +18,7 @@ const Layout = () => {
     let logged = useSelector(selectLoggedIn)
     let location = useLocation().pathname
     console.log('location', location)
-    let globalError = useSelector(selectError)
+    //let globalError = useSelector(selectError)
     let goodLocation = location === '/bands' || location ==='/labels' ||location === '/artists' ? true : false
 
     // useEffect(() => {

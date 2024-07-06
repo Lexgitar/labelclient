@@ -17,7 +17,7 @@ import {
   //toggleLog,
   userSignup
 } from "../../slices/userSlice"
-import Errorent from "../functional/Errorent"
+//import Errorent from "../functional/Errorent"
 
 
 const SignUpForm = () => {
