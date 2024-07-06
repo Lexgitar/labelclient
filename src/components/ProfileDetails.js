@@ -21,11 +21,11 @@ import Pcomments from "../pages/Pcomments"
 const ProfileDetails = () => {
     const [bubble, setBubble] = useState(false)
     const handleBubble = () => {
-      
+
         !bubble ? setBubble(true) : setBubble(false)
- 
+
     }
-    
+
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -40,29 +40,29 @@ const ProfileDetails = () => {
     let labels = useSelector(selectRoles).labels
     let artists = useSelector(selectRoles).artists
     let fans = useSelector(selectRoles).fans
-   
+
     const { id } = useParams()
     console.log('useparams', id)
 
-    useEffect(()=>{
+    useEffect(() => {
         setBubble(false)
-    },[id])
+    }, [id])
 
     let usersPool = (pathName.includes('labels') ? labels : (pathName.includes('artists') ? artists : (pathName.includes('fans') ? fans : bands)))
-    let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : (pathName.includes('fans') ? 'fans':'bands')))
+    let roleFromUrl = (pathName.includes('labels') ? 'labels' : (pathName.includes('artists') ? 'artists' : (pathName.includes('fans') ? 'fans' : 'bands')))
     let fanRoleCheck = userRole === 'fan' ? false : true
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
-    
-    const userProfile = usersPool.filter( function (user) { return  user._id === id })[0]
+
+    const userProfile = usersPool.filter(function (user) { return user._id === id })[0]
     console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile && userProfile.attachedId ? (userProfile.attachedId.includes(userRoleInfo._id) ? false : true) : false
-  
+
 
     const attachCheck = () => {
-        if ( loggedIn && byRolechecking &&
-             notInArrayCheck &&
-            fanRoleCheck && userRoleInfo) {
+        if (loggedIn && byRolechecking &&
+            notInArrayCheck &&
+            fanRoleCheck && userRoleInfo && userProfile.role !== 'fan') {
             return true
         } else {
             return false
@@ -70,17 +70,17 @@ const ProfileDetails = () => {
     }
     //
     const detachCheck = () => {
-        if ( loggedIn && byRolechecking &&
+        if (loggedIn && byRolechecking &&
             !notInArrayCheck &&
-            fanRoleCheck && userRoleInfo) {
+            fanRoleCheck && userRoleInfo && userProfile.role !== 'fan') {
             return true
         } else {
             return false
         }
     }
     //
-    const handleAttach =  () => {
-        if (userRoleInfo &&  userProfile) {
+    const handleAttach = () => {
+        if (userRoleInfo && userProfile) {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
@@ -100,8 +100,8 @@ const ProfileDetails = () => {
 
     }
 
-    const handleDetach =  () => {
-        if (userRoleInfo &&  userProfile) {
+    const handleDetach = () => {
+        if (userRoleInfo && userProfile) {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
@@ -125,7 +125,7 @@ const ProfileDetails = () => {
     return (
         <div>
             {(userProfile !== undefined &&
-            
+
 
                 <div> profiledetails
                     <p>_id:{userProfile._id}</p>
@@ -137,7 +137,7 @@ const ProfileDetails = () => {
                     <p>about - {userProfile.about}</p>
                     <p>links - {userProfile.links}</p>
 
-                    {(userProfile.attachedId !==undefined )&& userProfile.attachedId.map(id => {
+                    {(userProfile.attachedId !== undefined) && userProfile.attachedId.map(id => {
                         return <FindRole id={id} />
                     })}
                     {
@@ -151,11 +151,11 @@ const ProfileDetails = () => {
                     {/* <Errorent /> */}
                     {!bubble && <CommentIcon onClick={handleBubble} />}
                     {bubble && <CommentsDisabledIcon onClick={handleBubble} />}
-                    
+
                     {bubble && <Pcomments id={id} bubble={bubble} />}
-                   
+
                 </div>)
-               
+
             }
         </div>
 
