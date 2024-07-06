@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-
+import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
+import CommentIcon from '@mui/icons-material/Comment';
 import { useParams, useLocation, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectRoles, selectUser } from "../slices/userSlice"
@@ -148,8 +148,9 @@ const ProfileDetails = () => {
                         detachCheck() &&
                         <button onClick={handleDetach}>Detach</button>
                     }
-                    <Errorent />
-                    <ChatBubbleOutlineIcon onClick={handleBubble} />
+                    {/* <Errorent /> */}
+                    {!bubble && <CommentIcon onClick={handleBubble} />}
+                    {bubble && <CommentsDisabledIcon onClick={handleBubble} />}
                     
                     {bubble && <Pcomments id={id} bubble={bubble} />}
                     <Link to={'/fans/6688425f41ec988d66f28766'}>fan</Link>

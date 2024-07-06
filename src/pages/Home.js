@@ -33,7 +33,7 @@ const Home = () => {
       Home
       <br />
       {apiMsg && <p> - {apiMsg} - </p>}
-      <Errorent />
+      {/* <Errorent /> */}
       <div>edit:{`${edit}`} , logged: {`${logged}`}</div>
       {user && <p>{user.email}</p>}
       <div>bands{bands && bands.map((band) => (

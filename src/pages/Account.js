@@ -35,7 +35,7 @@ const Account = () => {
             <Link to='signup'  >Sign up</Link>
             <Link to='login' >Sign in</Link>
             {/* {error && <p>{error}</p>} */}
-            <Errorent/>
+            {/* <Errorent/> */}
         </div>
     )
 }

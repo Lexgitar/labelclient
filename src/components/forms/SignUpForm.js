@@ -23,7 +23,7 @@ import Errorent from "../functional/Errorent"
 const SignUpForm = () => {
 
   // let user = useSelector(selectUser)
- //let erur = useSelector(selectError)
+  //let erur = useSelector(selectError)
 
   let navigate = useNavigate()
   const dispatch = useDispatch()
@@ -46,7 +46,7 @@ const SignUpForm = () => {
     console.log(Object.keys(userBody).length)
 
     console.log('userbody', userBody)
-   
+
     dispatch(userSignup({ userBody })).then(value => {
       if (value.payload.errors) {
         console.log('value paiload erors', value.payload)
@@ -89,8 +89,8 @@ const SignUpForm = () => {
             <p>{email}</p>
             <p>{password}</p> */}
       <button type="submit">Submit</button>
-      
-      <Errorent/>
+
+      {/* <Errorent /> */}
 
     </form>
   )

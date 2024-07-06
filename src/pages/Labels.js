@@ -5,9 +5,9 @@
 
 //import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
-import SearchBar from "../components/functional/SearchBar"
+//import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
-import FilterTile from "../components/functional/FilterTile"
+//import FilterTile from "../components/functional/FilterTile"
 
 import { useSelector } from "react-redux"
 import { selectTerm , selectSearchRole,selectSearchKeys, selectFilteredLabels} from "../slices/userSlice"
@@ -32,7 +32,7 @@ const Labels = () => {
 
   return (
     <div className="labels">
-      <SearchBar/> <FilterTile/>
+      {/* <SearchBar/> <FilterTile/> */}
       {(labels.length && labels.map(label =>
 
         <ProfileTile key={label._id} profile={label} />

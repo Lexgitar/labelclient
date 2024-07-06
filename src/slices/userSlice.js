@@ -321,7 +321,7 @@ export const userSlice = createSlice({
             })
             .addCase(userSignup.rejected, (state, action) => {
 
-                state.error = action.payload.errors
+                state.error = action.payload.errors || action.payload || action.error.message
                 //state.loggedIn = state.user ? true : false
 
             })
@@ -355,7 +355,7 @@ export const userSlice = createSlice({
             })
             .addCase(deleteRole.rejected, (state, action) => {
                 console.log('delrolercase', action, action.payload)
-                state.error = action.payload.errors
+                state.error = action.payload.errors || action.payload || action.error.message
 
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
@@ -394,7 +394,7 @@ export const userSlice = createSlice({
             })
             .addCase(deleteUser.rejected, (state, action) => {
                 console.log('delusercase', action, action.payload)
-                state.error = action.payload.errors
+                state.error = action.payload.errors || action.payload || action.error.message
 
             })
     }

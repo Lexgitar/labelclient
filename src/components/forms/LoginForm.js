@@ -87,7 +87,7 @@ const LoginForm = () => {
             /> <br />
             <button >Log in</button>
 
-            <Errorent />
+            {/* <Errorent /> */}
 
         </form>
     )

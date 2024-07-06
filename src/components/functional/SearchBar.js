@@ -1,58 +1,58 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import {useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { searchInRole } from '../../slices/userSlice'
 
 
 
 
 const SearchBar = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    let page = useLocation().pathname
-    let alocation = page.includes('bands')? 'bands' : (page.includes('labels')? 'labels' : 'artists')
+  let page = useLocation().pathname
+  let alocation = page.includes('bands') ? 'bands' : (page.includes('labels') ? 'labels' : 'artists')
 
-    const [stateTerm, setStateTerm] = useState('')
-    const [placeholder , setPlaceholder] = useState(`Search ${alocation}`)
+  const [stateTerm, setStateTerm] = useState('')
+  const [placeholder, setPlaceholder] = useState(`Search ${alocation}`)
 
-    useEffect(()=>{
-        setPlaceholder(`Search ${alocation}`)
-        //setStateTerm('')
-        dispatch(searchInRole([alocation, stateTerm]))
-      }, [alocation, stateTerm])
+  useEffect(() => {
+    setPlaceholder(`Search ${alocation}`)
+    //setStateTerm('')
+    dispatch(searchInRole([alocation, stateTerm]))
+  }, [alocation, stateTerm])
 
-    const handleOnChange = (e)=>{
-        e.preventDefault();
-        setStateTerm(e.target.value)
-       
-        
-        }
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setStateTerm(e.target.value)
 
-        const handleSubmit =(e)=>{
-            e.preventDefault();
-            
-                dispatch(searchInRole([alocation, stateTerm]))
-                setStateTerm('')
-                setPlaceholder(`Search ${alocation}`)
-            
-            
-            
-          }
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(searchInRole([alocation, stateTerm]))
+    setStateTerm('')
+    setPlaceholder(`Search ${alocation}`)
+
+
+
+  }
 
   return (
     <div id="search-container">
-        <form className="search" 
-         onSubmit={handleSubmit} 
-        >
-            <input aria-label="Search posts" 
-            id="search" type="search" 
-             placeholder={placeholder}
-             value ={stateTerm}
-             onChange={handleOnChange}
-            />  
-        </form>   
-  </div>
+      <form className="search"
+        onSubmit={handleSubmit}
+      >
+        <input aria-label="Search posts"
+          id="search" type="search"
+          placeholder={placeholder}
+          value={stateTerm}
+          onChange={handleOnChange}
+        />
+      </form>
+    </div>
   )
 }
 

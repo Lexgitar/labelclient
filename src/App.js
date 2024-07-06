@@ -13,6 +13,7 @@ import About from './pages/About';
 import Account from './pages/Account';
 import SignUpForm from './components/forms/SignUpForm';
 import LoginForm from './components/forms/LoginForm';
+import NotFound from './pages/NotFound';
 //import UserDetails from './components/functional/UserDetails';
 
 
@@ -36,7 +37,7 @@ const router = createBrowserRouter(
       <Route path='account/signup' element={<SignUpForm />} />
       <Route path='account/login' element={<LoginForm />} />
 
-
+      <Route path='*' element={<NotFound/>} />
     </Route>
   )
 )
