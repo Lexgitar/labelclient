@@ -11,8 +11,9 @@ const SearchBar = () => {
   const dispatch = useDispatch()
 
   let page = useLocation().pathname
-  let alocation = page.includes('bands') ? 'bands' : (page.includes('labels') ? 'labels' : 'artists')
-
+  //let alocation = page.includes('bands') ? 'bands' : (page.includes('labels') ? 'labels' : 'artists')
+  let alocation = page.replace('/', '')
+//console.log('replace', page.replace('/', ''))
   const [stateTerm, setStateTerm] = useState('')
   const [placeholder, setPlaceholder] = useState(`Search ${alocation}`)
 
