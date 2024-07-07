@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
 import CommentIcon from '@mui/icons-material/Comment';
-import { useParams, useLocation, useNavigate } from "react-router-dom"
+import { useParams, useLocation, useNavigate, Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectRoles, selectUser } from "../slices/userSlice"
 
@@ -135,7 +135,7 @@ const ProfileDetails = () => {
                     {userProfile.genre && <p>genre - {userProfile.genre}</p>}
 
                     <p>about - {userProfile.about}</p>
-                    <p>links - {userProfile.links}</p>
+                    <a  href={userProfile.links.includes('http')?`${userProfile.links}`:`http://${userProfile.links}`} target='_blank' rel="noopener noreferrer">link - {userProfile.links}</a>
 
                     {(userProfile.attachedId !== undefined) && userProfile.attachedId.map(id => {
                         return <FindRole id={id} />

@@ -79,7 +79,7 @@ const UserForm = ({ user, userInfo }) => {
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Name" value={name} required /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="Location" value={location} required /><br />
             <textarea type="text" onChange={(e) => setAbout(e.target.value)} placeholder="About" value={about} required /><br />
-            <input type="text" onChange={(e) => setLinks(e.target.value)} placeholder="Link" value={links} required /><br />
+            <input type="text" onChange={(e) => setLinks(e.target.value)} placeholder="Link - include http" value={links} required /><br />
 
             {(user.role !== 'fan' && user.role !== 'artist') &&
                 <>
