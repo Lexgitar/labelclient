@@ -1,14 +1,7 @@
 
-// "proxy":"http://localhost:3000",
-//import { useEffect, useState } from "react"
-//import { Link } from "react-router-dom"
-
-//import SignUpForm from "../components/forms/SignUpForm"
 import ProfileTile from "../components/ProfileTile"
-//import SearchBar from "../components/functional/SearchBar"
-//import FilterTile from "../components/functional/FilterTile"
 import './pages.css'
-//import FilterTile from "../components/functional/FilterTile"
+
 import { useSelector } from "react-redux"
 import { selectTerm, selectSearchRole, selectSearchKeys, selectFilteredBands } from "../slices/userSlice"
 import { useLocation } from "react-router-dom"

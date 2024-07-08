@@ -1,7 +1,9 @@
 import useCanDeleteComment from "../components/functional/useCanDeleteComment"
 import DeleteComment from "../components/functional/DeleteComment"
 import useGetComAuthor from "../components/functional/useGetComAuthor"
+
 import { Link} from "react-router-dom"
+
 const OneComment = ({ id, comment }) => {
 
   const { canDelete } = useCanDeleteComment(id, comment.authorId)

@@ -25,17 +25,20 @@ const useHydrateComms = (id) => {
             //THEN try etc
         if (!profileComment) {
             console.log('disptching')
+           
             dispatch(fetchComment({ id }))
-        } else if (profileComment && profileComment.comments) {
-           //all can comment
+        } else if (profileComment && profileComment.comments.length === 0) {
+            console.log('pcom.coms else if', profileComment.comments)
+           setComments('no comments yet')
+           setOnlyPost(false)
+           
+            
+           
+        } else if(profileComment && profileComment.comments){
+            //all can comment 
             console.log('pcom.coms', profileComment.comments)
             setComments(profileComment.comments)
             setOnlyPost(false)
-           
-        } else if(profileComment && !profileComment.comments){
-            //all can comment 
-           setComments('no comments yet')
-           setOnlyPost(false)
         }
     }, [id,profileComment])
 

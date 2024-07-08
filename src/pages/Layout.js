@@ -12,6 +12,7 @@ import { fetchRoles } from '../slices/userSlice'
 import Errorent from '../components/functional/Errorent'
 import SearchBar from '../components/functional/SearchBar'
 import FilterTile from '../components/functional/FilterTile'
+import CottageIcon from '@mui/icons-material/Cottage';
 
 const Layout = () => {
     let dispatch = useDispatch()
@@ -41,7 +42,7 @@ const Layout = () => {
             <header className="header">
                 <nav className="nav">
                     <NavLink className='home' to='/'>
-                        HOME
+                        <CottageIcon/>
                     </NavLink>
                     <div className="profiles">
                         <NavLink to='labels'>Labels</NavLink>

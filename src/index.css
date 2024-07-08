@@ -25,3 +25,7 @@ a {
   
   display: block;
 }
+
+.container{
+  flex : 1;
+}

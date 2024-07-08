@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 
 import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
 import CommentIcon from '@mui/icons-material/Comment';
-import { useParams, useLocation, useNavigate, Link } from "react-router-dom"
+
+
+import { useParams, useLocation, useNavigate, } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { selectRoles, selectUser } from "../slices/userSlice"
 
@@ -154,7 +156,7 @@ const ProfileDetails = () => {
 
                     {bubble && <Pcomments id={id} bubble={bubble} />}
 
-                </div>)
+                </div>) || 'Loading...'
 
             }
         </div>

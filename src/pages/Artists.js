@@ -1,7 +1,5 @@
 import ProfileTile from "../components/ProfileTile"
-//import SearchBar from "../components/functional/SearchBar"
 import './pages.css'
-//import FilterTile from "../components/functional/FilterTile"
 import { useSelector } from "react-redux"
 import { selectRoles, selectTerm, selectSearchRole, selectSearchKeys } from "../slices/userSlice"
 import { useLocation } from "react-router-dom"
@@ -16,13 +14,13 @@ const Artists = () => {
   let searchPot = useSelector(selectSearchRole)
   if (term.length && location.includes(searchPot)) {
     artists = artists.filter((item) =>
-      //item.name.toLowerCase().includes(term))
+     
       keys.some((key) => item[key].toLowerCase().includes(term)))
     console.log('pls art', location)
   }
   return (
     <div className="artists">
-      {/* <SearchBar /> <FilterTile /> */}
+     
 
       {(artists.length && artists.map(artist =>
 

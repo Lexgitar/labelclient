@@ -255,7 +255,7 @@ export const userSlice = createSlice({
             })
             .addCase(editDetails.rejected, (state, action) => {
                 console.log('rj edit', action)
-                state.status = 'rejected'
+                //state.status = 'rejected'
                 state.error = action.payload || action.error.message
             })
             .addCase(editDetails.fulfilled, (state, action) => {
@@ -278,11 +278,14 @@ export const userSlice = createSlice({
                 state.roles.fans = action.payload[2]
                 state.roles.artists = action.payload[3]
                 state.error = ''
+                state.status = action.meta.requestStatus
+                console.log('fetchroles value', state.status)
             })
             .addCase(fetchRoles.rejected, (state, action) => {
-                console.log('fetcredux', action, action.payload)
+                console.log('fetcredux rejected', action, action.payload)
                 state.error = action.payload || action.error.message
-            })
+                state.status = action.meta.requestStatus
+            })           
             .addCase(attachUser.fulfilled, (state, action) => {
                 //const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
                 // which array to look into 
