@@ -101,8 +101,8 @@ const UserForm = ({ user, userInfo }) => {
             <br />
 
             <button>Submit</button>
-            <Errorent />
-            {genre && <p>genrecheck:{genre}</p>}
+            {/* <Errorent /> */}
+            {/* {genre && <p>genrecheck:{genre}</p>} */}
         </form>
     )
 }

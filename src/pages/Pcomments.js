@@ -12,9 +12,9 @@ import CommSkeletons from '../components/CommSkeletons';
 
 
 import useHydrateComms from "../components/functional/useHydrateComms";
-import { useEffect, 
-    useState ,
-} from 'react';
+// import { useEffect, 
+//     useState ,
+// } from 'react';
 import { selectComStatus } from '../slices/commentsSlice';
 
 
@@ -45,7 +45,7 @@ const Pcomments = ({ id, bubble }) => {
            
            
             {(bubble && canComment)  && <CommentForm id={id} onlyPost={onlyPost} />}
-            {((bubble && !commTrue) && <CommSkeletons />) || bubble && <Comments key={id} profile = {id} comms={comms} />}
+            {((bubble && !commTrue) && <CommSkeletons />) ||( bubble && <Comments key={id} profile = {id} comms={comms} />)}
         </div>
     )
 }

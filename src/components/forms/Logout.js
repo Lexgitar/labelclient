@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { toggleLog, userDelete, addUserInfo, toggleEdit } from "../../slices/userSlice"
@@ -27,7 +27,7 @@ const Logout = () => {
     }
 
     return (
-        <Link className="logbutton" onClick={handleClick}>Logout</Link>
+        <Link className="logbutton" onClick={handleClick}><LogoutIcon/></Link>
     )
 }
 
