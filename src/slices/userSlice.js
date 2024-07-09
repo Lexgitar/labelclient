@@ -207,7 +207,7 @@ export const userSlice = createSlice({
             let pot = state.searchPot
             state.toggleAtoZ = !state.toggleAtoZ
             state.roles[pot] = state.roles[pot].slice().sort((a, b) => state.toggleAtoZ ? a.createdAt < b.createdAt : a.createdAt > b.createdAt)
-            console.log(state.roles.bands[0])
+            //console.log(state.roles.bands[0])
         },
         filterByHot: (state,) => {
             let pot = state.searchPot
