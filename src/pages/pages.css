@@ -21,6 +21,7 @@ nav {
     width: 30%;
     display: flex;
     justify-content: space-around;
+    flex-grow: 0.2;
 
 }
 
