@@ -56,7 +56,7 @@ const ProfileDetails = () => {
     let byRolechecking = (`${userRole}s` === roleFromUrl) ? false : true
 
     const userProfile = usersPool.filter(function (user) { return user._id === id })[0]
-    console.log('userkind ', userProfile)
+    //console.log('userkind ', userProfile)
 
     let notInArrayCheck = userProfile && userProfile.attachedId ? (userProfile.attachedId.includes(userRoleInfo._id) ? false : true) : false
 
@@ -125,11 +125,11 @@ const ProfileDetails = () => {
 
 
     return (
-        <div>
+        <div >
             {(userProfile !== undefined &&
 
 
-                <div> profiledetails
+                <div key={userProfile._id}> profiledetails
                     <p>_id:{userProfile._id}</p>
                     <p>name: {userProfile.name}</p>
                     <p>location:{userProfile.location}</p>
@@ -140,7 +140,7 @@ const ProfileDetails = () => {
                     <a  href={userProfile.links.includes('http')?`${userProfile.links}`:`http://${userProfile.links}`} target='_blank' rel="noopener noreferrer">link - {userProfile.links}</a>
 
                     {(userProfile.attachedId !== undefined) && userProfile.attachedId.map(id => {
-                        return <FindRole id={id} />
+                        return <FindRole key={id} id={id} />
                     })}
                     {
                         attachCheck() &&
@@ -154,7 +154,7 @@ const ProfileDetails = () => {
                     {!bubble && <CommentIcon onClick={handleBubble} />}
                     {bubble && <CommentsDisabledIcon onClick={handleBubble} />}
 
-                    {bubble && <Pcomments id={id} bubble={bubble} />}
+                    {bubble && <Pcomments  id={id} bubble={bubble} />}
 
                 </div>) || 'Loading...'
 

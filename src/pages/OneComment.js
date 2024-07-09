@@ -13,7 +13,7 @@ const OneComment = ({ id, comment }) => {
 
   if (comment) {
     return (
-      <div>
+      <div key={id} >
         <p>body: {comment.body} </p>
         <p>id: {comment.authorId}</p>
         <Link to={path} >author: {author}</Link>

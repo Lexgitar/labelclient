@@ -18,8 +18,8 @@ const FindRole = ({id}) => {
         let name = ''
         rolePools.forEach(roleArray => {
             roleArray.forEach((roleObject) => {
-                console.log('inside rolefinder', roleObject, 'and id', id)
-                console.log('pools', rolePools)
+                //console.log('inside rolefinder', roleObject, 'and id', id)
+                //console.log('pools', rolePools)
                 if (roleObject._id === id) {
                     path = `/${roleObject.role}s/${id}`
                     name = roleObject.name

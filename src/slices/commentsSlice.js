@@ -15,6 +15,7 @@ const initialState = {
     error: '',
     canCommentPost: 'false',
     dispatchType: '',
+    status: '',
 }
 
 
@@ -39,7 +40,7 @@ export const fetchComment = createAsyncThunk('comment/fetchComment',
 export const fetchPostComment = createAsyncThunk('comment/fetchPostComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/comment?id=${id}`, {body})
+            const response = await axios.post(`/api/comment?id=${id}`, { body })
             const pComm = response.data
             console.log('fetchPostCom', response.data)
             return pComm
@@ -54,7 +55,7 @@ export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
             console.log('fetchPutCom BODY and id', body, id)
-            const response = await axios.put(`/api/comment/${id}`, {body})
+            const response = await axios.put(`/api/comment/${id}`, { body })
             const pComm = response.data
             //console.log('fetchPutCom BODY', body)
             console.log('fetchPutCom', response.data)
@@ -66,9 +67,9 @@ export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
 )
 
 export const fetchDeleteComment = createAsyncThunk('comment/fetchDeleteComment',
-    async ({ id, authorId, commentId}, { rejectWithValue }) => {
+    async ({ id, authorId, commentId }, { rejectWithValue }) => {
         try {
-            console.log('fetchPutCom id and authorid',  id, authorId)
+            console.log('fetchPutCom id and authorid', id, authorId)
             const response = await axios.put(`/api/comment/${id}?delete=${commentId}&authorId=${authorId}`)
             const pComm = response.data
             //console.log('fetchPutCom BODY', body)
@@ -91,35 +92,49 @@ export const commentsSlice = createSlice({
         builder
             //fetch one profileComment
             .addCase(fetchComment.fulfilled, (state, action) => {
-                state.pcomms.push(action.payload)
+               action.payload !== 'no comments' && state.pcomms.push(action.payload) 
 
                 console.log('fcompush', action.payload)
                 state.error = ''
+                state.status = action.meta.requestStatus
+            })
+            .addCase(fetchComment.pending, (state, action) => {
+                state.status = action.meta.requestStatus
             })
             .addCase(fetchComment.rejected, (state, action) => {
 
                 state.error = action.payload || action.error.message
                 console.log('errr', action.payload, action.error.message)
+                state.status = action.meta.requestStatus
             })
             .addCase(fetchPostComment.fulfilled, (state, action) => {
                 state.pcomms.push(action.payload)
 
                 console.log('fcompush - fpc', action.payload)
                 state.error = ''
+                state.status = action.meta.requestStatus
+            })
+            .addCase(fetchPostComment.pending, (state, action) => {
+                state.status = action.meta.requestStatus
             })
             .addCase(fetchPostComment.rejected, (state, action) => {
 
                 state.error = action.payload || action.error.message
                 console.log('errr fpc', action.payload, action.error.message)
+                state.status = action.meta.requestStatus
             })
             .addCase(fetchPutComment.fulfilled, (state, action) => {
                 //EDIT !!!!!!!!!!!!!!!!!!!!!!!!!!!!! REPLACE PC in state
-                    //done edit
-                let pIndex = state.pcomms.findIndex((item)=> item._id === action.payload._id )
+                //done edit
+                let pIndex = state.pcomms.findIndex((item) => item._id === action.payload._id)
                 state.pcomms.splice(pIndex, 1, action.payload)
 
                 console.log('fcompush - fputc', action.payload)
                 state.error = ''
+                state.status = action.meta.requestStatus
+            })
+            .addCase(fetchPutComment.pending, (state, action) => {
+                state.status = action.meta.requestStatus
             })
             .addCase(fetchPutComment.rejected, (state, action) => {
 
@@ -127,25 +142,28 @@ export const commentsSlice = createSlice({
                 console.log('errr fputc', action.payload, action.error.message)
             })
             .addCase(fetchDeleteComment.fulfilled, (state, action) => {
-                
-                let pIndex = state.pcomms.findIndex((item)=> item._id === action.payload._id )
+
+                let pIndex = state.pcomms.findIndex((item) => item._id === action.payload._id)
                 state.pcomms.splice(pIndex, 1, action.payload)
 
                 console.log('fcompush - fdelete', action.payload)
                 state.error = ''
+
             })
             .addCase(fetchDeleteComment.rejected, (state, action) => {
 
                 state.error = action.payload || action.error.message
                 console.log('errr fputc', action.payload, action.error.message)
+
             })
-    
+
     }
 })
 
 
 export default commentsSlice.reducer
 
+export const selectComStatus = (state) => state.comments.status
 export const selectPcomms = (state) => state.comments.pcomms
 export const selectItemId = (state, id) => id
 
