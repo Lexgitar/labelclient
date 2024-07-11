@@ -3,9 +3,12 @@ import {
 
 } from "react-redux"
 import {
-  selectLoggedIn, selectUser, selectRoles, selectUserEdit,
+  //electLoggedIn, 
+  //selectUser, 
+  selectRoles, 
+  //selectUserEdit,
 
-  selectApiMsg,
+  //selectApiMsg,
   selectStatus
 } from "../slices/userSlice"
 import HomeSkeletons from "../components/HomeSkeletons"
@@ -14,7 +17,7 @@ import HomeSkeletons from "../components/HomeSkeletons"
 
 
 const Home = () => {
-  let apiMsg = useSelector(selectApiMsg)
+  //let apiMsg = useSelector(selectApiMsg)
   let status = useSelector(selectStatus)
   
   let bands = useSelector(selectRoles).bands

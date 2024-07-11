@@ -13,9 +13,9 @@ import { filterByNew, filterAtoZ, filterByHot, sortByGenre, filterByGenre, selec
 
 
 const FilterTile = () => {
-  const [byGenre, setByGenre] = useState('Sort by Genre')
-  const [filterOn, setFilterOn] = useState(false)
-  const [genre, setGenre] = useState('')
+  // const [byGenre, setByGenre] = useState('Sort by Genre')
+  // const [filterOn, setFilterOn] = useState(false)
+  // const [genre, setGenre] = useState('')
   let pot = useSelector(selectSearchRole)
   const dispatch = useDispatch()
 

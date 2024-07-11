@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 import axios from 'axios'
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser, toggleLog, selectRoles, addUserInfo, addError } from '../../slices/userSlice'
 
@@ -13,12 +16,16 @@ const LoginForm = () => {
     const roles = useSelector(selectRoles)
 
     const [email, setEmail] = useState('')
-    //const [logged, setLogged] = useState('logged')
+    const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('')
 
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const handleVisibility = () => {
+        let visible = showPassword ? false : true
+        setShowPassword(visible)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -31,7 +38,7 @@ const LoginForm = () => {
                 const dataId = response.data._id
                 const role = response.data.role
 
-                console.log('from login data',response.data)
+                console.log('from login data', response.data)
                 dispatch(addUser(response.data))
 
                 const foundProfile = (id, role) => {
@@ -71,20 +78,29 @@ const LoginForm = () => {
 
     return (
         <form className="login" onSubmit={handleSubmit}>
-            <label>Email address:</label>
+            <label>Email address: </label>
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
             /> <br />
-            <label>Password:</label>
+            <label>Password: </label>
             <input
-                type="password"
+                aria-label='password'
+                type={
+                    showPassword ? "text" : "password"
+                }
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
                 required
-            /> <br />
+
+
+            />
+            <span onClick={() => handleVisibility()} >
+                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+            </span>
+            <br />
             <button >Log in</button>
 
             {/* <Errorent /> */}

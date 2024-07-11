@@ -26,3 +26,8 @@ a {
   display: block;
 }
 
+input::placeholder {
+             
+  /* Firefox, Chrome, Opera */
+  text-align: right;
+}

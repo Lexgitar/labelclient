@@ -7,7 +7,7 @@ const Comments = ({ profile, comms }) => {
  if(comms !== 'no comments yet'){
   return (
     <div>
-      {comms  && comms.map((comment) =>
+      {(comms  && comms.map((comment) =>
         <div key={comment._id}>
           <OneComment
             id={profile}
@@ -16,7 +16,7 @@ const Comments = ({ profile, comms }) => {
           />
 
         </div>
-      ) || '>> no comments <<'}
+      )) || '>> no comments <<'}
     </div>
   )
  }else {

@@ -8,6 +8,9 @@ import {
   //selectUser 
 } from "../../slices/userSlice"
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 import {
   //useSelector,
   useDispatch
@@ -30,8 +33,13 @@ const SignUpForm = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState('fan')
 
+  const handleVisibility = () => {
+    let visible = showPassword ? false : true
+    setShowPassword(visible)
+  }
   const roleChange = (e) => {
 
     setRole(e.target.value)
@@ -73,7 +81,14 @@ const SignUpForm = () => {
       onSubmit={handleSubmit}
     >
       <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="" placeholder="email" value={email} required />
-      <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="" placeholder="password" value={password} required /><br />
+      <input onChange={(e) => setPassword(e.target.value)} type={
+        showPassword ? "text" : "password"
+      } name="password" id="" placeholder="password" value={password}
+        required />
+      <span onClick={() => handleVisibility()} >
+        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+      </span>
+      <br />
       <input
         checked={role === 'label'}
         onChange={(e) => roleChange(e)}
