@@ -46,9 +46,9 @@ const LoginForm = () => {
 
                     const userProfile = profileRoles.filter((profile) =>
                         profile.userId === id)[0]
-                    console.log('Lf - handle', userProfile, profileRoles, roles)
+                    
                     if (userProfile) {
-                        console.log('userprofiel', userProfile)
+                       
                         return dispatch(addUserInfo(userProfile))
                     }
 
