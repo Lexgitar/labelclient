@@ -6,7 +6,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 
 import { useParams, useLocation, useNavigate, } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { selectRoles, selectUser } from "../slices/userSlice"
+import { addError, selectRoles, selectUser } from "../slices/userSlice"
 
 
 import {
@@ -90,10 +90,11 @@ const ProfileDetails = () => {
             dispatch(attachUser({ roleFromUrl, hostId, attachId })).then(
                 value => {
                     if (value.error) {
-                        console.log('deta', value.payload)
+                        //console.log('deta', value.payload)
+                        dispatch(addError(value.error))
                     } else if (!value.error && value.payload) {
-                        console.log(value.payload)
-                        navigate('/')
+                        //console.log(value.payload)
+                        //navigate('/')
                     }
                 }
             )
@@ -111,10 +112,11 @@ const ProfileDetails = () => {
             dispatch(detachUser({ roleFromUrl, hostId, attachId })).then(
                 value => {
                     if (value.error) {
-                        console.log('deta', value.payload)
+                        //console.log('deta', value.payload)
+                        dispatch(addError(value.error))
                     } else if (!value.error && value.payload) {
-                        console.log(value.payload)
-                        navigate('/')
+                        //console.log(value.payload)
+                        //navigate('/')
                     }
                 }
             )
