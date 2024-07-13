@@ -40,6 +40,7 @@ const useHydrateComms = (id) => {
             setComments(profileComment.comments)
             setOnlyPost(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, profileComment])
 
     return { comments, onlyPost }

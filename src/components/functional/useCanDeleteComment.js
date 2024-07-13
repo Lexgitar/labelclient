@@ -16,6 +16,7 @@ const useCanDeleteComment = (profileId, authorId) => {
                 setCanDelete(true)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
 
     return {canDelete}

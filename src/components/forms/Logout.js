@@ -3,7 +3,7 @@ import { Tooltip } from "react-tooltip";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
-import { toggleLog, userDelete, addUserInfo, toggleEdit } from "../../slices/userSlice"
+import { toggleLog, userDelete, addUserInfo, toggleEdit, addError } from "../../slices/userSlice"
 
 const Logout = () => {
 
@@ -23,6 +23,7 @@ const Logout = () => {
             navigate('/')
         }else{
             console.log('logout error')
+            dispatch(addError(response.error))
         }
 
     }

@@ -10,7 +10,7 @@ import {
     //selectError
 } from "../../slices/userSlice"
 import { useDispatch, useSelector } from "react-redux"
-import Errorent from "../functional/Errorent"
+//import Errorent from "../functional/Errorent"
 
 
 

@@ -4,7 +4,9 @@ import CommentsDisabledIcon from '@mui/icons-material/CommentsDisabled';
 import CommentIcon from '@mui/icons-material/Comment';
 
 
-import { useParams, useLocation, useNavigate, } from "react-router-dom"
+import { useParams, useLocation, 
+   // useNavigate,
+ } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { addError, selectRoles, selectUser } from "../slices/userSlice"
 
@@ -28,9 +30,10 @@ const ProfileDetails = () => {
 
     }
 
+ 
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+   // const navigate = useNavigate()
     let pathName = useLocation().pathname
     //  
     const loggedIn = useSelector(selectLoggedIn)
@@ -139,24 +142,30 @@ const ProfileDetails = () => {
                     {userProfile.genre && <p>genre - {userProfile.genre}</p>}
 
                     <p>about - {userProfile.about}</p>
-                    <a  href={userProfile.links.includes('http')?`${userProfile.links}`:`http://${userProfile.links}`} target='_blank' rel="noopener noreferrer">link - {userProfile.links}</a>
+                    <a href={userProfile.links.includes('http') ? `${userProfile.links}` : `http://${userProfile.links}`} target='_blank' rel="noopener noreferrer">link - {userProfile.links}</a>
 
-                    {(userProfile.attachedId !== undefined) && userProfile.attachedId.map(id => {
-                        return <FindRole key={id} id={id} />
-                    })}
+                    <div>Collabs:
+                        {((userProfile.attachedId !== undefined && userProfile.attachedId.length) &&
+                         userProfile.attachedId.map(
+                            id => {
+                                return <FindRole key={id} id={id} />
+                            })) 
+                            || ' no collabs yet'
+                        }
+                    </div>
                     {
                         attachCheck() &&
-                        <button onClick={handleAttach}>Submit</button>
+                        <button onClick={handleAttach}>Collab</button>
                     }
                     {
                         detachCheck() &&
-                        <button onClick={handleDetach}>Detach</button>
+                        <button onClick={handleDetach}>Uncollab</button>
                     }
                     {/* <Errorent /> */}
                     {!bubble && <CommentIcon onClick={handleBubble} />}
                     {bubble && <CommentsDisabledIcon onClick={handleBubble} />}
 
-                    {bubble && <Pcomments  id={id} bubble={bubble} />}
+                    {bubble && <Pcomments id={id} bubble={bubble} />}
 
                 </div>) || 'Loading...'
 

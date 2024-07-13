@@ -21,6 +21,7 @@ const SearchBar = () => {
     setPlaceholder(`Search ${alocation}`)
     //setStateTerm('')
     dispatch(searchInRole([alocation, stateTerm]))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [alocation, stateTerm])
 
   const handleOnChange = (e) => {

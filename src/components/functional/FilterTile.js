@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,  } from 'react'
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 //import ElderlyIcon from '@mui/icons-material/Elderly';
 import SortByAlphaIcon from '@mui/icons-material/SortByAlpha';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
-import GraphicEqIcon from '@mui/icons-material/GraphicEq';
+import TuneIcon from '@mui/icons-material/Tune';
 
 import FilterByGenre from './FilterByGenre';
 
@@ -21,7 +21,8 @@ const FilterTile = () => {
 
   useEffect(() => {
     dispatch(filterByGenre(''))
-  }, [])
+
+  })
 
   const handleNew = () => {
     dispatch(filterByNew())
@@ -49,11 +50,7 @@ const FilterTile = () => {
       <FiberNewIcon onClick={handleNew} />
       <WhatshotIcon onClick={handleHot} />
       <SortByAlphaIcon onClick={handleAlpha} />
-      {pot !== 'artists' && <GraphicEqIcon onClick={handleGenre} />}
-      {/* {pot !== 'artists' &&  
-      <br /> &&
-      <button onClick={handleGenre} >{byGenre}</button>}
-      <br /> */}
+      {pot !== 'artists' && <TuneIcon onClick={handleGenre} />}
       {pot !== 'artists' && <FilterByGenre />}
 
     </div>

@@ -15,7 +15,7 @@ const useGetComAuthor = (id) => {
             setLinkRole(role)
         }
         
-        
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     console.log('namez',  author,linkRole, id,)

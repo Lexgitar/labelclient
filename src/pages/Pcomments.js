@@ -1,7 +1,7 @@
-import { 
-    useSelector, 
+import {
+    useSelector,
     //useDispatch 
-    } from 'react-redux';
+} from 'react-redux';
 //import { selectbyId, } from '../slices/commentsSlice';
 import { selectLoggedIn, selectUser } from '../slices/userSlice';
 
@@ -19,33 +19,33 @@ import { selectComStatus } from '../slices/commentsSlice';
 
 
 const Pcomments = ({ id, bubble }) => {
-    
+
     const { comments, onlyPost } = useHydrateComms(id)
     const user = useSelector(selectUser)
     const commentIn = useSelector(selectComStatus)
     const loggedIn = useSelector(selectLoggedIn)
     //const commTrue = commentIn === 'fulfilled' || commentIn === 'pending' ? true : false
     const commTrue = commentIn === 'fulfilled' ? true : false
-    
-   
+
+
     //let canComment = ((onlyPost && (id === user.itemId)) ? false : true)
     let canComment = (!loggedIn ? false : ((onlyPost && (id === user.itemId)) ? false : true))
 
-    console.log('cancom: ',canComment)
+    console.log('cancom: ', canComment)
     console.log('only postt: ', onlyPost)
-   
-     let comms = comments
-    
+
+    let comms = comments
+
 
     return (
         <div>
-                pcoms
+            Comments
 
 
-           
-           
-            {(bubble && canComment)  && <CommentForm id={id} onlyPost={onlyPost} />}
-            {((bubble && !commTrue) && <CommSkeletons />) ||( bubble && <Comments key={id} profile = {id} comms={comms} />)}
+
+
+            {(bubble && canComment) && <CommentForm id={id} onlyPost={onlyPost} />}
+            {((bubble && !commTrue) && <CommSkeletons />) || (bubble && <Comments key={id} profile={id} comms={comms} />)}
         </div>
     )
 }

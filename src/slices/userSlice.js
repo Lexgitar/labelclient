@@ -230,8 +230,9 @@ export const userSlice = createSlice({
                     if (a.name > b.name) return 1;
                     return 0;
                 }
+                
             });
-            console.log('toggleaz', state.toggleAtoZ)
+            //console.log('toggleaz', state.toggleAtoZ)
         },
     },
     extraReducers(builder) {

@@ -45,13 +45,13 @@ const Layout = () => {
         dispatch(fetchRoles())
 
 
-    }, [])
+    })
 
     return (
         <div className="layout">
             <header className="header">
                 <nav className="nav">
-                    <NavLink 
+                    <NavLink
                         data-tooltip-id="my-hometooltip"
                         data-tooltip-content="HOME"
                         data-tooltip-place="bottom"
@@ -60,7 +60,7 @@ const Layout = () => {
                         <Tooltip id="my-hometooltip" />
                     </NavLink>
                     <div className="profiles">
-                        <NavLink 
+                        <NavLink
                             data-tooltip-id="my-labtooltip"
                             data-tooltip-content="Labels"
                             data-tooltip-place="bottom"
@@ -68,7 +68,7 @@ const Layout = () => {
                             <Tooltip id="my-labtooltip" />
                         </NavLink>
 
-                        <NavLink 
+                        <NavLink
                             data-tooltip-id="my-bantooltip"
                             data-tooltip-content="Bands"
                             data-tooltip-place="bottom"
@@ -76,7 +76,7 @@ const Layout = () => {
                             <Tooltip id="my-bantooltip" />
                         </NavLink>
 
-                        <NavLink 
+                        <NavLink
                             data-tooltip-id="my-arttooltip"
                             data-tooltip-content="Artists"
                             data-tooltip-place="bottom"
@@ -85,11 +85,11 @@ const Layout = () => {
                         </NavLink>
 
                     </div>
-                    <NavLink 
+                    <NavLink
                         data-tooltip-id="my-abtooltip"
                         data-tooltip-content="About"
                         data-tooltip-place="bottom"
-                        to='about'  className="about">
+                        to='about' className="about">
                         <AutoStoriesIcon />
                         <Tooltip id="my-abtooltip" />
                     </NavLink>
@@ -97,25 +97,28 @@ const Layout = () => {
                         data-tooltip-id="my-acctooltip"
                         data-tooltip-content="Account"
                         data-tooltip-place="bottom"
-                    
+
                         to='account' className="account">
                         {((logged && editing) && <ManageAccountsIcon />) || (logged && <PersonIcon />) || <PermIdentityIcon />}
                         <Tooltip id="my-acctooltip" />
                     </NavLink>
-                    {logged ? <Logout /> : <Link 
-                         data-tooltip-id="my-logintooltip"
-                         data-tooltip-content="Login"
-                         data-tooltip-place="bottom"
-                    to='account/login' className="logbutton">
-                    <LoginIcon />
-                    <Tooltip id="my-logintooltip" />
+                    {logged ? <Logout /> : <Link
+                        data-tooltip-id="my-logintooltip"
+                        data-tooltip-content="Login"
+                        data-tooltip-place="bottom"
+                        to='account/login' className="logbutton">
+                        <LoginIcon />
+                        <Tooltip id="my-logintooltip" />
                     </Link>}
                 </nav>
             </header>
             <div className="mainWrapper">
                 <main className="main">
                     <Errorent />
-                    {goodLocation && <> <SearchBar />  <FilterTile /> </>}
+                    {goodLocation && 
+                        <div> 
+                            <SearchBar /> <FilterTile /> 
+                        </div>}
                     <Outlet />
 
                 </main>
