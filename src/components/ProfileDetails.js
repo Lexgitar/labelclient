@@ -96,7 +96,7 @@ const ProfileDetails = () => {
                         //console.log('deta', value.payload)
                         dispatch(addError(value.error))
                     } else if (!value.error && value.payload) {
-                        //console.log(value.payload)
+                        console.log(value.payload)
                         //navigate('/')
                     }
                 }

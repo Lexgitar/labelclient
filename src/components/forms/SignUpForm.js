@@ -12,21 +12,19 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import {
-  //useSelector,
+ 
   useDispatch
 } from "react-redux"
 import {
-  //addUser,
-  //toggleLog,
+  
   userSignup
 } from "../../slices/userSlice"
-//import Errorent from "../functional/Errorent"
+
 
 
 const SignUpForm = () => {
 
-  // let user = useSelector(selectUser)
-  //let erur = useSelector(selectError)
+  
 
   let navigate = useNavigate()
   const dispatch = useDispatch()
@@ -40,16 +38,15 @@ const SignUpForm = () => {
     let visible = showPassword ? false : true
     setShowPassword(visible)
   }
+
   const roleChange = (e) => {
-
     setRole(e.target.value)
-
   }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // navigate('/account/user')
+    
     let userBody = { email, password, role }
     console.log(Object.keys(userBody).length)
 

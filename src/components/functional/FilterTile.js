@@ -22,7 +22,7 @@ const FilterTile = () => {
   useEffect(() => {
     dispatch(filterByGenre(''))
 
-  })
+  },[])
 
   const handleNew = () => {
     dispatch(filterByNew())

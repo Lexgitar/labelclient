@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { selectUser, selectLoggedIn, selectError, selectUserInfo } from "../../slices/userSlice"
+import { selectUser, selectLoggedIn,  selectUserInfo } from "../../slices/userSlice"
 
 import UserForm from "../forms/UserForm"
 import UserInfo from "../UserInfo"
@@ -8,7 +8,7 @@ import Logout from "../forms/Logout"
 
 const UserDetails = () => {
     const user = useSelector(selectUser)
-    let erur = useSelector(selectError)
+    // let erur = useSelector(selectError)
     const logged = useSelector(selectLoggedIn)
     const userInfo = useSelector(selectUserInfo)
     console.log('userdets', userInfo)
@@ -23,17 +23,17 @@ const UserDetails = () => {
     return (
         <div>
             {user && <div>
-                <div key={user._id}>
-                    {user.email}
-                    <p>{user.role}</p>
-                </div>
+                        <div key={user._id}>
+                            {user.email}
+                            <p>{user.role}</p>
+                        </div>
 
-                <div>{`${logged}`}</div>
+                        <div>{`${logged}`}</div>
 
-                <UserForm user={user}  />
-                {erur && console.log('udets',erur)}
+                        <UserForm user={user}  />
+                
 
-            </div>
+                    </div>
             }
             <Logout />
         </div>
