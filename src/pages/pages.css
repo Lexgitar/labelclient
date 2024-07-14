@@ -13,15 +13,25 @@ main {
 nav {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+}
+nav a{
+    
+    /* border: 1px solid red; */
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+
+
 }
 
 /* -------------------- */
 
 .profiles {
-    width: 30%;
+    width: 40%;
     display: flex;
     justify-content: space-around;
-    flex-grow: 0.2;
+    /* flex-grow: 0.2; */
 
 }
 
