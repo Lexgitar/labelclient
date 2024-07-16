@@ -131,27 +131,30 @@ const ProfileDetails = () => {
 
 
     return (
-        <div >
+        <div className='profileDetails'>
             {(userProfile !== undefined &&
 
 
                 <div key={userProfile._id}> Details
-                <DetailsTile userProfile={userProfile}/>
-                    
-                    {
-                        attachCheck() &&
-                        <button onClick={handleAttach}>Collab</button>
-                    }
-                    {
-                        detachCheck() &&
-                        <button onClick={handleDetach}>Uncollab</button>
-                    }
+                    <div className='pdOne'>
+                        <DetailsTile userProfile={userProfile}/>
+                        
+                        {
+                            attachCheck() &&
+                            <button onClick={handleAttach}>Collab</button>
+                        }
+                        {
+                            detachCheck() &&
+                            <button onClick={handleDetach}>Uncollab</button>
+                        }
+                    </div>
+                    <div className='pdTwo'>
                     {/* <Errorent /> */}
                     {!bubble && <CommentIcon onClick={handleBubble} />}
                     {bubble && <CommentsDisabledIcon onClick={handleBubble} />}
 
                     {bubble && <Pcomments id={id} bubble={bubble} />}
-
+                    </div>
                 </div>) || 'Loading...'
 
             }
