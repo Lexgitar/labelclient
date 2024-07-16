@@ -28,7 +28,7 @@ const FindRole = ({ id }) => {
         })
     })
 
-    return <Link to={path} key={id}>id:{name}</Link>
+    return <Link className='collabnames' to={path} key={id}>{name}</Link>
 
 
 }

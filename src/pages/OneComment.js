@@ -14,12 +14,13 @@ const OneComment = ({ id, comment }) => {
 
   if (comment) {
     return (
-      <div key={id} >
-        <p>body: {comment.body} </p>
-        <p>id: {comment.authorId}</p>
-        <Link to={path} >author: {author}</Link>
-        <p>{formatDistanceToNow(new Date(comment.createdAt),{ addSuffix: true })}</p>
-        {/* <NavLink to={`/${linkRole}s/${comment.authorId}`} >author: {author}</NavLink> */}
+      <div className="commDiv" key={id} >
+        <div className="cominfo" >
+          <Link className="commauthor" to={path} ><h4>{author}</h4></Link>
+          <p className="commDate">{formatDistanceToNow(new Date(comment.createdAt),{ addSuffix: true })}</p>
+        </div>
+        <p className="commBody"> {comment.body} </p>
+       
         {canDelete && <DeleteComment
           id={id}
           authorId={comment.authorId}

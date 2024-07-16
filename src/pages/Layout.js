@@ -1,4 +1,5 @@
 
+import './cardsAndMore.css'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 
 import { Tooltip } from "react-tooltip";

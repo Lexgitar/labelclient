@@ -46,22 +46,23 @@ const ProfileTile =  ({ profile }) => {
 
         <div >
             <Link key={profile.id} to={`${profile._id}`}>
-                <p>id: {profile._id}</p>
-                <p>name: {profile.name}</p>
-                <p>location: {profile.location}</p>
-                {profile.genre && <p>genre: {profile.genre}</p>}
-                <p>abot: {profile.about}</p>
-                <p>links: {profile.links}</p>
-                <p>role: {profile.role}</p>
+                {/* <p>id: {profile._id}</p> */}
+                <p>Name: {profile.name}</p>
+                <p>Location: {profile.location}</p>
+                {profile.genre && <p>Genre: {profile.genre}</p>}
+                <p>About: {profile.about}</p>
+                <p>Link: {profile.links}</p>
+                {/* <p>role: {profile.role}</p> */}
+                <p>Collabs : {(!!profile.attachedId.length && profile.attachedId.length) || ' 0' }</p>
             </Link>
-            {!!profile.attachedId.length && profile.attachedId.map((id) => (
+            {/* {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
 
                 // <Link to={roleFinder(id)} key={id}>id:{id}</Link>
                 roleFinder(id)
 
 
-            ))}
+            ))} */}
 
            
 

@@ -19,7 +19,8 @@ import {
 } from '../slices/userSlice'
 
 //import Errorent from "./functional/Errorent"
-import FindRole from "./functional/FindRole"
+//import FindRole from "./functional/FindRole"
+import DetailsTile from './DetailsTile';
 import Pcomments from "../pages/Pcomments"
 
 const ProfileDetails = () => {
@@ -134,25 +135,9 @@ const ProfileDetails = () => {
             {(userProfile !== undefined &&
 
 
-                <div key={userProfile._id}> profiledetails
-                    <p>_id:{userProfile._id}</p>
-                    <p>name: {userProfile.name}</p>
-                    <p>location:{userProfile.location}</p>
-
-                    {userProfile.genre && <p>genre - {userProfile.genre}</p>}
-
-                    <p>about - {userProfile.about}</p>
-                    <a href={userProfile.links.includes('http') ? `${userProfile.links}` : `http://${userProfile.links}`} target='_blank' rel="noopener noreferrer">link - {userProfile.links}</a>
-
-                    <div>Collabs:
-                        {((userProfile.attachedId !== undefined && userProfile.attachedId.length) &&
-                         userProfile.attachedId.map(
-                            id => {
-                                return <FindRole key={id} id={id} />
-                            })) 
-                            || ' no collabs yet'
-                        }
-                    </div>
+                <div key={userProfile._id}> Details
+                <DetailsTile userProfile={userProfile}/>
+                    
                     {
                         attachCheck() &&
                         <button onClick={handleAttach}>Collab</button>

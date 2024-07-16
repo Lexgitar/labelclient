@@ -32,27 +32,27 @@ const Home = () => {
     <div>
        {(status === 'fulfilled' &&
        <>
-      <div>bands{bands && bands.map((band) => (
+      <div>BANDS:{bands && bands.map((band) => (
         <p key={band._id} >
-          {band._id}
+          {band.name}
         </p>
       ))}
       </div>
-      <div>labels{labels && labels.map((label) => (
+      <div>LABELS:{labels && labels.map((label) => (
         <p key={label._id} >
-          {label._id}
+          {label.name}
         </p>
        ))}
       </div>
       <div>fans{fans && fans.map((fan) => (
         <p key={fan._id} >
-          {fan._id}
+          {fan.name}
         </p>
         ))}
       </div>
-      <div>artists{artists && artists.map((artist) => (
+      <div>ARTISTS:{artists && artists.map((artist) => (
         <p key={artist._id} >
-          {artist._id}
+          {artist.name}
         </p>
       ))}
       </div>

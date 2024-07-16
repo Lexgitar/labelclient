@@ -1,4 +1,5 @@
 import ProfileTile from "../components/ProfileTile"
+// import DetailsTile from '../components/DetailsTile'
 import './pages.css'
 import { useSelector } from "react-redux"
 import { selectRoles, selectTerm, selectSearchRole, selectSearchKeys } from "../slices/userSlice"
@@ -10,8 +11,10 @@ const Artists = () => {
   let keys = useSelector(selectSearchKeys)
   let artists = useSelector(selectRoles).artists
   let location = useLocation().pathname
+  
   let term = useSelector(selectTerm)
   let searchPot = useSelector(selectSearchRole)
+
   if (term.length && location.includes(searchPot)) {
     artists = artists.filter((item) =>
      
