@@ -18,7 +18,7 @@ const Bands = () => {
 
   let term = useSelector(selectTerm)
   let searchPot = useSelector(selectSearchRole)
-  
+
   if (term.length && location.includes(searchPot)) {
     bands = bands.filter((item) =>
       keys.some((key) => item[key].toLowerCase().includes(term).toLowerCase()))
@@ -27,7 +27,7 @@ const Bands = () => {
 
 
   return (
-    <div className="bands">
+    <div className="bands cards">
       {/* <SearchBar /> <FilterTile /> */}
       {(bands.length && bands.map(band =>
 

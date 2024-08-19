@@ -5,24 +5,36 @@ body {
     sans-serif;
     font-size: 14px;
   height: 99.6vh;
+  background-color:rgb(37, 37, 37);
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+button {
+  color: black;
+}
+
+input {
+  font-weight: 700;
+  color:black;
+}
 
 *{
   margin:0 auto;
   /* border: 1px solid blue; */
-  background-color:rgb(37, 37, 37);
+
   color:beige;
-  /* flex: auto; */
-  text-decoration: none;
   
+  text-decoration: none;
+  border-radius: 3px;
   ;
   
 }
+
+
 
 a {
   
@@ -34,4 +46,36 @@ input::placeholder {
   /* Firefox, Chrome, Opera */
   text-align: right;
 }
+
+/* ---------------------------*/
+
+.layout {
+  padding-bottom: 0;
+}
+
+footer{
+
+  
+  margin-top: 10px;
+}
+
+footer div {
+  background-color: darkslategrey;
+}
+.nav  {
+  background-color: darkslategrey;
+}
+
+.nav * {
+  background-color: darkslategrey;
+}
+
+.layout a {
+  font-weight: 700;
+  
+}
+
+/* ----------- */
+
+
 

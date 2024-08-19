@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 
 
-const ProfileTile =  ({ profile }) => {
+const ProfileTile = ({ profile }) => {
 
     let bands = useSelector(selectRoles).bands
     let labels = useSelector(selectRoles).labels
@@ -18,7 +18,7 @@ const ProfileTile =  ({ profile }) => {
 
     //let usersPool = useLocation().pathname.includes('labels') ? labels : bands
     let location = useLocation().pathname
-    let alocation = location.includes('bands')? 'bands' : (location.includes('labels')? 'labels' : 'artists')
+    let alocation = location.includes('bands') ? 'bands' : (location.includes('labels') ? 'labels' : 'artists')
     const roleFinder = (id) => {
         let rolePools = alocation === 'labels' ? [bands, artists] : alocation === 'bands' ? [labels, artists] : [bands, labels];
         let path = ''
@@ -34,7 +34,7 @@ const ProfileTile =  ({ profile }) => {
                 }
             })
         })
-        
+
         return <Link to={path} key={id}>id:{name}</Link>
 
     }
@@ -44,7 +44,7 @@ const ProfileTile =  ({ profile }) => {
     // console.log('patnew', pathNew)
     return (
 
-        <div >
+        <div id="ptile" >
             <Link key={profile.id} to={`${profile._id}`}>
                 {/* <p>id: {profile._id}</p> */}
                 <p>Name: {profile.name}</p>
@@ -53,7 +53,7 @@ const ProfileTile =  ({ profile }) => {
                 <p>About: {profile.about}</p>
                 <p>Link: {profile.links}</p>
                 {/* <p>role: {profile.role}</p> */}
-                <p>Collabs : {(!!profile.attachedId.length && profile.attachedId.length) || ' 0' }</p>
+                <p>Collabs : {(!!profile.attachedId.length && profile.attachedId.length) || ' 0'}</p>
             </Link>
             {/* {!!profile.attachedId.length && profile.attachedId.map((id) => (
 
@@ -64,7 +64,7 @@ const ProfileTile =  ({ profile }) => {
 
             ))} */}
 
-           
+
 
         </div>
     )

@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom"
 import {
   useSelector,
 
@@ -19,6 +20,7 @@ import HomeSkeletons from "../components/HomeSkeletons"
 const Home = () => {
   //let apiMsg = useSelector(selectApiMsg)
   let status = useSelector(selectStatus)
+  let location = useLocation().pathname
   
   let bands = useSelector(selectRoles).bands
   let labels = useSelector(selectRoles).labels
@@ -29,31 +31,31 @@ const Home = () => {
 
 
   return (
-    <div>
+    <div className="home">
        {(status === 'fulfilled' &&
        <>
-      <div>BANDS:{bands && bands.map((band) => (
-        <p key={band._id} >
+      <div>BANDS{bands && bands.map((band) => (
+        <Link key={band._id} to={`bands/${band._id}`} >
           {band.name}
-        </p>
+        </Link>
       ))}
       </div>
-      <div>LABELS:{labels && labels.map((label) => (
-        <p key={label._id} >
+      <div>LABELS{labels && labels.map((label) => (
+        <Link key={label._id} to={`labels/${label._id}`} >
           {label.name}
-        </p>
+        </Link>
        ))}
       </div>
-      <div>fans{fans && fans.map((fan) => (
+      {/* <div>fans{fans && fans.map((fan) => (
         <p key={fan._id} >
           {fan.name}
         </p>
         ))}
-      </div>
-      <div>ARTISTS:{artists && artists.map((artist) => (
-        <p key={artist._id} >
+      </div> */}
+      <div>ARTISTS{artists && artists.map((artist) => (
+        <Link key={artist._id} to={`artists/${artist._id}`} >
           {artist.name}
-        </p>
+        </Link>
       ))}
       </div>
       </>) || <HomeSkeletons/>

@@ -46,7 +46,7 @@ const FilterTile = () => {
 
 
   return (
-    <div>
+    <div className='filterTypes'>
       <FiberNewIcon onClick={handleNew} />
       <WhatshotIcon onClick={handleHot} />
       <SortByAlphaIcon onClick={handleAlpha} />

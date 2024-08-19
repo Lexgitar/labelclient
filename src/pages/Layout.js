@@ -117,7 +117,7 @@ const Layout = () => {
                 <main className="main">
                     <Errorent />
                     {goodLocation && 
-                        <div> 
+                        <div className='filters'> 
                             <SearchBar /> <FilterTile /> 
                         </div>}
                     <Outlet />
@@ -126,7 +126,7 @@ const Layout = () => {
             </div>
             <footer className='footer'>
                 <div className="wrapper">
-                    div(footer)
+                &copy;Lexgitar
                 </div>
             </footer>
 

@@ -135,7 +135,7 @@ const ProfileDetails = () => {
             {(userProfile !== undefined &&
 
 
-                <div key={userProfile._id}> Details
+                <div key={userProfile._id}> 
                     <div className='pdOne'>
                         <DetailsTile userProfile={userProfile}/>
                         

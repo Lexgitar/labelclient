@@ -1,14 +1,12 @@
 .layout {
     width: 99%;
-    border: 1px solid white;
+    
     height: 99vh;
     text-align: center;
 
 }
 
-main {
-    border: 1px solid red;
-}
+
 
 nav {
     display: flex;
@@ -21,6 +19,7 @@ nav a{
     vertical-align: middle;
     display: flex;
     align-items: center;
+    padding: 1px;
 
 
 }
@@ -28,6 +27,7 @@ nav a{
 /* -------------------- */
 
 .profiles {
+   
     width: 40%;
     display: flex;
     justify-content: space-around;
@@ -44,9 +44,7 @@ main {
     overflow: auto;
 }
 
-.user {
-    border: 1px solid red;
-}
+
 
 
 
@@ -58,3 +56,22 @@ footer {
 
 }
 
+.home div {
+    border: 1px solid darkslategrey;
+    font-weight: 700;
+    color:darkcyan;
+    margin-top: 2px;
+}
+.home div p {
+    /* text-align: left; */
+    font-weight: 700;
+    /* border-bottom: 1px solid slategrey; */
+    border-left: 1px solid slategrey;
+    border-right: 1px solid slategrey;
+    
+}
+
+.home div a:hover {
+    background-color:darkcyan;
+    color:black;
+}
