@@ -20,11 +20,11 @@ import HomeSkeletons from "../components/HomeSkeletons"
 const Home = () => {
   //let apiMsg = useSelector(selectApiMsg)
   let status = useSelector(selectStatus)
-  let location = useLocation().pathname
+  //let location = useLocation().pathname
   
   let bands = useSelector(selectRoles).bands
   let labels = useSelector(selectRoles).labels
-  let fans = useSelector(selectRoles).fans
+  //let fans = useSelector(selectRoles).fans
   let artists = useSelector(selectRoles).artists
 
 

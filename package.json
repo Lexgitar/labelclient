@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:3000",
+  "proxy": "https://labelfinder-xmhe.onrender.com",
   "name": "labelclient",
   "version": "0.1.0",
   "private": true,
