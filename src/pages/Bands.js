@@ -21,7 +21,7 @@ const Bands = () => {
 
   if (term.length && location.includes(searchPot)) {
     bands = bands.filter((item) =>
-      keys.some((key) => item[key].toLowerCase().includes(term).toLowerCase()))
+      keys.some((key) => item[key].toLowerCase().includes(term)))
     console.log('pls', location)
   }
 

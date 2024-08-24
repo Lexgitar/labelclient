@@ -46,7 +46,7 @@ const Layout = () => {
         dispatch(fetchRoles())
 
 //keep [ ]
-    },[])
+    },[dispatch])
 
     return (
         <div className="layout">
