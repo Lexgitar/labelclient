@@ -126,7 +126,7 @@ const Layout = () => {
             </div>
             <footer className='footer'>
                 <div className="wrapper">
-                &copy;Lexgitar
+                &copy;BandNott 2024
                 </div>
             </footer>
 
