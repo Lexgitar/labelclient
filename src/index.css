@@ -22,6 +22,17 @@ input {
   color:black;
 }
 
+textarea {
+  color: black;
+}
+
+select {
+  color: darkblue;
+  option {
+    color: black;
+  }
+}
+
 *{
   margin:0 auto;
   /* border: 1px solid blue; */
