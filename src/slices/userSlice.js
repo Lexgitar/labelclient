@@ -31,6 +31,9 @@ const initialState = {
 
 
 }
+
+let baseUrl = 'https://labelfinder-xmhe.onrender.com'
+
 export const userSignup = createAsyncThunk('userDetails/userSignup',
     async ({ userBody }, { rejectWithValue }) => {
 
@@ -114,10 +117,10 @@ export const editDetails = createAsyncThunk('userDetails/editDetails',
 
 export const fetchRoles = createAsyncThunk('roles/fetchRoles',
     async (rejectWithValue) => {
-        const bandsRes = await axios.get(`api/bands`)
-        const labelsRes = await axios.get(`api/labels`)
-        const fansRes = await axios.get(`api/fans`)
-        const artistsRes = await axios.get(`api/artists`)
+        const bandsRes = await axios.get(`${baseUrl}/api/bands`)
+        const labelsRes = await axios.get(`${baseUrl}/api/labels`)
+        const fansRes = await axios.get(`${baseUrl}/api/fans`)
+        const artistsRes = await axios.get(`${baseUrl}/api/artists`)
         try {
 
             //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
