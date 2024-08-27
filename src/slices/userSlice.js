@@ -122,7 +122,7 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
 
             //const [bands, labels, fans] = await Promise.all([bandsRes, labelsRes, fansRes])
             //console.log('fb',bands.data, labels.data, fans.data)
-            console.log('fR', bandsRes.data, labelsRes.data, fansRes.data, artistsRes.data)
+            //console.log('fR', bandsRes.data, labelsRes.data, fansRes.data, artistsRes.data)
             return [bandsRes.data, labelsRes.data, fansRes.data, artistsRes.data]
 
         } catch (error) {

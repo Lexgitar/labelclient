@@ -87,3 +87,29 @@ main .filters {
   .collabnames {
     color: cyan
   }
+
+  .login {
+    background-color: darkslategray;
+    margin: 10px;
+    input {
+      margin: 10px;
+    }
+    button {
+      margin: 10px;
+      font-weight: 600;
+    }
+  }
+
+  /*  */
+
+  .signup {
+    background-color: darkslategray;
+    margin: 10px;
+    input{
+      margin: 5px;
+
+    }
+    button {
+      font-weight: 600;
+    }
+  }

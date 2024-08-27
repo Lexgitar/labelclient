@@ -35,7 +35,7 @@ const Layout = () => {
     let logged = useSelector(selectLoggedIn)
     let editing = useSelector(selectUserEdit)
     let location = useLocation().pathname
-    console.log('location', location)
+    //console.log('location', location)
     //let globalError = useSelector(selectError)
     let goodLocation = location === '/bands' || location === '/labels' || location === '/artists' ? true : false
 
