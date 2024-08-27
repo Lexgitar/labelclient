@@ -113,3 +113,9 @@ main .filters {
       font-weight: 600;
     }
   }
+
+
+.account{
+     background-color: darkslategray;
+    margin: 10px;
+}
