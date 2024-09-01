@@ -113,3 +113,14 @@ main .filters {
       font-weight: 600;
     }
   }
+
+  .account{
+    padding: 5px;
+    background-color: darkslategray;
+     margin: 10px;
+   a {
+    margin: 10px;
+    
+    background-color: hsl(180, 26%, 20%);
+   }
+}
