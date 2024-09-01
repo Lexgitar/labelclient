@@ -9,19 +9,19 @@ const Logout = () => {
 
     let navigate = useNavigate()
     const dispatch = useDispatch()
-
+    let baseUrl = 'https://labelfinder-xmhe.onrender.com'
     const handleClick = async () => {
-        const response = await axios.get('/api/logout')
+        const response = await axios.get(`${baseUrl}/api/logout`)
         console.log(response.data)
-        
+
         if (response.statusText === 'OK') {
-           
+
             dispatch(userDelete())
             dispatch(toggleLog(false))
             dispatch(addUserInfo(''))
             dispatch(toggleEdit(false))
             navigate('/')
-        }else{
+        } else {
             console.log('logout error')
             dispatch(addError(response.error))
         }
@@ -29,15 +29,15 @@ const Logout = () => {
     }
 
     return (
-        <Link 
+        <Link
             data-tooltip-id="my-tooltip"
             data-tooltip-content="Logout"
             data-tooltip-place="bottom"
             className="logoutButton" onClick={handleClick}>
-                <Tooltip id="my-tooltip" />
-            <LogoutIcon/>
-           
-            
+            <Tooltip id="my-tooltip" />
+            <LogoutIcon />
+
+
         </Link>
     )
 }
