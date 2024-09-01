@@ -38,7 +38,7 @@ export const userSignup = createAsyncThunk('userDetails/userSignup',
     async ({ userBody }, { rejectWithValue }) => {
 
         try {
-            const response = await axios.post(`/api/signup`, userBody)
+            const response = await axios.post(`${baseUrl}/api/signup`, userBody)
             return response.data
 
         } catch (err) {
@@ -53,7 +53,7 @@ export const userSignup = createAsyncThunk('userDetails/userSignup',
 export const detachUser = createAsyncThunk('userDetails/detachUser',
     async ({ roleFromUrl, hostId, attachId }, { rejectWithValue }) => {
         try {
-            let link = `/api/${roleFromUrl}/${hostId}?detach=${attachId}`
+            let link = `${baseUrl}/api/${roleFromUrl}/${hostId}?detach=${attachId}`
             const response = await axios.put(link)
             const array = await response.data
             console.log('aU', hostId, attachId, link, array)
@@ -69,7 +69,7 @@ export const detachUser = createAsyncThunk('userDetails/detachUser',
 export const attachUser = createAsyncThunk('userDetails/attachUser',
     async ({ roleFromUrl, hostId, attachId }, { rejectWithValue }) => {
         try {
-            let link = `/api/${roleFromUrl}/${hostId}?attach=${attachId}`
+            let link = `${baseUrl}/api/${roleFromUrl}/${hostId}?attach=${attachId}`
             const response = await axios.put(link)
             const array = await response.data
             console.log('aU', hostId, attachId, link, array)
@@ -88,7 +88,7 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
     async ({ body, role }, { rejectWithValue }) => {
 
         try {
-            const response = await axios.post(`api/${role}s`, body)
+            const response = await axios.post(`${baseUrl}/api/${role}s`, body)
             const user = await response.data
             console.log('uS', role, response.data)
             return { user, role }
@@ -103,7 +103,7 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
 export const editDetails = createAsyncThunk('userDetails/editDetails',
     async ({ id, body, role }, { rejectWithValue }) => {
         try {
-            const response = await axios.put(`api/${role}s/${id}`, body)
+            const response = await axios.put(`${baseUrl}/api/${role}s/${id}`, body)
             const user = response.data
             console.log('uSedit', role, response.data)
             return user
@@ -139,7 +139,7 @@ export const fetchRoles = createAsyncThunk('roles/fetchRoles',
 export const deleteRole = createAsyncThunk('roles/deleteRole',
     async ({ id, role }, { rejectWithValue }) => {
         try {
-            const json = await axios.delete(`api/${role}s/${id}`)
+            const json = await axios.delete(`${baseUrl}/api/${role}s/${id}`)
             const data = await json.data
             console.log('delRol', data, role)
             return { data, id }
@@ -151,7 +151,7 @@ export const deleteRole = createAsyncThunk('roles/deleteRole',
 export const deleteUser = createAsyncThunk('roles/deleteUser',
     async (rejectWithValue) => {
         try {
-            const json = await axios.delete(`api/delete`)
+            const json = await axios.delete(`${baseUrl}/api/delete`)
             const data = await json.data
             console.log('delRol', json, data,)
             return data
