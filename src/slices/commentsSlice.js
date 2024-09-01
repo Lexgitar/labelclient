@@ -18,12 +18,12 @@ const initialState = {
     status: '',
 }
 
-
+let baseUrl = 'https://labelfinder-xmhe.onrender.com'
 export const fetchComment = createAsyncThunk('comment/fetchComment',
     async ({ id }, { rejectWithValue }) => {
         try {
 
-            const response = await axios.get(`/api/comment/${id}`)
+            const response = await axios.get(`${baseUrl}/api/comment/${id}`)
             const pComm = response.data
             console.log('ftechcom', response.data)
             return pComm
@@ -40,7 +40,7 @@ export const fetchComment = createAsyncThunk('comment/fetchComment',
 export const fetchPostComment = createAsyncThunk('comment/fetchPostComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`/api/comment?id=${id}`, { body })
+            const response = await axios.post(`${baseUrl}/api/comment?id=${id}`, { body })
             const pComm = response.data
             console.log('fetchPostCom', response.data)
             return pComm
@@ -55,7 +55,7 @@ export const fetchPutComment = createAsyncThunk('comment/fetchPutComment',
     async ({ id, body }, { rejectWithValue }) => {
         try {
             console.log('fetchPutCom BODY and id', body, id)
-            const response = await axios.put(`/api/comment/${id}`, { body })
+            const response = await axios.put(`${baseUrl}/api/comment/${id}`, { body })
             const pComm = response.data
             //console.log('fetchPutCom BODY', body)
             console.log('fetchPutCom', response.data)
@@ -70,7 +70,7 @@ export const fetchDeleteComment = createAsyncThunk('comment/fetchDeleteComment',
     async ({ id, authorId, commentId }, { rejectWithValue }) => {
         try {
             console.log('fetchPutCom id and authorid', id, authorId)
-            const response = await axios.put(`/api/comment/${id}?delete=${commentId}&authorId=${authorId}`)
+            const response = await axios.put(`${baseUrl}/api/comment/${id}?delete=${commentId}&authorId=${authorId}`)
             const pComm = response.data
             //console.log('fetchPutCom BODY', body)
             console.log('fetchPutDeleteCom', response.data)
