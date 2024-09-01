@@ -45,8 +45,8 @@ const Layout = () => {
 
         dispatch(fetchRoles())
 
-//keep [ ]
-    },[dispatch])
+        //keep [ ]
+    }, [dispatch])
 
     return (
         <div className="layout">
@@ -116,9 +116,9 @@ const Layout = () => {
             <div className="mainWrapper">
                 <main className="main">
                     <Errorent />
-                    {goodLocation && 
-                        <div className='filters'> 
-                            <SearchBar /> <FilterTile /> 
+                    {goodLocation &&
+                        <div className='filters'>
+                            <SearchBar /> <FilterTile />
                         </div>}
                     <Outlet />
 
@@ -126,7 +126,7 @@ const Layout = () => {
             </div>
             <footer className='footer'>
                 <div className="wrapper">
-                &copy;BandNott 2024
+                    &copy;BandNott 2024
                 </div>
             </footer>
 
