@@ -14,7 +14,7 @@ import { addUser, toggleLog, selectRoles, addUserInfo, addError } from '../../sl
 
 const LoginForm = () => {
     const roles = useSelector(selectRoles)
-
+    let baseUrl = 'https://labelfinder-xmhe.onrender.com'
     const [email, setEmail] = useState('')
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ const LoginForm = () => {
         e.preventDefault()
         let body = { email, password }
         try {
-            const response = await axios.post('/api/login', body)
+            const response = await axios.post(`${baseUrl}/api/login`, body)
 
             if (response.data && response.data.status !== 400) {
 
