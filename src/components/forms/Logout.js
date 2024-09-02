@@ -24,6 +24,7 @@ const Logout = () => {
         } else {
             dispatch(addError(response.error))
             console.log('logout error', response.error)
+            console.log('logout error', response)
         }
 
     }
