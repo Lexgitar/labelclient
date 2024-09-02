@@ -14,7 +14,7 @@ const Logout = () => {
         const response = await axios.get(`${baseUrl}/api/logout`)
         console.log(response.data)
 
-        if (response.statusText === 'OK') {
+        if (response.status === 200) {
 
             dispatch(userDelete())
             dispatch(toggleLog(false))
@@ -24,7 +24,7 @@ const Logout = () => {
         } else {
             dispatch(addError(response.error))
             console.log('logout error', response.error)
-            console.log('logout error', response)
+            console.log('logout reponse', response)
         }
 
     }
