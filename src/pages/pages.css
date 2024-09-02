@@ -57,11 +57,16 @@ footer {
 }
 
 .home div {
-    border: 1px solid darkslategrey;
+    border: 2px solid darkslategrey;
     font-weight: 700;
     color:darkcyan;
     margin-top: 2px;
+    padding: 5px;
 }
+.home div:hover{
+    border-color: darkcyan;
+}
+
 .home div p {
     /* text-align: left; */
     font-weight: 700;

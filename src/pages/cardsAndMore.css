@@ -123,6 +123,12 @@ main .filters {
     margin: 10px;
     padding: 10px;
     background-color: hsl(180, 26%, 20%);
+    border: 0.1px solid transparent;
+   }
+   a:hover{
+    color: cyan;
+    border-color:  cyan;
+    
    }
 }
 
