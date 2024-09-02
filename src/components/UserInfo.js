@@ -16,12 +16,12 @@ const UserInfo = ({ userInfo }) => {
 
     console.log('Uinfo', userInfo, user)
     return (
-        <div>
-            <p>user info name: {userInfo.name}</p>
-            <p>_id: {userInfo._id}</p>
-            <p>location: {userInfo.location}</p>
+        <div className="userInfo">
+            <p>Name: {userInfo.name}</p>
+            {/* <p>_id: {userInfo._id}</p> */}
+            <p>Location: {userInfo.location}</p>
             {edit && <UserForm user={user} userInfo={userInfo} />}
-             {<button onClick={handleClick} > {edit?'Cancel':'Edit'} </button>}
+             {<button className="editB" onClick={handleClick} > {edit?'Cancel':'Edit Details'} </button>}
             {userInfo && <DeleteRoleBtn id={userInfo._id} role = {user.role} />}
             {/* {user && <DeleteAccount/>} */}
         </div>

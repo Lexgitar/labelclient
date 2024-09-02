@@ -21,8 +21,8 @@ const DeleteRoleBtn = ({id, role}) => {
     }
 
     return (
-        <button onClick={handleDelete} >
-            Delete details
+        <button className='delete' onClick={handleDelete} >
+            Delete Details
         </button>
     )
 }

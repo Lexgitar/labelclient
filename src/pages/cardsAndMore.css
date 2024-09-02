@@ -119,8 +119,45 @@ main .filters {
     background-color: darkslategray;
      margin: 10px;
    a {
+    font-size: 1rem;
     margin: 10px;
-    
+    padding: 10px;
     background-color: hsl(180, 26%, 20%);
    }
+}
+
+.userInfo {
+  padding: 10px;
+  background-color: darkslategray;
+   margin: 10px;
+   p{
+    padding: 5px;
+    margin: 5px;
+    background-color: hsl(180, 26%, 20%); ;
+   }
+   button {
+    margin: 5px;
+   }
+}
+
+.delAcc {
+  padding: 10px;
+  background-color: darkslategray;
+   margin: 10px;
+}
+
+.editB {
+  border-left: 2px solid green;
+  border-bottom: 2px solid green;
+}
+
+.delete {
+  border-right: 2px solid cyan;
+  border-bottom: 2px solid cyan;
+}
+
+.userForm *{
+  background-color: rgb(135, 155, 155);
+  margin: 5px;
+  padding: 5px;
 }

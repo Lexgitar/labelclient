@@ -74,7 +74,7 @@ const UserForm = ({ user, userInfo }) => {
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)} id='userform'>
+        <form className="userForm" onSubmit={(e) => handleSubmit(e)} id='userform'>
             {tiTle} <br />
             <input type="text" onChange={(e) => setName(e.target.value)} placeholder="Name" value={name} required /> <br />
             <input type="text" onChange={(e) => setLocation(e.target.value)} placeholder="Location" value={location} required /><br />
@@ -83,14 +83,14 @@ const UserForm = ({ user, userInfo }) => {
 
             {(user.role !== 'fan' && user.role !== 'artist') &&
                 <>
-                    <label htmlFor="genre">Genre: </label><br />
+                    {/* <label htmlFor="genre">Genre: </label><br /> */}
                     <select name="" id="genre"
                         
                         onChange={(e) => setGenre(e.target.value)}
                         required
                         form='userform'
                     >
-                        <option value="">--select--</option>
+                        <option value="">-- Select Genre --</option>
                         {/* <option value="">--Select genre--</option> */}
                         {options.map(item => (
                             <option key={item.value} value={item.value}>{item.label}</option>
@@ -101,8 +101,7 @@ const UserForm = ({ user, userInfo }) => {
             <br />
 
             <button>Submit</button>
-            {/* <Errorent /> */}
-            {/* {genre && <p>genrecheck:{genre}</p>} */}
+            
         </form>
     )
 }
