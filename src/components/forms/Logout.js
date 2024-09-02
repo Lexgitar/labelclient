@@ -20,7 +20,7 @@ const Logout = () => {
             dispatch(toggleLog(false))
             dispatch(addUserInfo(''))
             dispatch(toggleEdit(false))
-            navigate('/')
+            navigate('https://bandnott.com/')
         } else {
             console.log('logout error')
             dispatch(addError(response.error))
