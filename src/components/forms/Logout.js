@@ -22,8 +22,8 @@ const Logout = () => {
             dispatch(toggleEdit(false))
             navigate('https://bandnott.com/')
         } else {
-            console.log('logout error')
             dispatch(addError(response.error))
+            console.log('logout error', response.error)
         }
 
     }
