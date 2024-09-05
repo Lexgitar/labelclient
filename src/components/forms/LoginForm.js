@@ -32,7 +32,8 @@ const LoginForm = () => {
         let body = { email, password }
         try {
             const response = await axios.post(`${baseUrl}/api/login`, body, {
-                withCredentials: true
+                //withCredentials: true
+                withCredentials: false
             })
 
             if (response.data && response.data.status !== 400) {
