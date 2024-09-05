@@ -31,12 +31,7 @@ const LoginForm = () => {
         e.preventDefault()
         let body = { email, password }
         try {
-            const response = await axios.post(`${baseUrl}/api/login`, body, {
-                
-                  withCredentials: true
-                
-            }
-            )
+            const response = await axios.post(`${baseUrl}/api/login`, body)
 
             if (response.data && response.data.status !== 400) {
 
@@ -51,9 +46,9 @@ const LoginForm = () => {
 
                     const userProfile = profileRoles.filter((profile) =>
                         profile.userId === id)[0]
-                    
+
                     if (userProfile) {
-                       
+
                         return dispatch(addUserInfo(userProfile))
                     }
 
