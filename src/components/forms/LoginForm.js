@@ -31,7 +31,9 @@ const LoginForm = () => {
         e.preventDefault()
         let body = { email, password }
         try {
-            const response = await axios.post(`${baseUrl}/api/login`, body)
+            const response = await axios.post(`${baseUrl}/api/login`, body, {
+                withCredentials: true
+            })
 
             if (response.data && response.data.status !== 400) {
 
