@@ -32,10 +32,9 @@ const LoginForm = () => {
         let body = { email, password }
         try {
             const response = await axios.post(`${baseUrl}/api/login`, body, {
-                headers: {
-                  Accept: "application/json",
+                
                   withCredentials: true
-                }
+                
             }
             )
 
