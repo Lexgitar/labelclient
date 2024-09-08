@@ -33,15 +33,16 @@ const LoginForm = () => {
         e.preventDefault()
         let body = { email, password }
         try {
-            const response = await axios.post(`${baseUrl}/api/login`, body, {
-                withCredentials: true,
-                proxy: {
-                    protocol: 'https',
+            const response = await axios.post(`${baseUrl}/api/login`, body,
+            //      {
+            //     withCredentials: true,
+            //     proxy: {
+            //         protocol: 'https',
                     
-                  },
-                 // httpsAgent: new https.Agent({ keepAlive: true }),
-                
-            })
+            //       },
+            //      // httpsAgent: new https.Agent({ keepAlive: true }),   
+            // }
+        )
 
             if (response.data && response.data.status !== 400) {
 
