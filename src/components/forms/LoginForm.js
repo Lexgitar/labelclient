@@ -45,7 +45,7 @@ const LoginForm = () => {
 
                 {
                     withCredentials: true,
-                    xsrfCookieName: 'jwt',
+                   
 
                 }
             )
