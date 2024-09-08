@@ -25,6 +25,7 @@ const CommentForm = ({id, onlyPost}) => {
         return (
             <form onSubmit={(e) => handleSubmit(e)}  id='commentform'>
                 <textarea 
+                rows="3" cols="40"
                 onChange={(e) => setBody(e.target.value)} 
                 type="text" 
                 placeholder="add comment..." 

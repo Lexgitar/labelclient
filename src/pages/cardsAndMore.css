@@ -22,6 +22,19 @@
     padding: 0 10px ;
 }
 
+.pcomments {
+  padding: 5px;
+  margin: 5px;
+}
+
+#commentform {
+  padding: 5px;
+  margin: 5px;
+  button {
+    margin: 5px;
+  }
+}
+
 .pdTwo {
     margin-top: 10px;
 }
@@ -70,9 +83,17 @@ main .filters {
     }
   }
 
-  .detailstile a:hover {
-    background-color: darkslategray;
+  .detailstile * {
+    background-color: hsl(180, 26%, 20%);
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid transparent;
   }
+
+.detailstile *:hover {
+  border-color: cyan;
+}
+
   .filterTypes *{
     margin: 2px;
     padding: 2px;

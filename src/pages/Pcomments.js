@@ -38,7 +38,7 @@ const Pcomments = ({ id, bubble }) => {
 
 
     return (
-        <div>
+        <div className='pcomments'>
             Comments
 
 
