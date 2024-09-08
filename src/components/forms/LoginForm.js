@@ -15,7 +15,7 @@ import { addUser, toggleLog, selectRoles, addUserInfo, addError } from '../../sl
 const LoginForm = () => {
     const roles = useSelector(selectRoles)
    // let baseUrl = 'https://labelfinder-xmhe.onrender.com'
-    let baseUrl = 'https://www.bandnotts.com/'
+    let baseUrl = 'https://www.bandnotts.com'
     const [email, setEmail] = useState('')
     const [showPassword, setShowPassword] = useState(false);
     const [password, setPassword] = useState('')

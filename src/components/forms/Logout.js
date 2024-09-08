@@ -10,7 +10,7 @@ const Logout = () => {
     let navigate = useNavigate()
     const dispatch = useDispatch()
     //let baseUrl = 'https://labelfinder-xmhe.onrender.com'
-    let baseUrl = 'https://www.bandnotts.com/'
+    let baseUrl = 'https://www.bandnotts.com'
     const handleClick = async () => {
         const response = await axios.get(`${baseUrl}/api/logout`)
         console.log(response.data)

@@ -19,7 +19,7 @@ const initialState = {
 }
 
 //let baseUrl = 'https://labelfinder-xmhe.onrender.com'
-let baseUrl = 'https://www.bandnotts.com/'
+let baseUrl = 'https://www.bandnotts.com'
 export const fetchComment = createAsyncThunk('comment/fetchComment',
     async ({ id }, { rejectWithValue }) => {
         try {
