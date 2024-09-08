@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit"
 
 
 import axios from "axios";
-
+//THIS IS THE KEY TO LIFE 
 axios.defaults.withCredentials = true
 
 const initialState = {
