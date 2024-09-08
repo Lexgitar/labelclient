@@ -42,6 +42,11 @@ const LoginForm = () => {
             //       },
             //      // httpsAgent: new https.Agent({ keepAlive: true }),   
             // }
+
+            {
+                headers: {'X-Requested-With': 'jwt'},
+               
+            }
         )
 
             if (response.data && response.data.status !== 400) {
