@@ -45,6 +45,7 @@ const LoginForm = () => {
 
                 {
                     withCredentials: true,
+                    headers: {'X-Requested-With': 'XMLHttpRequest'},
                    
 
                 }
