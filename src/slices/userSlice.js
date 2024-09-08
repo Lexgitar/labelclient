@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk, createSelector } from "@reduxjs/toolkit"
 
 import axios from "axios";
 
+axios.defaults.withCredentials = true
+
 const initialState = {
     user: '',
     loggedIn: false,
