@@ -15,7 +15,7 @@ import { addUser, toggleLog, selectRoles, addUserInfo, addError } from '../../sl
 
 const LoginForm = () => {
     const roles = useSelector(selectRoles)
-   // let baseUrl = 'https://labelfinder-xmhe.onrender.com'
+    // let baseUrl = 'https://labelfinder-xmhe.onrender.com'
     let baseUrl = 'https://www.bandnotts.com'
     const [email, setEmail] = useState('')
     const [showPassword, setShowPassword] = useState(false);
@@ -34,20 +34,21 @@ const LoginForm = () => {
         let body = { email, password }
         try {
             const response = await axios.post(`${baseUrl}/api/login`, body,
-            //      {
-            //     withCredentials: true,
-            //     proxy: {
-            //         protocol: 'https',
-                    
-            //       },
-            //      // httpsAgent: new https.Agent({ keepAlive: true }),   
-            // }
+                //      {
+                //     withCredentials: true,
+                //     proxy: {
+                //         protocol: 'https',
 
-            {
-                headers: {'X-Requested-With': 'jwt'},
-               
-            }
-        )
+                //       },
+                //      // httpsAgent: new https.Agent({ keepAlive: true }),   
+                // }
+
+                {
+                    withCredentials: true,
+                    xsrfCookieName: 'jwt',
+
+                }
+            )
 
             if (response.data && response.data.status !== 400) {
 
