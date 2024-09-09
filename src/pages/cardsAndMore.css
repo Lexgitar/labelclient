@@ -69,6 +69,7 @@ main .filters {
 #ptile a {
     background-color: rgba(0, 139, 139, 0.356) ;
     margin: 2px;
+    border: 1px solid transparent;
   
   }
 
@@ -78,6 +79,7 @@ main .filters {
 
   #ptile a:hover {
     background-color: rgb(47, 69, 79);
+    border-color: darkcyan;
     p{
         color: rgba(0, 255, 149, 0.459);
     }
