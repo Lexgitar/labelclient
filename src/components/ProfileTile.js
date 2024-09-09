@@ -50,7 +50,7 @@ const ProfileTile = ({ profile }) => {
                 <p>Name: {profile.name}</p>
                 <p>Location: {profile.location}</p>
                 {profile.genre && <p>Genre: {profile.genre}</p>}
-                <p>About: {profile.about}</p>
+                {/* <p>About: {profile.about}</p> */}
                 <p>Link: {profile.links}</p>
                 {/* <p>role: {profile.role}</p> */}
                 <p>Collabs : {(!!profile.attachedId.length && profile.attachedId.length) || ' 0'}</p>
