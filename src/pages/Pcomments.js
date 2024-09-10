@@ -31,8 +31,8 @@ const Pcomments = ({ id, bubble }) => {
     //let canComment = ((onlyPost && (id === user.itemId)) ? false : true)
     let canComment = (!loggedIn ? false : ((onlyPost && (id === user.itemId)) ? false : true))
 
-    console.log('cancom: ', canComment)
-    console.log('only postt: ', onlyPost)
+    //console.log('cancom: ', canComment)
+    //console.log('only postt: ', onlyPost)
 
     let comms = comments
 

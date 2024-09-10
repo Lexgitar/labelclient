@@ -451,7 +451,7 @@ export const selectNameById =
             }
             const [a, b, c, d] = Object.values(roles)
             const conced = a.concat(b, c, d)
-            console.log(conced)
+            //console.log(conced)
             const confil = conced.find(isEquals)
             if (confil.name && confil.role ) {
                 //console.log('confil', confil)
