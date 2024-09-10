@@ -11,7 +11,7 @@ const UserDetails = () => {
     // let erur = useSelector(selectError)
     const logged = useSelector(selectLoggedIn)
     const userInfo = useSelector(selectUserInfo)
-    console.log('userdets', userInfo)
+    //console.log('userdets', userInfo)
     if (userInfo) {
         return (
             <div>

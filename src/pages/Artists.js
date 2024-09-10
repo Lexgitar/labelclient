@@ -19,7 +19,7 @@ const Artists = () => {
     artists = artists.filter((item) =>
      
       keys.some((key) => item[key].toLowerCase().includes(term)))
-    console.log('pls art', location)
+    //console.log('pls art', location)
   }
   return (
     <div className="artists">

@@ -13,7 +13,7 @@ const Logout = () => {
     let baseUrl = 'https://www.bandnotts.com'
     const handleClick = async () => {
         const response = await axios.get(`${baseUrl}/api/logout`)
-        console.log(response.data)
+        //console.log(response.data)
 
         if (response.status === 200) {
 
@@ -24,8 +24,8 @@ const Logout = () => {
             navigate('/')
         } else {
             dispatch(addError(response.error))
-            console.log('logout error', response.error)
-            console.log('logout reponse', response)
+            //console.log('logout error', response.error)
+            //console.log('logout reponse', response)
         }
 
     }

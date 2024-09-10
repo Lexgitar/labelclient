@@ -59,7 +59,7 @@ export const detachUser = createAsyncThunk('userDetails/detachUser',
             let link = `${baseUrl}/api/${roleFromUrl}/${hostId}?detach=${attachId}`
             const response = await axios.put(link)
             const array = await response.data
-            console.log('aU', hostId, attachId, link, array)
+            //console.log('aU', hostId, attachId, link, array)
             return { roleFromUrl, hostId, array }
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -75,7 +75,7 @@ export const attachUser = createAsyncThunk('userDetails/attachUser',
             let link = `${baseUrl}/api/${roleFromUrl}/${hostId}?attach=${attachId}`
             const response = await axios.put(link)
             const array = await response.data
-            console.log('aU', hostId, attachId, link, array)
+            //console.log('aU', hostId, attachId, link, array)
             return { roleFromUrl, hostId, array }
 
         } catch (error) {
@@ -93,7 +93,7 @@ export const createDetails = createAsyncThunk('userDetails/createDetails',
         try {
             const response = await axios.post(`${baseUrl}/api/${role}s`, body)
             const user = await response.data
-            console.log('uS', role, response.data)
+            //console.log('uS', role, response.data)
             return { user, role }
         } catch (err) {
             return rejectWithValue(err.response.data)
@@ -108,10 +108,10 @@ export const editDetails = createAsyncThunk('userDetails/editDetails',
         try {
             const response = await axios.put(`${baseUrl}/api/${role}s/${id}`, body)
             const user = response.data
-            console.log('uSedit', role, response.data)
+            //console.log('uSedit', role, response.data)
             return user
         } catch (err) {
-            console.log('eediter', err)
+            //console.log('eediter', err)
             return rejectWithValue(err.response.data)
         }
 
@@ -144,7 +144,7 @@ export const deleteRole = createAsyncThunk('roles/deleteRole',
         try {
             const json = await axios.delete(`${baseUrl}/api/${role}s/${id}`)
             const data = await json.data
-            console.log('delRol', data, role)
+           // console.log('delRol', data, role)
             return { data, id }
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -156,7 +156,7 @@ export const deleteUser = createAsyncThunk('roles/deleteUser',
         try {
             const json = await axios.delete(`${baseUrl}/api/delete`)
             const data = await json.data
-            console.log('delRol', json, data,)
+            //console.log('delRol', json, data,)
             return data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -247,7 +247,7 @@ export const userSlice = createSlice({
                 // state.status = 'loading'
             })
             .addCase(createDetails.rejected, (state, action) => {
-                console.log('rjedct', action)
+               // console.log('rjedct', action)
                 // state.status = 'rejected'
                 state.error = action.payload || action.error.message
             })
@@ -261,7 +261,7 @@ export const userSlice = createSlice({
 
             })
             .addCase(editDetails.rejected, (state, action) => {
-                console.log('rj edit', action)
+                //console.log('rj edit', action)
                 //state.status = 'rejected'
                 state.error = action.payload || action.error.message
             })
@@ -274,9 +274,9 @@ export const userSlice = createSlice({
                 //    console.log('addcase',arrayByRole.findIndex((item)=>item._id === action.payload._id)) 
                 let editedIndex = arrayByRole.findIndex((item) => item._id === action.payload._id)
                 arrayByRole.splice(editedIndex, 1, action.payload)
-                console.log('paiload.role', action.payload)
-                console.log('sttae rols', state.roles.fans)
-                console.log('sttae rol', state.user.role)
+               // console.log('paiload.role', action.payload)
+               // console.log('sttae rols', state.roles.fans)
+               // console.log('sttae rol', state.user.role)
             })
             .addCase(fetchRoles.fulfilled, (state, action) => {
 
@@ -286,10 +286,10 @@ export const userSlice = createSlice({
                 state.roles.artists = action.payload[3]
                 state.error = ''
                 state.status = action.meta.requestStatus
-                console.log('fetchroles value', state.status)
+               // console.log('fetchroles value', state.status)
             })
             .addCase(fetchRoles.rejected, (state, action) => {
-                console.log('fetcredux rejected', action, action.payload)
+                //console.log('fetcredux rejected', action, action.payload)
                 state.error = action.payload || action.error.message
                 state.status = action.meta.requestStatus
             })           
@@ -297,14 +297,14 @@ export const userSlice = createSlice({
                 //const arrayByRole = state.user.role === 'band' ? state.roles.labels : state.roles.bands
                 // which array to look into 
                 let roleOfArray = state.roles[action.payload.roleFromUrl]
-                console.log('role of array', roleOfArray)
+               // console.log('role of array', roleOfArray)
                 //console.log('attUsr', arrayByRole)
                 let arrayIndex = roleOfArray.findIndex((item) => item._id === action.payload.hostId)
                 roleOfArray[arrayIndex].attachedId = action.payload.array
                 state.error = ''
             })
             .addCase(attachUser.rejected, (state, action) => {
-                console.log('atach', action, action.payload)
+               // console.log('atach', action, action.payload)
                 state.status = 'rejected'
                 state.error = action.payload || action.error.message
 
@@ -318,7 +318,7 @@ export const userSlice = createSlice({
                 state.error = ''
             })
             .addCase(detachUser.rejected, (state, action) => {
-                console.log('detach', action, action.payload)
+               // console.log('detach', action, action.payload)
                 state.status = 'rejected'
                 state.error = action.payload || action.error.message
 
@@ -336,19 +336,19 @@ export const userSlice = createSlice({
 
             })
             .addCase(deleteRole.fulfilled, (state, action) => {
-                console.log('delrolefulcase -deluser', action.payload)
+                //console.log('delrolefulcase -deluser', action.payload)
 
                 const theRole = state.user.role
                 //arrays to map over
                 const arrayToMap = (theRole === 'band' ? [state.roles.labels, state.roles.artists] : (theRole === 'label' ? [state.roles.bands, state.roles.artists] : [state.roles.bands, state.roles.labels]))
                 if (theRole === 'band' || theRole === 'label' || theRole === 'artist') {
-                    console.log('didd')
+                    //console.log('didd')
                     arrayToMap.forEach(rolArray => {
                         rolArray.forEach((element) => {
                             if (element.attachedId.includes(state.userInfo._id)) {
                                 let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
                                 element.attachedId.splice(idIndex, 1)
-                                console.log('did')
+                               // console.log('did')
                             }
                         })
                     })
@@ -364,23 +364,23 @@ export const userSlice = createSlice({
 
             })
             .addCase(deleteRole.rejected, (state, action) => {
-                console.log('delrolercase', action, action.payload)
+                //console.log('delrolercase', action, action.payload)
                 state.error = action.payload.errors || action.payload || action.error.message
 
             })
             .addCase(deleteUser.fulfilled, (state, action) => {
-                console.log('deluserfulcase', action.payload)
+                //console.log('deluserfulcase', action.payload)
                 const theRole = state.user.role
                 //arrays to map over
                 const arrayToMap = (theRole === 'band' ? [state.roles.labels, state.roles.artists] : (theRole === 'label' ? [state.roles.bands, state.roles.artists] : [state.roles.bands, state.roles.labels]))
                 if (theRole === 'band' || theRole === 'label' || theRole === 'artist') {
-                    console.log('didd-deluser')
+                    //console.log('didd-deluser')
                     arrayToMap.forEach(rolArray => {
                         rolArray.forEach((element) => {
                             if (element.attachedId.includes(state.userInfo._id)) {
                                 let idIndex = element.attachedId.findIndex((item) => item === state.userInfo._id)
                                 element.attachedId.splice(idIndex, 1)
-                                console.log('did')
+                                //console.log('did')
                             }
                         })
                     })
@@ -403,7 +403,7 @@ export const userSlice = createSlice({
 
             })
             .addCase(deleteUser.rejected, (state, action) => {
-                console.log('delusercase', action, action.payload)
+               // console.log('delusercase', action, action.payload)
                 state.error = action.payload.errors || action.payload || action.error.message
 
             })
@@ -454,14 +454,14 @@ export const selectNameById =
             console.log(conced)
             const confil = conced.find(isEquals)
             if (confil.name && confil.role ) {
-                console.log('confil', confil)
+                //console.log('confil', confil)
                 const { name, role} = confil
-                console.log('name si role', name, role)
+                //console.log('name si role', name, role)
                 return {name, role}
             } else if( confil.name){
-                console.log('confil2', confil)
+                //console.log('confil2', confil)
                 const { name, role} = confil
-                console.log('name si role2', name, role)
+                //console.log('name si role2', name, role)
                 return {name, role}
             }
 

@@ -48,7 +48,7 @@ const ProfileDetails = () => {
     let fans = useSelector(selectRoles).fans
 
     const { id } = useParams()
-    console.log('useparams', id)
+    //console.log('useparams', id)
 
     useEffect(() => {
         setBubble(false)
@@ -90,14 +90,14 @@ const ProfileDetails = () => {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
-            console.log('handle attach', attachId, hostId)
+            //console.log('handle attach', attachId, hostId)
             dispatch(attachUser({ roleFromUrl, hostId, attachId })).then(
                 value => {
                     if (value.error) {
                         //console.log('deta', value.payload)
                         dispatch(addError(value.error))
                     } else if (!value.error && value.payload) {
-                        console.log(value.payload)
+                        //console.log(value.payload)
                         //navigate('/')
                     }
                 }
@@ -112,7 +112,7 @@ const ProfileDetails = () => {
 
             const attachId = userRoleInfo._id
             const hostId = userProfile._id
-            console.log('handle detach', attachId, hostId)
+            //console.log('handle detach', attachId, hostId)
             dispatch(detachUser({ roleFromUrl, hostId, attachId })).then(
                 value => {
                     if (value.error) {

@@ -2,7 +2,7 @@
 import OneComment from "./OneComment"
 const Comments = ({ profile, comms }) => {
 
- console.log('onecom comms:', comms,)
+ //console.log('onecom comms:', comms,)
 
  if(comms !== 'no comments yet'){
   return (

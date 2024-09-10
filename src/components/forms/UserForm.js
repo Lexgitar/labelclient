@@ -59,7 +59,7 @@ const UserForm = ({ user, userInfo }) => {
             if (value.payload.errors) {
                 console.log('value paiload erors', value.payload)
             } else if (value.payload && !value.payload.errors) {
-                console.log('value.payload', value.payload)
+                //console.log('value.payload', value.payload)
                 // setName('')
                 // setLocation('')
                 // setGenre('')

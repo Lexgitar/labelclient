@@ -34,20 +34,11 @@ const LoginForm = () => {
         let body = { email, password }
         try {
             const response = await axios.post(`${baseUrl}/api/login`, body,
-                //      {
-                //     withCredentials: true,
-                //     proxy: {
-                //         protocol: 'https',
-
-                //       },
-                //      // httpsAgent: new https.Agent({ keepAlive: true }),   
-                // }
-
+                
                 {
                     withCredentials: true,
                     headers: {'X-Requested-With': 'XMLHttpRequest'},
                    
-
                 }
             )
 
@@ -56,7 +47,7 @@ const LoginForm = () => {
                 const dataId = response.data._id
                 const role = response.data.role
 
-                console.log('from login data', response.data)
+                //console.log('from login data', response.data)
                 dispatch(addUser(response.data))
 
                 const foundProfile = (id, role) => {
@@ -88,9 +79,7 @@ const LoginForm = () => {
 
         }
 
-
-
-        // navigate('/account/user')
+ 
 
     }
 

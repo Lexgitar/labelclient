@@ -14,7 +14,7 @@ const DeleteRoleBtn = ({id, role}) => {
                 navigate('/')
             }else{
                 dispatch(addUserInfo(''))
-                console.log('delete info invalid')
+                //console.log('delete info invalid')
             }
         })
         

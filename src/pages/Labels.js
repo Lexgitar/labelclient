@@ -22,7 +22,7 @@ const Labels = () => {
   if(term.length && location.includes(searchPot)){
     labels = labels.filter((item)=>
       keys.some((key)=>item[key].toLowerCase().includes(term)))
-    console.log('pls', location)
+    //console.log('pls', location)
   }
 
 

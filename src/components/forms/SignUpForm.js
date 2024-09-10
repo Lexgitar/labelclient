@@ -48,15 +48,15 @@ const SignUpForm = () => {
     e.preventDefault()
     
     let userBody = { email, password, role }
-    console.log(Object.keys(userBody).length)
+    //console.log(Object.keys(userBody).length)
 
-    console.log('userbody', userBody)
+    //console.log('userbody', userBody)
 
     dispatch(userSignup({ userBody })).then(value => {
       if (value.payload.errors) {
-        console.log('value paiload erors', value.payload)
+        //console.log('value paiload erors', value.payload)
       } else if (value.payload && !value.payload.errors) {
-        console.log('value.payload', value.payload)
+        //console.log('value.payload', value.payload)
         setEmail('')
         setPassword('')
         navigate('/account')
@@ -64,10 +64,6 @@ const SignUpForm = () => {
         console.log('ELSE')
       }
     })
-
-
-
-    // user ? navigate('/account') : navigate('')
 
 
   }
@@ -97,12 +93,8 @@ const SignUpForm = () => {
       <label htmlFor="artist">Artist</label><br />
       <input checked={role === 'fan'} onChange={(e) => roleChange(e)} type="radio" id="fan" name="role" value="fan" />
       <label htmlFor="fan">Fan</label><br />
-      {/* <p>{role}</p>
-            <p>{email}</p>
-            <p>{password}</p> */}
+      
       <button type="submit">Submit</button>
-
-      {/* <Errorent /> */}
 
     </form>
   )

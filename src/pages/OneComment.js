@@ -10,7 +10,7 @@ const OneComment = ({ id, comment }) => {
   const { canDelete } = useCanDeleteComment(id, comment.authorId)
   const { author, linkRole } = useGetComAuthor(comment.authorId)
   let path = linkRole && comment.authorId ? `/${linkRole}s/${comment.authorId}` : ''
-  console.log(author)
+  //console.log(author)
 
   if (comment) {
     return (

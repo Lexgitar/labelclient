@@ -14,16 +14,16 @@ const UserInfo = ({ userInfo }) => {
         dispatch(toggleEdit(edit?false:true))
     }
 
-    console.log('Uinfo', userInfo, user)
+    //console.log('Uinfo', userInfo, user)
     return (
         <div className="userInfo">
             <p>Name: {userInfo.name}</p>
-            {/* <p>_id: {userInfo._id}</p> */}
+            
             <p>Location: {userInfo.location}</p>
             {edit && <UserForm user={user} userInfo={userInfo} />}
              {<button className="editB" onClick={handleClick} > {edit?'Cancel':'Edit Details'} </button>}
             {userInfo && <DeleteRoleBtn id={userInfo._id} role = {user.role} />}
-            {/* {user && <DeleteAccount/>} */}
+            
         </div>
     )
 }

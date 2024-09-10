@@ -7,7 +7,7 @@ const OkButton = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   let errorr = useSelector(selectError)
-  console.log('eeroarea', errorr)
+  //console.log('eeroarea', errorr)
   const handleOk = () => {
     navigate('/')
     if (errorr === 'Request failed with status code 404') {

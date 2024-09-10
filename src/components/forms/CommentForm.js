@@ -14,9 +14,9 @@ const CommentForm = ({id, onlyPost}) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('hsb BEFORE', id, body)
+        //console.log('hsb BEFORE', id, body)
         dispatch(fetchType({id, body}))
-        console.log('hsb', id, body)
+        //console.log('hsb', id, body)
         setBody('')
     }
 

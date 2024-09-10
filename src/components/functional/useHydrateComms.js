@@ -18,17 +18,17 @@ const useHydrateComms = (id) => {
 
     // profileComment contains all comments per profile
     const [profileComment] = useSelector(state => selectbyId(state, id))
-    console.log('hyd-pcom', profileComment)
+    //console.log('hyd-pcom', profileComment)
 
     useEffect(() => {
 
         //THEN try etc
         if (!profileComment) {
-            console.log('disptching')
+            //console.log('disptching')
 
             dispatch(fetchComment({ id }))
         } else if (profileComment && profileComment.comments.length === 0) {
-            console.log('pcom.coms else if', profileComment.comments)
+            //onsole.log('pcom.coms else if', profileComment.comments)
             setComments('no comments yet')
             setOnlyPost(false)
 
@@ -36,7 +36,7 @@ const useHydrateComms = (id) => {
 
         } else if (profileComment && profileComment.comments) {
             //all can comment 
-            console.log('pcom.coms', profileComment.comments)
+            //console.log('pcom.coms', profileComment.comments)
             setComments(profileComment.comments)
             setOnlyPost(false)
         }
